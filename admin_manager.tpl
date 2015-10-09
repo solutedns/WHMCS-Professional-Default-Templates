@@ -26,7 +26,11 @@
 		{if $sac.health}<div role="tabpanel" class="tab-pane" id="health">{include file="{$base_path}/template/admin_manager_health.tpl"}</div>{/if}
 	</div>
 </div>
-{else}
+{else if $nozone}
+<div id="slave_msg" class="alert2 alert2-info top15">
+	<div id="dyn_title" style="font-weight: bold;"><h4>{$LANG.admin_msg_nozone_title}</h4></div>
+	<div id="dyn_msg">{$LANG.admin_msg_nozone_desc}</div>
+</div>{else}
 <div id="slave_msg" class="alert2 alert2-danger top15">
 	<div id="dyn_title" style="font-weight: bold;"><h4>{$LANG.admin_msg_rde_title}</h4></div>
 	<div id="dyn_msg">{$LANG.admin_msg_rde_desc}</div>

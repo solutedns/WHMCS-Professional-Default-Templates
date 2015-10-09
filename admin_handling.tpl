@@ -20,6 +20,8 @@
                             <label for="sdns_product_{$product.id}">{$product.name|ucfirst}</label>
                         </div>
                     </div>
+                    {foreachelse}
+                    <small><i class="text-muted">{$LANG.admin_none_available}</i></small>
                     {/foreach}
                 </div>
             </div>
@@ -34,6 +36,8 @@
                             <label for="sdns_ignoreproduct_{$ignoreproduct.id}">{$ignoreproduct.name|ucfirst}</label>
                         </div>
                     </div>
+                    {foreachelse}
+                    <small><i class="text-muted">{$LANG.admin_none_available}</i></small>
                     {/foreach}
                 </div>
             </div>
@@ -55,6 +59,8 @@
                             <label for="sdns_ignoreregistrar_{$registrar.registrar}">{$registrar.registrar|ucfirst}</label>
                         </div>
                     </div>
+                    {foreachelse}
+                    <small><i class="text-muted">{$LANG.admin_none_available}</i></small>
                     {/foreach}
                 </div>
                 <div class="row text-center">

@@ -154,7 +154,9 @@ function setErrorField(field) {
 }
 
 function clearFields() {
+    $("#sdns_name_0").val("");
     $("#sdns_content_0").val("");
+    $("#sdns_prio_0").val("");
 }
 
 function clearErrorField() {
@@ -176,6 +178,17 @@ function updatesettings(element) {
 
     sendData(data)
 }
+
+function update_static(action) {
+    var item = {
+        action: action,
+    };
+
+    jsonString = JSON.stringify(item);
+
+    sendData(jsonString);
+}
+
 
 function record_add(type) {
 
@@ -422,9 +435,7 @@ function setZoneName(name) {
 }
 
 function setOverview(name) {
-
     document.getElementById("overview_title").innerHTML = name;
-
 }
 
 function setTemplate(id) {
@@ -484,6 +495,24 @@ function syscheck(type) {
             } else {
                 $("#sys_msgbox").hide("slow");
                 $("#sys_msgbox").removeClass();
+				
+				if (type == 'ssh') {
+					
+					var title = '<h4>' + data['title'] + '</h4>';
+               		var msg = '<p>' + data['msg'] + '</p>';
+					
+					$("#sys_msgbox").addClass('alert2 alert2-success');
+					$("#sys_title").html(title);
+					$("#sys_msg").html(msg);
+	
+					$("#sys_msgbox").show("slow", function() {
+						$('html, body').animate({
+							scrollTop: $("#sys_msgbox").offset().top - 20
+						}, 400);
+					});
+					
+				}
+				
             }
 
             if (type == 'ssh') {
@@ -593,8 +622,30 @@ function start_com(e, type) {
             var el = document.getElementById('results');
             el.scrollTop = el.scrollHeight;
         }, 120);
+		
+		if (type == 'mutation') {
+			
+			var data = {
+				type: $("#sdns_mut_for").val(), 
+				server: $("#sdns_mut_server").val(),
+			
+				action: $("#sdns_mut_action").val(), 
+			
+				where_type: $("#sdns_mut_where_type").val(), 
+				where_content: $("#sdns_mut_where_content").val(), 
+				where_ttl: $("#sdns_mut_where_ttl").val(), 
+				where_prio: $("#sdns_mut_where_prio").val(), 
+			
+				content_type: $("#sdns_mut_content_type").val(), 
+				content_content: $("#sdns_mut_content_content").val(), 
+				content_ttl: $("#sdns_mut_content_ttl").val(), 
+				content_prio: $("#sdns_mut_content_prio").val()
+			 };
 
-        source = new EventSource(document.URL + '&console=' + type);
+			source = new EventSource(document.URL + '&console=' + type + '&data=' + JSON.stringify(data));		
+		} else {
+			source = new EventSource(document.URL + '&console=' + type);		
+		}
 
         source.addEventListener('message', function(e) {
             var result = JSON.parse(e.data);
@@ -653,4 +704,8 @@ function console(type) {
     if (typeof(EventSource) !== "undefined") {
         start_com(null, type);
     }
+}
+
+function console_name(name) {
+	$('h4#dialog_console_title').text(name);
 }

@@ -186,6 +186,30 @@
     </div>
 </div>
 
+<!-- Export Zone -->
+<div class="bootstrap">
+    <div class="modal fade" id="dialog_exportZone" tabindex="-1" role="dialog" aria-labelledby="dialog_exportZone" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="dialog_exportZone">{$LANG.admin_manage_records_exportzone}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <textarea id="textarea_iex" name="sdns_exportzone" class="form-padding form-control">{$LANG.admin_loading_zone}</textarea>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.admin_close}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     var vars = {};

@@ -6,8 +6,7 @@
         </div>
         <div class="col-md-2">
             <div class="text-right">
-                <h4>
-        <button data-toggle="modal" data-target="#dialog_addTemplate" type="button" class="btn btn-success">{$LANG.admin_template_addtemplate}</button></h4>
+                <h4><button data-toggle="modal" data-target="#dialog_addTemplate" type="button" class="btn btn-success">{$LANG.admin_template_addtemplate}</button></h4>
             </div>
         </div>
     </div>

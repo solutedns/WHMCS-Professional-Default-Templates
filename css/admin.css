@@ -85,6 +85,17 @@ form label {
 	font-size: 50px;
 	color: #EC971F;
 }
+
+.tools-warning {
+	color: #F00;
+	text-transform: uppercase;
+	font-weight:bold;
+	margin: 5px;"	
+}
+
+.sdns_text_disabled {
+	color: #999 !important;	
+}
 /*
 ## Label override
 */

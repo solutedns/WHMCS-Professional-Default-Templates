@@ -134,7 +134,7 @@
 </div>
 
 {if $maintenance eq false} 
-{if $client_zones eq true}
+{if $client_zones eq true || $client_template eq true}
 <!-- Add Modal -->
 <div class="bootstrap">
     <div class="modal fade" id="dialog_addRecord" tabindex="-1" role="dialog" aria-labelledby="dialog_addRecord" aria-hidden="true">
@@ -148,7 +148,7 @@
                     <div class="row">
                         <div id="sdns_z-name_0" class="col-md-3">
                             <label for "sdns_name_0">{$MLANG.client_name}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" value="&lt;domain&gt;">
+                            <input type="textbox" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="&lt;domain&gt;">
                         </div>
                         <div class="col-md-2">
                             <label for "sdns_type_0">{$MLANG.client_type}:</label>

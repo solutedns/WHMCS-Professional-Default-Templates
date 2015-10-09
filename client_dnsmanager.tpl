@@ -217,7 +217,7 @@
                     <div class="row">
                         <div id="sdns_z-name_0" class="col-md-3">
                             <label for "sdns_name_0">{$MLANG.client_name}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" value="{$zone.domain}">
+                            <input type="textbox" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="{$zone.domain}">
                         </div>
                         <div class="col-md-2">
                             <label for "sdns_type_0">{$MLANG.client_type}:</label>

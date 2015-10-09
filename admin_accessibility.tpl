@@ -118,6 +118,33 @@
             </div>
             
             <hr />
+            <h4>{$LANG.admin_accessibility_title_menu}</h4>
+            
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc">
+                    <label for="sdns_disable_primarymenu">{$LANG.admin_accessibility_option_disableprimarymenu}:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="checkbox chx_label">
+                        <input {if $settings.disable_primarymenu} CHECKED{/if} name="sdns_disable_primarymenu" id="sdns_disable_primarymenu" type="checkbox">
+                        <label class="chx_label" for="sdns_disable_primarymenu">{$LANG.admin_accessibility_desc_disableprimarymenu}</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc">
+                    <label for="sdns_disable_secondarymenu">{$LANG.admin_accessibility_option_disablesecondarymenu}:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="checkbox chx_label">
+                        <input {if $settings.disable_secondarymenu} CHECKED{/if} name="sdns_disable_secondarymenu" id="sdns_disable_secondarymenu" type="checkbox">
+                        <label class="chx_label" for="sdns_disable_secondarymenu">{$LANG.admin_accessibility_desc_disablesecondarymenu}</label>
+                    </div>
+                </div>
+            </div>
+            
+            <hr />
             <h4>{$LANG.admin_accessibility_title_admin}</h4>
             
             <div class="row">

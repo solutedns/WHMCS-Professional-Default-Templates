@@ -117,7 +117,9 @@ function setErrorField(field) {
 }
 
 function clearFields() {
+	$("#sdns_name_0").val("");
     $("#sdns_content_0").val("");
+    $("#sdns_prio_0").val("");
 }
 
 function clearErrorField() {

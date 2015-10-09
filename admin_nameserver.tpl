@@ -28,7 +28,7 @@
                     <label for="sdns_db_port">{$LANG.admin_nameservers_option_port}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_db_port" id="sdns_db_port" value="{$ns_details.db_port}">
+                    <input type="textbox" class="form-padding form-control" name="sdns_db_port" id="sdns_db_port" placeholder="3306" {if $ns_details.db_port neq '0'}value="{$ns_details.db_port}"{/if}>
                 </div>
                 <div class="col-md-6">
                     <label class="info_text" for="sdns_db_port">{$LANG.admin_nameservers_desc_port}</label>
@@ -157,7 +157,7 @@
                     <label for="sdns_ssh_port">{$LANG.admin_nameservers_option_port}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ssh_port" id="sdns_ssh_port" value="{$ns_details.ssh_port}">
+                    <input type="textbox" class="form-padding form-control" name="sdns_ssh_port" id="sdns_ssh_port" placeholder="22" {if $ns_details.ssh_port neq '0'}value="{$ns_details.ssh_port}"{/if} >
                 </div>
                 <div class="col-md-6">
                     <label class="info_text" for="sdns_ssh_port">{$LANG.admin_nameservers_desc_sshport}</label>

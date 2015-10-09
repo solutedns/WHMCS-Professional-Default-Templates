@@ -1,9 +1,14 @@
 <div class="col-md-12">
 
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-10">
 			<h4>{$LANG.admin_logs_title_logs}</h4>
 		</div>
+        <div class="col-md-2">
+            <div class="text-right">
+                <h4><button onclick="update_static('clearlogs')" type="button" class="btn btn-sm btn-primary">{$LANG.admin_logs_clearlogs}</button></h4>
+            </div>
+        </div>
 	</div>
   
 	<div class="overview_row">

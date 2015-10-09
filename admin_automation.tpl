@@ -104,9 +104,6 @@
                     </div>
                 </div>
             </div>
-
-            <hr />
-            <h4>{$LANG.admin_automation_title_dnsforproducts}</h4>
             
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
@@ -116,6 +113,21 @@
                     <div class="checkbox chx_label">
                         <input {if $settings.auto_dnsprod} CHECKED{/if} name="sdns_auto_product" id="sdns_auto_product" type="checkbox">
                         <label class="chx_label" for="sdns_auto_product">{$LANG.admin_automation_desc_products}</label>
+                    </div>
+                </div>
+            </div>
+            
+            <hr />
+            <h4>{$LANG.admin_automation_title_admin}</h4>
+            
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc">
+                    <label for="sdns_auto_todo">{$LANG.admin_automation_option_todo}:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="checkbox chx_label">
+                        <input {if $settings.auto_todo} CHECKED{/if} name="sdns_auto_todo" id="sdns_auto_todo" type="checkbox">
+                        <label class="chx_label" for="sdns_auto_todo">{$LANG.admin_automation_desc_todo}</label>
                     </div>
                 </div>
             </div>
