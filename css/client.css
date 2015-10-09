@@ -1,0 +1,243 @@
+/**********************************************
+
+         *** SoluteDNS for WHMCS ***
+
+File:					template/css/client.css
+File version:			0.2.0
+Date:					28-08-2015
+
+Distribution Package:	15200
+
+Copyright (C) NetDistrict 2015
+All Rights Reserved
+
+**********************************************/
+
+/*
+## Health Icons
+*/
+
+.sdns_health {
+    margin-right: 5px;
+    cursor: pointer;
+}
+.sdns_health_ok {
+    color: #390;
+}
+.sdns_health_pending {
+    color: #06F;
+}
+.sdns_health_warning {
+    color: #F90;
+}
+.sdns_health_error {
+    color: #C00;
+}
+.sdns_health_unavailable {
+    color: #777;
+}
+
+/*
+## DNS Management
+*/
+
+.dnsfield {
+    width: 100% !important;
+}
+.nowrap {
+    white-space: nowrap;
+}
+.top5 {
+    margin-top: 5px;
+}
+.top5 {
+    margin-top: 10px;
+}
+.textarea {
+    font-size: 12px;
+    width: 100%;
+}
+
+/*
+## Datatable Custom
+*/
+
+.dataTables_empty {
+    text-align: center !important;
+}
+
+/*
+## Responsive Table styles
+*/
+
+table.dataTable.dtr-inline.collapsed tbody td:first-child,
+table.dataTable.dtr-inline.collapsed tbody th:first-child {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+table.dataTable.dtr-inline.collapsed tbody td:first-child:before,
+table.dataTable.dtr-inline.collapsed tbody th:first-child:before {
+    top: 8px;
+    left: 4px;
+    height: 16px;
+    width: 16px;
+    display: block;
+    position: absolute;
+    color: white;
+    border: 2px solid white;
+    border-radius: 16px;
+    text-align: center;
+    line-height: 14px;
+    box-shadow: 0 0 3px #444;
+    box-sizing: content-box;
+    content: '+';
+    background-color: #31b131;
+}
+table.dataTable.dtr-inline.collapsed tbody td:first-child.dataTables_empty:before,
+table.dataTable.dtr-inline.collapsed tbody th:first-child.dataTables_empty:before {
+    display: none;
+}
+table.dataTable.dtr-inline.collapsed tbody tr.parent td:first-child:before,
+table.dataTable.dtr-inline.collapsed tbody tr.parent th:first-child:before {
+    content: '-';
+    background-color: #d33333;
+}
+table.dataTable.dtr-inline.collapsed tbody tr.child td:before {
+    display: none;
+}
+table.dataTable.dtr-column tbody td.control,
+table.dataTable.dtr-column tbody th.control {
+    position: relative;
+    cursor: pointer;
+}
+table.dataTable.dtr-column tbody td.control:before,
+table.dataTable.dtr-column tbody th.control:before {
+    top: 50%;
+    left: 50%;
+    height: 16px;
+    width: 16px;
+    margin-top: -10px;
+    margin-left: -10px;
+    display: block;
+    position: absolute;
+    color: white;
+    border: 2px solid white;
+    border-radius: 16px;
+    text-align: center;
+    line-height: 14px;
+    box-shadow: 0 0 3px #444;
+    box-sizing: content-box;
+    content: '+';
+    background-color: #31b131;
+}
+table.dataTable.dtr-column tbody tr.parent td.control:before,
+table.dataTable.dtr-column tbody tr.parent th.control:before {
+    content: '-';
+    background-color: #d33333;
+}
+table.dataTable tr.child {
+    padding: 0.5em 1em;
+}
+table.dataTable tr.child:hover {
+    background: transparent !important;
+}
+table.dataTable tr.child ul {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+table.dataTable tr.child ul li {
+    border-bottom: 1px solid #efefef;
+    padding: 0.5em 0;
+    white-space: nowrap;
+}
+table.dataTable tr.child ul li:first-child {
+    padding-top: 0;
+}
+table.dataTable tr.child ul li:last-child {
+    border-bottom: none;
+}
+table.dataTable tr.child span.dtr-title {
+    display: inline-block;
+    min-width: 75px;
+    font-weight: bold;
+}
+
+/*
+## NProgress Bar
+*/
+
+/* Make clicks pass-through */
+
+#nprogress {
+    pointer-events: none;
+}
+#nprogress .bar {
+    background: #29d;
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+}
+/* Fancy blur effect */
+
+#nprogress .peg {
+    display: block;
+    position: absolute;
+    right: 0px;
+    width: 100px;
+    height: 100%;
+    box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+    opacity: 0.5;
+    -webkit-transform: rotate(1deg) translate(0px, 0px);
+    -ms-transform: rotate(1deg) translate(0px, 0px);
+    transform: rotate(1deg) translate(0px, 0px);
+}
+/* Remove these to get rid of the spinner */
+
+#nprogress .spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 15px;
+    right: 15px;
+}
+#nprogress .spinner-icon {
+    width: 18px;
+    height: 18px;
+    box-sizing: border-box;
+    border: solid 2px transparent;
+    border-top-color: #29d;
+    border-left-color: #29d;
+    border-radius: 50%;
+    -webkit-animation: nprogress-spinner 400ms linear infinite;
+    animation: nprogress-spinner 400ms linear infinite;
+}
+.nprogress-custom-parent {
+    overflow: hidden;
+    position: relative;
+}
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+    position: absolute;
+}
+@-webkit-keyframes nprogress-spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes nprogress-spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
