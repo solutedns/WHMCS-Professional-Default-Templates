@@ -54,9 +54,22 @@
                 </div>
             </div>
             
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc chx_form">
+                    <label for="sdns_dns_pagination">{$LANG.admin_accessibility_option_dnspagination}:</label>
+                </div>
+                <div class="col-md-1 chx_desc">
+                    <input type="textbox" class="form-padding form-control" name="sdns_dns_pagination" id="sdns_dns_pagination" value="{$settings.dns_pagination}">
+                </div>
+                <div class="col-md-8 chx_desc chx_form">
+                    <label class="info_text" for="sdns_dns_pagination">{$LANG.admin_accessibility_desc_dnspagination}</label>
+                </div>
+            </div>
+            
             <hr />
             <h4>{$LANG.admin_accessibility_title_clientzones}</h4>
 
+			{if $lal >= 3}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_client_zones">{$LANG.admin_accessibility_option_clientzones}:</label>
@@ -68,7 +81,9 @@
                     </div>
                 </div>
             </div>
+            {/if}
             
+            {if $lal >= 3}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_client_template">{$LANG.admin_accessibility_option_clienttemplate}:</label>
@@ -80,7 +95,9 @@
                     </div>
                 </div>
             </div>
+            {/if}
             
+            {if $lal >= 4}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_client_health">{$LANG.admin_accessibility_option_clienthealth}:</label>
@@ -92,7 +109,9 @@
                     </div>
                 </div>
             </div>
+            {/if}
             
+            {if $lal >= 3}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_client_reverse">{$LANG.admin_accessibility_option_clientreverse}:</label>
@@ -104,16 +123,17 @@
                     </div>
                 </div>
             </div>
+            {/if}
 
             <div class="row">
-                <div class="col-md-3 text-right chx_desc">
+                <div class="col-md-3 text-right chx_desc chx_form">
                     <label for="sdns_zone_limit">{$LANG.admin_accessibility_option_zonelimit}:</label>
                 </div>
                 <div class="col-md-1 chx_desc">
                     <input type="textbox" class="form-padding form-control" name="sdns_zone_limit" id="sdns_zone_limit" value="{$settings.zone_limit}">
                 </div>
-                <div class="col-md-8 chx_desc">
-                    <label class="info_text" for="sdns_zone_limit">Limit the maximum zones allowed for clients. (0 = unlimited, -1 = none)</label>
+                <div class="col-md-8 chx_desc chx_form">
+                    <label class="info_text" for="sdns_zone_limit">{$LANG.admin_accessibility_desc_zonelimit}</label>
                 </div>
             </div>
             
@@ -159,6 +179,7 @@
                 </div>
             </div>
             
+            {if $lal >= 4}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_admin_health">{$LANG.admin_accessibility_option_adminhealth}:</label>
@@ -170,6 +191,7 @@
                     </div>
                 </div>
             </div>
+            {/if}
 
             <div class="row text-center">
                 <br />

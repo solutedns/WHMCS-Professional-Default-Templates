@@ -6,6 +6,7 @@
         </div>
     </div>
 
+	{if $lal >= 4}
     <b>{$LANG.admin_tools_title_mutationtool}</b>
 
     <div class="row">
@@ -178,4 +179,5 @@
         </div>
     </div>
     <hr />
+    {/if}
 </div>

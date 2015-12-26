@@ -3,6 +3,7 @@
     <h4>{$LANG.admin_system_title_system}</h4>
     
     <form role="form" id="system">
+    	{if $lal >= 2}
         <div class="row">
             <div class="col-md-3 text-right">
                 <label>{$LANG.admin_system_option_rectifyqueue}:</label>
@@ -17,7 +18,7 @@
                 <label>{$LANG.admin_system_option_rectifycron}:</label>
             </div>
             <div class="col-md-9 data_text">
-                <label class="info_text">{if $cron.rectify_end}<span class="label default">{$LANG.admin_system_idle}</span>{elseif $cron.rectify_escalate}<span class="label label-warning">{$LANG.admin_system_running}</span> {$LANG.admin_system_text_runningtoolong}{else}<span class="label label-success">{$LANG.admin_system_running}</span>{/if} {$cron.rectify_status}</label>
+                <label class="info_text">{if $cron.rectify_end}<span class="label label-default">{$LANG.admin_system_idle}</span>{elseif $cron.rectify_escalate}<span class="label label-warning">{$LANG.admin_system_running}</span> {$LANG.admin_system_text_runningtoolong}{else}<span class="label label-success">{$LANG.admin_system_running}</span>{/if} {$cron.rectify_status}</label>
             </div>
         </div>
         {if $cron.rectify_escalate}
@@ -31,6 +32,7 @@
             </div>
         </div>
         {/if} {/if}
+        {/if}
         <div class="row">
             <div class="col-md-3 text-right">
                 <label>{$LANG.admin_system_option_index}:</label>
@@ -53,7 +55,7 @@
                 <label>{$LANG.admin_system_option_version}:</label>
             </div>
             <div class="col-md-9 data_text">
-                <label class="info_text">{$system.version} - {$system.distribution}</label>
+                <label class="info_text">{$system.version} - {$system.distribution} ({$system.type})</label>
             </div>
         </div>
         <div class="row">

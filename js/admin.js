@@ -354,6 +354,22 @@ function zone_delete() {
 
 }
 
+function delete_ns() {
+	
+    var action = 'delete_nameserver';
+    var id = $("#sdns_server_id").val();
+
+    var item = {
+        action: action,
+        id: id
+    };
+
+    jsonString = JSON.stringify(item);
+
+    sendData(jsonString);
+
+}
+
 function dnssec(action, zone, key) {
 
     var item = {
@@ -442,10 +458,14 @@ function setTemplate(id) {
     $("#sdns_template_id").val(id);
 }
 
-function syscheck(type) {
+function syscheck(type, id) {
 
     if (type == 'ssh') {
-        var source = 'sshcheck';
+		if (id != null) {
+        	var source = 'sshcheck&id='+id;
+		} else {
+			var source = 'sshcheck'	
+		}
         NProgress.start();
     } else {
         var source = 'syscheck';
@@ -623,6 +643,8 @@ function start_com(e, type) {
             el.scrollTop = el.scrollHeight;
         }, 120);
 		
+		var URL = document.URL.substring(0, document.URL .indexOf('#'));
+		
 		if (type == 'mutation') {
 			
 			var data = {
@@ -642,9 +664,9 @@ function start_com(e, type) {
 				content_prio: $("#sdns_mut_content_prio").val()
 			 };
 
-			source = new EventSource(document.URL + '&console=' + type + '&data=' + JSON.stringify(data));		
+			source = new EventSource(URL + '&console=' + type + '&data=' + JSON.stringify(data));		
 		} else {
-			source = new EventSource(document.URL + '&console=' + type);		
+			source = new EventSource(URL + '&console=' + type);		
 		}
 
         source.addEventListener('message', function(e) {
@@ -709,3 +731,29 @@ function console(type) {
 function console_name(name) {
 	$('h4#dialog_console_title').text(name);
 }
+
+function reset_addzone() {
+	$('#sdns_addzone_type').val('');
+	$('#sdns_addzone_client').val('');
+	$('#sdns_addzone_domain').val('');
+	$('#sdns_addzone_ip').val('');
+	
+	$('#add_client').hide();
+    $('#add_domain').hide();
+    $('#add_reverse').hide();
+}
+
+// Remember opened tab
+$(document).ready(function() {
+				
+	var url = document.location.toString();
+	if (url.match('#')) {
+		$('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+	} 
+		
+	// Change hash for page-reload
+	$('.nav-tabs a').on('shown.bs.tab', function (e) {
+		window.location.hash = e.target.hash;
+	})
+		
+});

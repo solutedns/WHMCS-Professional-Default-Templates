@@ -78,6 +78,18 @@
                 </div>
             </div>
             
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc"></div>
+                <div class="col-md-9">
+                    <div class="col-md-4">
+                        <div class="checkbox checkbox-danger chx_label">
+                            <input {if $settings.auto_delete_whmcs eq 'on'} CHECKED{/if} name="sdns_auto_delete_whmcs" id="sdns_auto_delete_whmcs" type="checkbox">
+                            <label class="chx_label" for="sdns_auto_delete_whmcs">{$LANG.admin_automation_desc_deletewhmcs}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <hr />
             <h4>{$LANG.admin_automation_title_dnsmanagement}</h4>
 
@@ -93,6 +105,7 @@
                 </div>
             </div>
             
+            {if $lal >= 4}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_auto_health">{$LANG.admin_automation_option_health}:</label>
@@ -104,7 +117,9 @@
                     </div>
                 </div>
             </div>
+            {/if}
             
+            {if $lal >= 2}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_auto_product">{$LANG.admin_automation_option_products}:</label>
@@ -116,6 +131,7 @@
                     </div>
                 </div>
             </div>
+            {/if}
             
             <hr />
             <h4>{$LANG.admin_automation_title_admin}</h4>

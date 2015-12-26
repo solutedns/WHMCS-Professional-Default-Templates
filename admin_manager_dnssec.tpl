@@ -26,13 +26,15 @@
                         {$LANG.admin_manage_manage} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                        <li><a href="#" data-toggle="modal" data-target="#dialog_addDNSsec" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_add}</span></a></li>
+                        <li><a href="javascript:void(0);" data-toggle="modal" data-target="#dialog_addDNSsec" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_add}</span></a></li>
                         <li class="divider"></li>
-                        <li><a href="#" onclick="dnssec('check','{$zone.id}');"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_check}</span></a></li>
-                        <li><a href="#" onclick="dnssec('nsec3','{$zone.id}');"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_nsec3}</span></a></li>
+                        <li><a href="javascript:void(0);" onclick="dnssec('check','{$zone.id}');"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_check}</span></a></li>
+                        <li><a href="javascript:void(0);" onclick="dnssec('nsec3','{$zone.id}');"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_nsec3}</span></a></li>
                         <li class="divider"></li>
-                        <li><a href="#" onclick="dnssec('reload','{$zone.id}');"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_reload}</span></a></li>
-                        <li><a href="#" onclick="dnssec('reset','{$zone.id}');"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_reset}</span></a></li>
+                        <li><a href="javascript:void(0);" onclick="dnssec('reload','{$zone.id}');"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_reload}</span></a></li>
+                        <li><a href="javascript:void(0);" onclick="dnssec('reset','{$zone.id}');"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_reset}</span></a></li>
+                        <li class="divider"></li>
+                        <li><a href="javascript:void(0);" onclick="dnssec('unset','{$zone.id}');"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_dnssec_unset}</span></a></li>
                     </ul>
                 </div>
 
@@ -91,7 +93,7 @@
             	{if $key.active eq '1'}
                 <span class="label active">active</span>
                 {else}
-                <span class="label">inactive</span>
+                <span class="label label-default">inactive</span>
                 {/if}                
             </td>
             <td align="center">

@@ -9,7 +9,6 @@
 </div>
 
 <div role="tabpanel">
-
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         {if $acl < 5}<li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab" onclick="drawTable('sdns_domains');">{$LANG.admin_menu_overview}</a></li>{/if}
@@ -25,15 +24,17 @@
         {if $acl < 2}<li class="dropdown" role="presentation" id="nameserver_sub"><a id="nameservers" class="dropdown-toggle" aria-controls="nameservers-contents" data-toggle="dropdown" href="#" aria-expanded="true">{$LANG.admin_menu_nameservers}<span class="caret"></span></a>
             <ul id="nameservers-contents" class="dropdown-menu" aria-labelledby="nameservers" role="menu">
                 {foreach $nameservers as $ns}
-                <li ><a id="nameservers-tab" href="addonmodules.php?module=solutedns&server={$ns.id}" aria-expanded="false"><span id="ns_{$ns.id}"  aria-hidden="true"></span> {$ns.nameserver|ucfirst}</a></li>
+                <li ><a id="nameservers-tab" aria-controls="nameserver{$ns.id}" data-toggle="tab" role="tab" tabindex="-1" onClick="location.href='addonmodules.php?module=solutedns&server={$ns.id}#nameserver{$ns.id}'" href="#nameserver{$ns.id}" aria-expanded="false"><span id="ns_{$ns.id}"  aria-hidden="true"></span> {$ns.nameserver|ucfirst}</a></li>
                 {/foreach}
+                {if $lal >= 5}<li class="divider"></li>
+                <li ><a id="nameservers-tab" onClick="location.href='addonmodules.php?module=solutedns&server=-1#nameserver'" href="#nameserver" aria-expanded="false"><span id="ns_add"  aria-hidden="true"></span> {$LANG.admin_add}</a></li>{/if}
             </ul>
         </li>{/if}
         {if $acl < 4}<li class="dropdown" role="presentation"><a id="system_tab" class="dropdown-toggle" aria-controls="system-contents" data-toggle="dropdown" href="#" aria-expanded="true">{$LANG.admin_menu_system}<span class="caret"></span></a>
             <ul id="system-contents" class="dropdown-menu" aria-labelledby="system_tab" role="menu">
                 {if $acl < 3}<li ><a id="system1-tab" aria-controls="system" data-toggle="tab" role="tab" tabindex="-1" href="#system" aria-expanded="false">{$LANG.admin_menu_system}</a></li>{/if}
-                {if $acl < 3}<li ><a id="system2-tab" aria-controls="tools" data-toggle="tab" role="tab" tabindex="-1" href="#tools" aria-expanded="false">{$LANG.admin_menu_tools}</a></li>{/if}
-                {if $acl < 2}<li ><a id="system3-tab" aria-controls="accesscontrol" data-toggle="tab" role="tab" tabindex="-1" href="#accesscontrol" aria-expanded="false">{$LANG.admin_menu_accesscontrol}</a></li>{/if}
+                {if $lal >= 2}{if $acl < 3}<li ><a id="system2-tab" aria-controls="tools" data-toggle="tab" role="tab" tabindex="-1" href="#tools" aria-expanded="false">{$LANG.admin_menu_tools}</a></li>{/if}{/if}
+                {if $lal >= 4}{if $acl < 2}<li ><a id="system3-tab" aria-controls="accesscontrol" data-toggle="tab" role="tab" tabindex="-1" href="#accesscontrol" aria-expanded="false">{$LANG.admin_menu_accesscontrol}</a></li>{/if}{/if}
                 {if $acl < 4}<li ><a id="system4-tab" aria-controls="logs" onclick="drawTable('sdns_logs')" data-toggle="tab" role="tab" tabindex="-1" href="#logs" aria-expanded="false">{$LANG.admin_menu_logs}</a></li>{/if}
             </ul>
         </li>{/if}
@@ -48,10 +49,10 @@
         {if $acl < 2}<div role="tabpanel" class="tab-pane" id="accessibility">{include file="{$base_path}/template/admin_accessibility.tpl"}</div>{/if}
         {if $acl < 2}<div role="tabpanel" class="tab-pane" id="automation">{include file="{$base_path}/template/admin_automation.tpl"}</div>{/if}
         {if $acl < 3}<div role="tabpanel" class="tab-pane" id="assignment">{include file="{$base_path}/template/admin_handling.tpl"}</div>{/if}
-        {if $acl < 2}<div role="tabpanel" class="tab-pane" id="nameserver">{include file="{$base_path}/template/admin_nameserver.tpl"}</div>{/if}
+        {if $acl < 2}<div role="tabpanel" class="tab-pane" id="nameserver{if $ns_details.id neq 'n'}{$ns_details.id}{/if}">{include file="{$base_path}/template/admin_nameserver.tpl"}</div>{/if}
         {if $acl < 4}<div role="tabpanel" class="tab-pane" id="system">{include file="{$base_path}/template/admin_system.tpl"}</div>{/if}
-        {if $acl < 2}<div role="tabpanel" class="tab-pane" id="accesscontrol">{include file="{$base_path}/template/admin_access.tpl"}</div>{/if}
-        {if $acl < 3}<div role="tabpanel" class="tab-pane" id="tools">{include file="{$base_path}/template/admin_tools.tpl"}</div>{/if}
+        {if $lal >= 4}{if $acl < 2}<div role="tabpanel" class="tab-pane" id="accesscontrol">{include file="{$base_path}/template/admin_access.tpl"}</div>{/if}{/if}
+        {if $lal >= 2}{if $acl < 3}<div role="tabpanel" class="tab-pane" id="tools">{include file="{$base_path}/template/admin_tools.tpl"}</div>{/if}{/if}
         {if $acl < 4}<div role="tabpanel" class="tab-pane" id="logs">{include file="{$base_path}/template/admin_logs.tpl"}</div>{/if}
         {if $acl < 2}<div role="tabpanel" class="tab-pane" id="license">{include file="{$base_path}/template/admin_license.tpl"}</div>{/if}
     </div>
@@ -135,9 +136,6 @@
         }
 
         if (document.URL.indexOf("server") != -1) {
-            $("#overview").removeClass('active');
-            $("#nameserver").addClass('active');
-            $('.nav li:eq(7) a').tab('show');
         } else {
 			drawTable('sdns_domains');	
 		}
@@ -177,3 +175,11 @@
 		
     });
 </script>
+
+<noscript>
+    <div class="alert2 alert2-danger">
+        <h4>{$LANG.nojavascript_title}</h4>
+        <p>{$LANG.nojavascript_desc}</p>
+    </div>
+	<style>.tab-content { display:none; } .nav { display:none; }</style>
+</noscript>

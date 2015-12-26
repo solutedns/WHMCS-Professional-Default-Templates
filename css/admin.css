@@ -28,6 +28,9 @@ All Rights Reserved
 .data_text {
     padding: 0 !important;
 }
+.chx_form {
+    line-height: 33px;
+}
 .chx_desc {
     margin-top: 10px;
 }

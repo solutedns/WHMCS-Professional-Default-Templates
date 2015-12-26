@@ -102,18 +102,18 @@
             <h4>{$LANG.admin_records_title_defaultsoa}</h4>
             
             <div class="row">
-                <div class="col-md-3 text-right">
+                <div class="col-md-3 text-right chx_form">
                     <label for="sdns_soa_hostmaster">{$LANG.admin_records_option_hostmaster}:</label>
                 </div>
                 <div class="col-md-3">
                     <input type="textbox" class="form-padding form-control" name="sdns_soa_hostmaster" id="sdns_soa_hostmaster" value="{$settings.soa_hostmaster}">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_soa_hostmaster">{$LANG.admin_records_desc_hostmaster}</label>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 text-right">
+                <div class="col-md-3 text-right chx_form">
                     <label for="sdns_soa_serial">{$LANG.admin_records_option_serial}:</label>
                 </div>
                 <div class="col-md-3">
@@ -123,12 +123,12 @@
                         <option {if $settings.soa_serial eq 'zero'}SELECTED{/if} value="zero">{$LANG.admin_records_select_zero}</option>
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_soa_serial">{$LANG.admin_records_desc_serial}</label>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 text-right">
+                <div class="col-md-3 text-right chx_form">
                     <label for="sdns_soa_refresh">{$LANG.admin_records_option_refresh}:</label>
                 </div>
                 <div class="col-md-3">
@@ -137,7 +137,7 @@
                 <div class="col-md-6"></div>
             </div>
             <div class="row">
-                <div class="col-md-3 text-right">
+                <div class="col-md-3 text-right chx_form">
                     <label for="sdns_soa_retry">{$LANG.admin_records_option_retry}:</label>
                 </div>
                 <div class="col-md-3">
@@ -146,7 +146,7 @@
                 <div class="col-md-6"></div>
             </div>
             <div class="row">
-                <div class="col-md-3 text-right">
+                <div class="col-md-3 text-right chx_form">
                     <label for="sdns_soa_expire">{$LANG.admin_records_option_expire}:</label>
                 </div>
                 <div class="col-md-3">
@@ -155,7 +155,7 @@
                 <div class="col-md-6"></div>
             </div>
             <div class="row">
-                <div class="col-md-3 text-right">
+                <div class="col-md-3 text-right chx_form">
                     <label for="sdns_soa_ttl">{$LANG.admin_records_option_ttl}:</label>
                 </div>
                 <div class="col-md-3">
@@ -168,13 +168,13 @@
             <h4>{$LANG.admin_records_title_limit}</h4>
             
             <div class="row">
-                <div class="col-md-3 text-right">
+                <div class="col-md-3 text-right chx_form">
                     <label for="sdns_record_limit">{$LANG.admin_records_option_recordlimit}:</label>
                 </div>
                 <div class="col-md-1">
                     <input name="sdns_record_limit" type="textbox" class="form-control" name="sdns_record_limit" id="sdns_record_limit" value="{$settings.record_limit}">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 chx_form">
                     <label class="info_text" for="sdns_record_limit">{$LANG.admin_records_desc_recordlimit}</label>
                 </div>
             </div>

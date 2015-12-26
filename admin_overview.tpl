@@ -7,8 +7,12 @@
             <div class="links_row">
                 <ul id="overview-tabs">
                     <li class="first active" id="domains-tab"><a onclick="setOverview('{$LANG.admin_overview_title_domains}'); drawTable('sdns_domains')" href="#domains" class="ajax" aria-controls="domains" role="tab" data-toggle="tab">{$LANG.admin_overview_title_domains} <span>(?)</span></a></li>
+                    {if $lal >= 2}
                     <li class="" id="products-tab"><a onclick="setOverview('{$LANG.admin_overview_title_products}'); drawTable('sdns_products')" href="#products" class="ajax" aria-controls="products" role="tab" data-toggle="tab">{$LANG.admin_overview_title_products} <span>(?)</span></a></li>
+                    {/if}
+                    {if $lal >= 3}
                     <li class="" id="standalone-tab"><a onclick="setOverview('{$LANG.admin_overview_title_standalone}'); drawTable('sdns_standalone')" href="#standalone" class="ajax" aria-controls="standalone" role="tab" data-toggle="tab">{$LANG.admin_overview_title_standalone} <span>(?)</span></a></li>
+                    {/if}
                     <li class="" id="reverse-tab"><a onclick="setOverview('{$LANG.admin_overview_title_reverse}'); drawTable('sdns_reverse')" href="#reverse" class="ajax" aria-controls="reverse" role="tab" data-toggle="tab">{$LANG.admin_overview_title_reverse} <span>(?)</span></a></li>
                     <li class="" id="unassigned-tab"><a onclick="setOverview('{$LANG.admin_overview_title_unassigned}'); drawTable('sdns_unassigned')" href="#unassigned" class="ajax" aria-controls="unassigned" role="tab" data-toggle="tab">{$LANG.admin_overview_title_unassigned} <span>(~)</span></a></li>
                 </ul>
@@ -41,6 +45,7 @@
                     </tbody>
                 </table>
             </div>
+            {if $lal >= 2}
             <div role="tabpanel" class="tab-pane" id="products">
                 <table class="dataTable display" id="sdns_products" width="100%" border="0" cellspacing="1" cellpadding="3">
                     <thead>
@@ -58,6 +63,8 @@
                     </tbody>
                 </table>
             </div>
+            {/if}
+            {if $lal >= 3}
             <div role="tabpanel" class="tab-pane" id="standalone">
                 <table class="dataTable display" id="sdns_standalone" width="100%" border="0" cellspacing="1" cellpadding="3">
                     <thead>
@@ -75,6 +82,7 @@
                     </tbody>
                 </table>
             </div>
+            {/if}
             <div role="tabpanel" class="tab-pane" id="reverse">
                 <table class="dataTable display" id="sdns_reverse" width="100%" border="0" cellspacing="1" cellpadding="3">
                     <thead>
@@ -132,8 +140,8 @@
                                 <select name="sdns_addzone_type" id="sdns_addzone_type" class="form-padding form-control">
                                     <option value="" disabled selected>{$LANG.admin_overview_selecttype}</option>
                                     <option value="d">{$LANG.admin_overview_domain}</option>
-                                    <option value="p">{$LANG.admin_overview_product}</option>
-                                    <option value="s">{$LANG.admin_overview_standalone}</option>
+                                    {if $lal >= 2}<option value="p">{$LANG.admin_overview_product}</option>{/if}
+                                    {if $lal >= 3}<option value="s">{$LANG.admin_overview_standalone}</option>{/if}
                                     <option value="r">{$LANG.admin_overview_reverse}</option>
                                 </select>
                             </div>
@@ -156,7 +164,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal" onclick="updatesettings('add_zone');">{$LANG.admin_add}</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.admin_cancel}</button>
+                    <button type="button" class="btn btn-default" onclick="reset_addzone()" data-dismiss="modal">{$LANG.admin_cancel}</button>
                 </div>
             </div>
         </div>

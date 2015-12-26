@@ -13,8 +13,8 @@
 <!-- Navigation Tabs -->
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active"><a href="#records" aria-controls="records" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_records}</a></li>
-	{if $sac.dnssec}<li role="presentation"><a href="#dnssec" aria-controls="dnssec" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_dnssec}</a></li>{/if}
-	{if $sac.health}<li role="presentation"><a href="#health" aria-controls="health" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_health}{if $health_count} <span class="label label-danger badge_danger">{$health_count}</span>{/if}</a></li>{/if}
+	{if $lal >= 2}{if $sac.dnssec}<li role="presentation"><a href="#dnssec" aria-controls="dnssec" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_dnssec}</a></li>{/if}{/if}
+	{if $lal >= 4}{if $sac.health}<li role="presentation"><a href="#health" aria-controls="health" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_health}{if $health_count} <span class="label label-danger badge_danger">{$health_count}</span>{/if}</a></li>{/if}{/if}
 </ul>
   
 {if $server_avb eq true}
@@ -22,8 +22,8 @@
 <div role="tabpanel">
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="records">{include file="{$base_path}/template/admin_manager_records.tpl"}</div>
-		{if $sac.dnssec}<div role="tabpanel" class="tab-pane" id="dnssec">{include file="{$base_path}/template/admin_manager_dnssec.tpl"}</div>{/if}
-		{if $sac.health}<div role="tabpanel" class="tab-pane" id="health">{include file="{$base_path}/template/admin_manager_health.tpl"}</div>{/if}
+		{if $lal >= 2}{if $sac.dnssec}<div role="tabpanel" class="tab-pane" id="dnssec">{include file="{$base_path}/template/admin_manager_dnssec.tpl"}</div>{/if}{/if}
+		{if $lal >= 4}{if $sac.health}<div role="tabpanel" class="tab-pane" id="health">{include file="{$base_path}/template/admin_manager_health.tpl"}</div>{/if}{/if}
 	</div>
 </div>
 {else if $nozone}
@@ -36,3 +36,11 @@
 	<div id="dyn_msg">{$LANG.admin_msg_rde_desc}</div>
 </div>
 {/if}
+
+<noscript>
+    <div class="alert2 alert2-danger">
+        <h4>{$LANG.nojavascript_title}</h4>
+        <p>{$LANG.nojavascript_desc}</p>
+    </div>
+	<style>.tab-content { display:none; } .nav { display:none; }</style>
+</noscript>

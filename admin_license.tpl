@@ -60,7 +60,7 @@
                     <label for="sdns_maintenance">{$LANG.admin_license_brandremoval}:</label>
                 </div>
                 <div class="col-md-9 data_text">
-                    <label class="info_text" for="sdns_maintenance"> {if $license.brandremoval eq 'Yes'} <span class="label active">{$LANG.admin_yes}</span> {else} <span class="label">{$LANG.admin_no}</span> {/if} </label>
+                    <label class="info_text" for="sdns_maintenance"> {if $license.brandremoval eq 'Yes'} <span class="label active">{$LANG.admin_yes}</span> {else} <span class="label label-default">{$LANG.admin_no}</span> {/if} </label>
                 </div>
             </div>
 

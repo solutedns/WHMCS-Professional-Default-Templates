@@ -33,8 +33,10 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
                         <li><a href="#" data-toggle="modal" data-target="#dialog_applyTemplate"><span class="glyphicon glyphicon-random" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_applytemplate}</span></a></li>
+                        {if $lal >= 4}
                         <li><a href="#" data-toggle="modal" data-target="#dialog_importZone"><span class="glyphicon glyphicon-import" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_importzone}</span></a></li>
                         <li><a href="#" data-toggle="modal" data-target="#dialog_exportZone" onclick="ExportZone('{$zone.id}')"><span class="glyphicon glyphicon-export" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_exportzone}</span></a></li>
+                        {/if}
                         <li class="divider"></li>
                         <li><a href="#" onclick="deleteSelected();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_deleteselected}</span></a></li>
                     </ul>
@@ -252,6 +254,7 @@
     </div>
 </div>
 
+{if $lal >= 4}
 <!-- Import Zone -->
 <div class="bootstrap">
     <div class="modal fade" id="dialog_importZone" tabindex="-1" role="dialog" aria-labelledby="dialog_importZone" aria-hidden="true">
@@ -313,6 +316,7 @@
         </div>
     </div>
 </div>
+{/if}
 
 <input type="hidden" id="sdns_zone" value="{$zone.id}">
 <input type="hidden" id="sdns_record">

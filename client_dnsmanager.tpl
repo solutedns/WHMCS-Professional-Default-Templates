@@ -16,7 +16,7 @@
             </div>
             <div class="list-group">
                 <a href="#overview" id="overview-tab" class="list-group-item active" onclick="setOverview('overview');" aria-controls="overview" role="tab" data-toggle="tab">{$MLANG.client_overview}</a>
-                <a href="#dnssec" id="dnssec-tab" class="list-group-item {if $dnssec eq false}disabled{/if}" {if $dnssec eq true}onclick="setOverview('dnssec');" {/if} aria-controls="template" role="tab" data-toggle="tab">{$MLANG.client_dnssec}</a>
+                {if $lal >= 2}<a href="#dnssec" id="dnssec-tab" class="list-group-item {if $dnssec eq false}disabled{/if}" {if $dnssec eq true}onclick="setOverview('dnssec');" {/if} aria-controls="template" role="tab" data-toggle="tab">{$MLANG.client_dnssec}</a>{/if}
             </div>
         </div>
         <div class="text-right">
@@ -78,6 +78,7 @@
                     </table>
                 </div>
             </div>
+            {if $lal >= 2}
             {if $dnssec eq true}
             <!-- DNSsec Tab -->
             <div role="tabpanel" class="tab-pane" id="dnssec">
@@ -197,6 +198,7 @@
                     </table>
                 </div>
             </div>
+            {/if}
             {/if}
         </div>
         {/if}
@@ -352,3 +354,11 @@
 {/if}
 {/if}
 {/if}
+
+<noscript>
+    <div class="alert alert-danger">
+        <h4>{$MLANG.nojavascript_title}</h4>
+        <p>{$MLANG.nojavascript_desc}</p>
+    </div>
+	<style>.sidebar { display:none; } .tab-content { display:none; }</style>
+</noscript>
