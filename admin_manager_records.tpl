@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-3">
             <p><strong>{$LANG.admin_manage_title_client}:</strong>
-                <br /><a href="clientssummary.php?userid={$clientdetails.id}"><?php echo $this->{if $clientdetails.companyname}{$clientdetails.companyname}{else}{$clientdetails.firstname} {$clientdetails.lastname}{/if}</a></p>
+                <br /><a href="clientssummary.php?userid={$clientdetails.id}">{if $clientdetails.companyname}{$clientdetails.companyname}{else}{$clientdetails.firstname} {$clientdetails.lastname}{/if}</a></p>
         </div>
         <div class="col-md-3">
             <p><strong>{$LANG.admin_manage_title_email}:</strong>
@@ -320,9 +320,3 @@
 
 <input type="hidden" id="sdns_zone" value="{$zone.id}">
 <input type="hidden" id="sdns_record">
-
-<script>
-    $(document).ready(function() {
-        drawRecords('sdns_records')
-    });
-</script>

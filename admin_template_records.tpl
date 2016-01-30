@@ -124,9 +124,3 @@
 
 <input type="hidden" id="sdns_zone" value="{$template.id}">
 <input type="hidden" id="sdns_record">
-
-<script>
-    $(document).ready(function() {
-        drawRecords('sdns_template_records')
-    });
-</script>

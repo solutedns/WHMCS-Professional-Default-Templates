@@ -81,6 +81,10 @@ function sendData(json) {
             if (data['reversereload'] == true) {
                 SDNS_reverseTable.fnReloadAjax();
             }
+			
+			if (data['recordreset'] == true) {
+                resetDNSField();
+            }
 
             if (data['reload'] == true) {
                 setTimeout(function() {
@@ -395,16 +399,37 @@ function dnsassist(type) {
 
 /* Enable edit fields */
 function edit(id) {
-    $('#sdns_name_' + id).removeAttr("disabled");
-    $('#sdns_type_' + id).removeAttr("disabled");
-    $('#sdns_content_' + id).removeAttr("disabled");
-    $('#sdns_prio_' + id).removeAttr("disabled");
-    $('#sdns_ttl_' + id).removeAttr("disabled");
-    var edit = 'sdns_edit_' + id
-    var save = 'sdns_save_' + id
-
-    document.getElementById(edit).style.display = 'none';
-    document.getElementById(save).style.display = 'inline-block';
+	
+	//Reset previous selected field
+	resetDNSField();
+	
+	//Enable current fields
+	$('#sdns_name_' + id).prop('disabled', false);
+	$('#sdns_type_' + id).prop('disabled', false);
+	$('#sdns_content_' + id).prop('disabled', false);
+	$('#sdns_prio_' + id).prop('disabled', false);
+	$('#sdns_ttl_' + id).prop('disabled', false);
+	
+    $('#sdns_edit_' + id).hide();
+	$('#sdns_save_' + id).show();
 
     setRecord(id);
+}
+
+/* Disable previous selected edit fields */
+function resetDNSField() {
+	
+	var id = $("#sdns_record").val();
+	
+	if (id > 1)  {
+		//Disable previous fields
+		$('#sdns_name_' + id).prop('disabled', true);
+		$('#sdns_type_' + id).prop('disabled', true);
+		$('#sdns_content_' + id).prop('disabled', true);
+		$('#sdns_prio_' + id).prop('disabled', true);
+		$('#sdns_ttl_' + id).prop('disabled', true);
+		
+		$('#sdns_save_' + id).hide();
+		$('#sdns_edit_' + id).show();
+	}	
 }

@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-3">
             <p><strong>{$LANG.admin_manage_title_client}:</strong>
-                <br /><a href="clientssummary.php?userid={$clientdetails.id}"><?php echo $this->{if $clientdetails.companyname}{$clientdetails.companyname}{else}{$clientdetails.firstname} {$clientdetails.lastname}{/if}</a></p>
+                <br /><a href="clientssummary.php?userid={$clientdetails.id}">{if $clientdetails.companyname}{$clientdetails.companyname}{else}{$clientdetails.firstname} {$clientdetails.lastname}{/if}</a></p>
         </div>
         <div class="col-md-3">
             <p><strong>{$LANG.admin_manage_title_email}:</strong>
@@ -18,7 +18,7 @@
                 <div class="btn-group">
                     <form role="form" id="reset_health">
                         <input type="hidden" name="sdns_form" value="reset_health">
-                        <input name="sdns_domain" id="sdns_domain" type="hidden" value="{$zone.domain}">
+                        <input name="sdns_domain" id="sdns_domain" type="hidden" value="{if $zone.domain_utf}{$zone.domain_utf}{else}{$zone.domain}{/if}">
                         <button {if $isSlave}disabled{/if} type="button" class="btn btn-warning btn-sm" onclick="updatesettings('reset_health');"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span> {$LANG.admin_manage_health_recheck}</button>
                     </form>
                 </div>

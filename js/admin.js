@@ -76,6 +76,10 @@ function sendData(json) {
             if (data['recordreload'] == true) {
                 SDNS_recordTable.fnReloadAjax();
             }
+			
+			if (data['recordreset'] == true) {
+                resetDNSField();
+            }
 
             if (data['reload'] == true) {
                 setTimeout(function() {
@@ -98,24 +102,42 @@ function sendData(json) {
 }
 
 function edit(id) {
+	
+	//Reset previous selected field
+	resetDNSField();
 
-    $('#sdns_name_' + id).removeAttr("disabled");
-    $('#sdns_type_' + id).removeAttr("disabled");
-    $('#sdns_content_' + id).removeAttr("disabled");
-    $('#sdns_prio_' + id).removeAttr("disabled");
-    $('#sdns_ttl_' + id).removeAttr("disabled");
+	//Enable current fields
+    $('#sdns_name_' + id).prop('disabled', false);
+	$('#sdns_type_' + id).prop('disabled', false);
+	$('#sdns_content_' + id).prop('disabled', false);
+	$('#sdns_prio_' + id).prop('disabled', false);
+	$('#sdns_ttl_' + id).prop('disabled', false);
 
-    var edit = 'sdns_edit_' + id
-    var save = 'sdns_save_' + id
-
-    document.getElementById(edit).style.display = 'none';
-    document.getElementById(save).style.display = 'inline-block';
+	$('#sdns_edit_' + id).hide();
+	$('#sdns_save_' + id).show();
 
     setRecord(id);
 
 }
 
-function deleteSelected() {
+function resetDNSField() {
+	
+	var id = $("#sdns_record").val();
+	
+	if (id > 1)  {
+		//Disable previous fields
+		$('#sdns_name_' + id).prop('disabled', true);
+		$('#sdns_type_' + id).prop('disabled', true);
+		$('#sdns_content_' + id).prop('disabled', true);
+		$('#sdns_prio_' + id).prop('disabled', true);
+		$('#sdns_ttl_' + id).prop('disabled', true);
+		
+		$('#sdns_save_' + id).hide();
+		$('#sdns_edit_' + id).show();
+	}	
+}
+
+function deleteSelected(serverid) {
 
     var deleteArray = [];
 
@@ -126,12 +148,21 @@ function deleteSelected() {
     var action = 'deleteselectedrecords';
     var zone = $("#sdns_zone").val();
     var records = deleteArray;
-
-    var data = {
-        action: action,
-        zone: zone,
-        records: records
-    };
+	
+	if (serverid != null) {
+		var data = {
+			action: action,
+			server: serverid,
+			zone: zone,
+			records: records
+		};
+	} else {
+		var data = {
+			action: action,
+			zone: zone,
+			records: records
+		};
+	}
 
     jsonString = JSON.stringify(data);
 
@@ -190,7 +221,7 @@ function update_static(action) {
 }
 
 
-function record_add(type) {
+function record_add(type, serverid) {
 
     setRecord(0);
     clearErrorField()
@@ -203,16 +234,6 @@ function record_add(type) {
     var var4 = $("#sdns_prio_0").val();
     var var5 = $("#sdns_ttl_0").val();
 
-    var item = {
-        action: action,
-        zone: zone,
-        name: var1,
-        type: var2,
-        content: var3,
-        prio: var4,
-        ttl: var5
-    };
-
     if (type == 'template') {
         var item = {
             action: action,
@@ -224,7 +245,18 @@ function record_add(type) {
             ttl: var5,
             template: true
         };
-    } else {
+    } else if(serverid != null) {
+        var item = {
+            action: action,
+			server: serverid,
+            zone: zone,
+            name: var1,
+            type: var2,
+            content: var3,
+            prio: var4,
+            ttl: var5
+        };
+	} else {
         var item = {
             action: action,
             zone: zone,
@@ -242,7 +274,7 @@ function record_add(type) {
 
 }
 
-function record_edit(type) {
+function record_edit(type, serverid) {
 
     clearErrorField()
 
@@ -268,7 +300,19 @@ function record_edit(type) {
             ttl: var5,
             template: true
         };
-    } else {
+    } else if(serverid != null) {
+        var item = {
+            action: action,
+			server: serverid,
+            zone: zone,
+            record_id: record_id,
+            name: var1,
+            type: var2,
+            content: var3,
+            prio: var4,
+            ttl: var5
+        };
+	} else {
         var item = {
             action: action,
             zone: zone,
@@ -287,7 +331,7 @@ function record_edit(type) {
 
 }
 
-function record_delete(type) {
+function record_delete(type, serverid) {
 
     var action = 'deleterecord';
     var zone = $("#sdns_zone").val();
@@ -299,6 +343,13 @@ function record_delete(type) {
             zone: zone,
             record_id: record_id,
             template: true
+        };
+    } else if (serverid != null) {
+        var item = {
+            action: action,
+			server: serverid,
+            zone: zone,
+            record_id: record_id,
         };
     } else {
         var item = {
@@ -643,7 +694,11 @@ function start_com(e, type) {
             el.scrollTop = el.scrollHeight;
         }, 120);
 		
-		var URL = document.URL.substring(0, document.URL .indexOf('#'));
+		if(document.URL.indexOf('#') === -1) {
+			var URL = document.URL;
+		} else {
+			var URL = document.URL.substring(0, document.URL.indexOf('#'));
+		}
 		
 		if (type == 'mutation') {
 			
@@ -665,6 +720,14 @@ function start_com(e, type) {
 			 };
 
 			source = new EventSource(URL + '&console=' + type + '&data=' + JSON.stringify(data));		
+		} else if (type == 'dnssec') {
+			
+			var data = {
+				server: $("#sdns_dnssec_server").val(), 
+				mode: $("#sdns_dnssec_action").val(),
+			 };
+
+			source = new EventSource(URL + '&console=' + type + '&data=' + JSON.stringify(data));		
 		} else {
 			source = new EventSource(URL + '&console=' + type);		
 		}
@@ -683,7 +746,7 @@ function start_com(e, type) {
                 var el = document.getElementById('results');
                 el.scrollTop = el.scrollHeight;
                 $('#console-close').prop('disabled', false);
-
+				delete console.isRunning;
             }
         });
 
@@ -694,6 +757,7 @@ function start_com(e, type) {
             var el = document.getElementById('results');
             el.scrollTop = el.scrollHeight;
             $('#console-close').prop('disabled', false);
+			delete console.isRunning;
         });
 
         console.isRunning = true;
@@ -743,17 +807,76 @@ function reset_addzone() {
     $('#add_reverse').hide();
 }
 
-// Remember opened tab
 $(document).ready(function() {
-				
+	
+	// Remember opened tab
 	var url = document.location.toString();
 	if (url.match('#')) {
-		$('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+		$('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show');
+		var atab = url.split('#')[1];
 	} 
 		
 	// Change hash for page-reload
 	$('.nav-tabs a').on('shown.bs.tab', function (e) {
 		window.location.hash = e.target.hash;
 	})
+
+	// Disable Console if EventSource not supported
+	if (typeof(EventSource) !== "undefined") {} else {
+		$('#console-job span').text("Your browser does not support the console output.");
+		$('#console-status span').text("Console not supported");
+	}
+
+	// Load table of active tab
+	if (atab == 'templates') {
+		drawTable('sdns_templates');	
+	} else if (atab == 'logs') {
+		drawTable('sdns_logs');	
+	} else if (document.URL.indexOf("server") != -1 || atab != null && atab != 'overview' && atab != 'records') {
+		// No table in active tab
+	} else {
+		if($("#sdns_domains").length != 0) {
+			drawTable('sdns_domains');
+		}
+		if($("#sdns_records").length != 0) {
+			drawRecords('sdns_records');
+		}
+		if($("#sdns_template_records").length != 0) {
+			drawRecords('sdns_template_records');
+		}
+	}
+
+		//Mutation Tool
+		$('.where_input').attr('disabled','disabled');
+		$('#where_container').addClass("sdns_text_disabled");
+    
+		$('select[name="sdns_mut_action"]').on('change',function(){
+			var  others = $(this).val();
+		
+			if(others == "add"){
+				$('.where_input').attr('disabled','disabled');
+				$('.content_input').removeAttr('disabled');
+				$('#where_container').addClass("sdns_text_disabled");
+				$('#content_container').removeClass("sdns_text_disabled");
+			}
+			
+			if(others == "edit"){           
+				$('.where_input').removeAttr('disabled');
+				$('.content_input').removeAttr('disabled');
+				$('#content_container').removeClass("sdns_text_disabled");
+				$('#where_container').removeClass("sdns_text_disabled");
+			}
+			
+			if(others == "delete"){           
+				$('.where_input').removeAttr('disabled');
+				$('.content_input').attr('disabled','disabled');
+				$('#content_container').addClass("sdns_text_disabled");
+				$('#where_container').removeClass("sdns_text_disabled");
+			}
+			else{
+				$('#disabled_input').attr('disabled','disabled'); 
+			}  
+	
+		});
 		
 });

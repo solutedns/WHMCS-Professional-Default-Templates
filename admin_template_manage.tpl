@@ -5,7 +5,7 @@
 
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#records" aria-controls="records" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_records}</a></li>
+	<li role="presentation" class="active"><a href="#records" onclick="drawRecords('sdns_template_records');" aria-controls="records" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_records}</a></li>
 	<li role="presentation"><a href="#settings" aria-controls="dnssec" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_settings}</a></li>
 </ul>
     

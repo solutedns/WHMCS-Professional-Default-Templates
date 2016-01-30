@@ -12,7 +12,7 @@
 
 <!-- Navigation Tabs -->
 <ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="active"><a href="#records" aria-controls="records" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_records}</a></li>
+	<li role="presentation" class="active"><a href="#records" onclick="drawRecords('sdns_records');" aria-controls="records" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_records}</a></li>
 	{if $lal >= 2}{if $sac.dnssec}<li role="presentation"><a href="#dnssec" aria-controls="dnssec" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_dnssec}</a></li>{/if}{/if}
 	{if $lal >= 4}{if $sac.health}<li role="presentation"><a href="#health" aria-controls="health" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_health}{if $health_count} <span class="label label-danger badge_danger">{$health_count}</span>{/if}</a></li>{/if}{/if}
 </ul>

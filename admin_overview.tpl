@@ -29,6 +29,7 @@
     <div class="overview_row">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="domains">
+            	<table class="dataTable hidden" id="sdns_empty"></table>
                 <table class="dataTable display" id="sdns_domains" width="100%" border="0" cellspacing="1" cellpadding="3">
                     <thead>
                         <tr>

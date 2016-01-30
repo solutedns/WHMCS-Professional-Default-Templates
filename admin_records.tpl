@@ -26,6 +26,12 @@
                         </div>
                         <div class="col-md-2">
                             <div class="checkbox">
+                                <input name="sdns_type_alias" id="sdns_type_alias" type="checkbox" {if $settings.ALIAS} CHECKED{/if} DISABLED>
+                                <label for="sdns_type_alias">ALIAS</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox">
                                 <input name="sdns_type_cname" id="sdns_type_cname" type="checkbox" {if $settings.CNAME} CHECKED{/if}>
                                 <label for="sdns_type_cname">CNAME</label>
                             </div>
@@ -48,8 +54,6 @@
                                 <label for="sdns_type_naptr">NAPTR</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-2">
                             <div class="checkbox">
                                 <input name="sdns_type_ns" id="sdns_type_ns" type="checkbox" {if $settings.NS} CHECKED{/if}>
@@ -86,8 +90,12 @@
                                 <label for="sdns_type_sshfp">SSHFP</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="checkbox">
+                                <input name="sdns_type_tlsa" id="sdns_type_tlsa" type="checkbox" {if $settings.TLSA} CHECKED{/if}>
+                                <label for="sdns_type_tlsa">TLSA</label>
+                            </div>
+                        </div>
                         <div class="col-md-2">
                             <div class="checkbox">
                                 <input name="sdns_type_txt" id="sdns_type_txt" type="checkbox" {if $settings.TXT} CHECKED{/if}>

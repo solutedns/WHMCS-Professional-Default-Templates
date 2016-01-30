@@ -11,7 +11,7 @@
 <div role="tabpanel">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        {if $acl < 5}<li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab" onclick="drawTable('sdns_domains');">{$LANG.admin_menu_overview}</a></li>{/if}
+        {if $acl < 5}<li role="presentation" class="active"><a href="#overview" onclick="drawTable('sdns_domains');" aria-controls="overview" role="tab" data-toggle="tab">{$LANG.admin_menu_overview}</a></li>{/if}
         {if $acl < 4}<li role="presentation"><a href="#templates" onclick="drawTable('sdns_templates')" aria-controls="templates" role="tab" data-toggle="tab">{$LANG.admin_menu_templates}</a></li>{/if}
        {if $acl < 3}<li class="dropdown" role="presentation"><a id="settings" class="dropdown-toggle" aria-controls="settings-contents" data-toggle="dropdown" href="#" aria-expanded="true">{$LANG.admin_menu_settings}<span class="caret"></span></a>
             <ul id="settings-contents" class="dropdown-menu" aria-labelledby="settings" role="menu">
@@ -126,55 +126,6 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-		
-		if (typeof(EventSource) !== "undefined") {} else {
-			$('#console-job span').text("Your browser does not support the console output.");
-			$('#console-status span').text("Console not supported");
-        }
-
-        if (document.URL.indexOf("server") != -1) {
-        } else {
-			drawTable('sdns_domains');	
-		}
-	
-		//Mutation Tool
-		$('.where_input').attr('disabled','disabled');
-		$('#where_container').addClass("sdns_text_disabled");
-    
-		$('select[name="sdns_mut_action"]').on('change',function(){
-			var  others = $(this).val();
-		
-			if(others == "add"){
-				$('.where_input').attr('disabled','disabled');
-				$('.content_input').removeAttr('disabled');
-				$('#where_container').addClass("sdns_text_disabled");
-				$('#content_container').removeClass("sdns_text_disabled");
-			}
-			
-			if(others == "edit"){           
-				$('.where_input').removeAttr('disabled');
-				$('.content_input').removeAttr('disabled');
-				$('#content_container').removeClass("sdns_text_disabled");
-				$('#where_container').removeClass("sdns_text_disabled");
-			}
-			
-			if(others == "delete"){           
-				$('.where_input').removeAttr('disabled');
-				$('.content_input').attr('disabled','disabled');
-				$('#content_container').addClass("sdns_text_disabled");
-				$('#where_container').removeClass("sdns_text_disabled");
-			}
-			else{
-				$('#disabled_input').attr('disabled','disabled'); 
-			}  
-	
-		});
-		
-    });
-</script>
 
 <noscript>
     <div class="alert2 alert2-danger">

@@ -227,6 +227,18 @@
             <h4>{$LANG.admin_nameservers_title_dnssecoptions}</h4>
             
             <div class="row">
+                <div class="col-md-3 text-right chx_form">
+                    <label for="sdns_pdnsversion">{$LANG.admin_nameservers_option_pdnsversion}:</label>
+                </div>
+                <div class="col-md-3">
+                    <select class="form-padding form-control" name="sdns_pdnsversion" id="sdns_pdnsversion">
+                        <option {if $ns_details.version eq '3'}selected {/if}value="3">3.x</option>
+                        <option {if $ns_details.version eq '4'}selected {/if}value="4">4.x</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_dnssec_enable">{$LANG.admin_nameservers_option_enablednssec}:</label>
                 </div>

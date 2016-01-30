@@ -94,6 +94,17 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc">
+                    <label for="sdns_system_debug">{$LANG.admin_system_option_debug}:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="checkbox chx_label">
+                        <input {if $settings.system_debug} CHECKED{/if} name="sdns_system_debug" id="sdns_system_debug" type="checkbox">
+                        <label class="chx_label" for="sdns_system_debug">{$LANG.admin_system_desc_debug}</label>
+                    </div>
+                </div>
+            </div>
 
             <div class="row text-center">
                 <br />
