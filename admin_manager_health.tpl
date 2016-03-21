@@ -3,7 +3,14 @@
     <div class="row">
         <div class="col-md-3">
             <p><strong>{$LANG.admin_manage_title_zone}:</strong>
-                <br /><a href="http://{$zone.domain}">{$zone.domain}</a></p>
+                <br />
+                {if $zone.type eq 'd'}
+                <a href="clientsdomains.php?userid={$zone.client_id}&id={$zone.local_id}">{$zone.domain}</a></p>
+                {else if $zone.type eq 'p'}
+                <a href="clientsservices.php?userid={$zone.client_id}&id={$zone.local_id}">{$zone.domain}</a></p>
+                {else}
+                <a href="http://{$zone.domain}">{$zone.domain}</a></p>
+                {/if}
         </div>
         <div class="col-md-3">
             <p><strong>{$LANG.admin_manage_title_client}:</strong>

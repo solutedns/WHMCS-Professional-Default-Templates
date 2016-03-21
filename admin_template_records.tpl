@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-9">
             <p><strong>{$LANG.admin_template_title_template}:</strong>
-                <br />{if $template.name}{$template.name}{else}{$LANG.admin_template_unnamed}{/if}</p>
+                <br />{if $template.type neq default}<a href="#" id="sdns_template_name" data-type="text">{/if}{if $template.name}{$template.name}{/if}{if $template.type neq default}</a>{/if}</p>
         </div>
         <div class="col-md-3">
             <div class="text-right">
@@ -61,10 +61,8 @@
                                 <option value="CNAME">CNAME</option>
                                 <option value="MX">MX</option>
                                 <option value="NAPTR">NAPTR</option>
-                                <option value="NS">NS</option>
                                 <option value="PTR">PTR</option>
                                 <option value="RP">RP</option>
-                                <option value="SOA">SOA</option>
                                 <option value="SPF">SPF</option>
                                 <option value="SRV">SRV</option>
                                 <option value="SSHFP">SSHFP</option>
@@ -82,12 +80,19 @@
                         </div>
                         <div class="col-md-2">
                             <label for "sdns_ttl_0">{$LANG.admin_manage_ttl}:</label>
+                        	{if $ttl.preset}
                             <select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
-                                <option value="60">1 {$LANG.admin_manage_minute}</option>
-                                <option value="300">5 {$LANG.admin_manage_minutes}</option>
-                                <option SELECTED value="3600">1 {$LANG.admin_manage_hour}</option>
-                                <option value="86400">1 {$LANG.admin_manage_day}</option>
+                                <option {if $template.default_ttl eq "60"}SELECTED{/if} value="60">1 {$LANG.admin_manage_minute}</option>
+                                <option {if $template.default_ttl eq "300"}SELECTED{/if} value="300">5 {$LANG.admin_manage_minutes}</option>
+                                <option {if $template.default_ttl eq "3600"}SELECTED{/if} value="3600">1 {$LANG.admin_manage_hour}</option>
+                                <option {if $template.default_ttl eq "86400"}SELECTED{/if} value="86400">1 {$LANG.admin_manage_day}</option>
+                                {if $template.default_ttl neq "60" && $template.default_ttl neq "300" && $template.default_ttl neq "3600" && $template.default_ttl neq "86400"}
+                                <option SELECTED value="{$template.default_ttl}">{$template.default_ttl}</option>
+                                {/if}
                             </select>
+                            {else}
+                            <input type="textbox" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
+                            {/if}
                         </div>
                     </div>
                 </div>
@@ -124,3 +129,16 @@
 
 <input type="hidden" id="sdns_zone" value="{$template.id}">
 <input type="hidden" id="sdns_record">
+
+<script>
+$(document).ready(function() {    
+    // Make template name editable
+    $('#sdns_template_name').editable({
+		mode: 'inline',
+		url: function(param) {
+			updateTemplate(param.value);
+		},
+		emptytext: '{$LANG.admin_template_unnamed}',
+	});
+});
+</script>

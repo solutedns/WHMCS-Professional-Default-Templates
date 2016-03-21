@@ -239,13 +239,20 @@
                         </div>
                         <div class="col-md-2">
                             <label for "sdns_ttl_0">{$MLANG.client_ttl}:</label>
+                        	{if $ttl.preset}
                             <select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
-                                <option value="60">1 {$MLANG.client_minute}</option>
-                                <option value="300">5 {$MLANG.client_minutes}</option>
-                                <option SELECTED value="3600">1 {$MLANG.client_hour}</option>
-                                <option value="86400">1 {$MLANG.client_day}</option>
+                                <option {if $ttl.default eq "60"}SELECTED{/if} value="60">1 {$MLANG.client_minute}</option>
+                                <option {if $ttl.default eq "300"}SELECTED{/if} value="300">5 {$MLANG.client_minutes}</option>
+                                <option {if $ttl.default eq "3600"}SELECTED{/if} value="3600">1 {$MLANG.client_hour}</option>
+                                <option {if $ttl.default eq "86400"}SELECTED{/if} value="86400">1 {$MLANG.client_day}</option>
+                                {if $ttl.default neq "60" && $ttl.default neq "300" && $ttl.default neq "3600" && $ttl.default neq "86400"}
+                                <option SELECTED value="{$ttl.default}">{$ttl.default}</option>
+                                {/if}
                             </select>
-                        </div>
+                            {else}
+                            <input type="textbox" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
+                            {/if}
+                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -311,7 +318,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <label for "sdns_srv_ttl">{$MLANG.client_ttl}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_ttl" id="sdns_srv_ttl" value="3600">
+                            <input type="textbox" class="form-padding form-control" name="sdns_srv_ttl" id="sdns_srv_ttl" value="{$ttl.default}">
                         </div>
                         <div class="col-md-2">
                             <label for "sdns_srv_priority">{$MLANG.client_priority}:</label>

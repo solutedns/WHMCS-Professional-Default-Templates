@@ -300,21 +300,21 @@
 
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
-        prefetch: 'addonmodules.php?module=solutedns&datasource=search&client&query=%QUERY',
-        remote: {
-            url: 'addonmodules.php?module=solutedns&datasource=search&client&query=%QUERY',
-            wildcard: '%QUERY'
-        }
+		remote: {
+			url: "addonmodules.php?module=solutedns&datasource=search&client&query=%QUERY",
+			wildcard: '%QUERY',
+		}
+
     });
 
     $('#add_client .typeahead').typeahead({
         hint: true,
         highlight: true,
-        minLength: 1
+        minLength: 1,
     }, {
-        name: 'best-pictures',
-        /*display: ''*/
-        source: clientResults,
+        name: 'clientResults',
+		displayKey: 'value',
+		source: clientResults.ttAdapter(),
         limit: 8
     });
 </script>

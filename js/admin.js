@@ -3,12 +3,12 @@
          *** SoluteDNS for WHMCS ***
 
 File:					template/js/admin.js
-File version:			0.2.0
-Date:					28-08-2015
+File version:			0.2.4
+Date:					21-03-2016
 
-Distribution Package:	15200
+Distribution Package:	16002
 
-Copyright (C) NetDistrict 2015
+Copyright (C) NetDistrict 2016
 All Rights Reserved
 
 **********************************************/
@@ -99,6 +99,7 @@ function sendData(json) {
 
         }
     });
+	
 }
 
 function edit(id) {
@@ -509,6 +510,22 @@ function setTemplate(id) {
     $("#sdns_template_id").val(id);
 }
 
+function updateTemplate(name) {
+    var id = $('#sdns_zone').val();
+	
+    var item = {
+        action: 'edit_template_name',
+        id: id,
+        name: name,
+    };
+
+    jsonString = JSON.stringify(item);
+
+    sendData(jsonString);
+
+    $('#sdns_template_name2').text(name);
+}
+
 function syscheck(type, id) {
 
     if (type == 'ssh') {
@@ -617,7 +634,7 @@ function countupdate() {
 
 function domainResults() {
 
-    $('#add_domain .typeahead').typeahead('destroy')
+    $('#add_domain .typeahead').typeahead('destroy');
 
     vars.domainResults = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
@@ -635,7 +652,7 @@ function domainResults() {
         highlight: true,
         minLength: 1
     }, {
-        name: 'best-pictures2',
+        name: 'domainResults',
         /*display: ''*/
         source: vars.domainResults,
         limit: 8

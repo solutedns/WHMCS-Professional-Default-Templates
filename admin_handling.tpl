@@ -14,6 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
                 	{if $lal >= 2}
+                    {if $settings.auto_dnsprod} 
                     {foreach from=$handling_products item=product}
                     <div class="col-md-2">
                         <div class="checkbox">
@@ -24,6 +25,9 @@
                     {foreachelse}
                     <small><i class="text-muted">{$LANG.admin_none_available}</i></small>
                     {/foreach}
+                    {else}
+                    <small><i class="text-danger">{$LANG.admin_handling_dnsforproduct}</i></small>
+                    {/if}
                     {else}
                     <small><i class="text-muted">{$LANG.admin_none_available}</i></small>
                     {/if}
