@@ -71,6 +71,9 @@ form label {
 .topm5 {
     padding-top: 8px;
 }
+.paddingl5 {
+	padding-left: 5px !important;	
+}
 #console-job {
     padding-bottom: 8px;
 }
@@ -99,6 +102,29 @@ form label {
 .sdns_text_disabled {
 	color: #999 !important;	
 }
+
+.autosave-enabled {
+	border-top: solid 3px #090;	
+	color: #090;
+	text-transform: uppercase;
+	text-align: right;
+	margin-right: 2px;
+	padding-right: 2px;
+}
+
+.ph-row {
+	border-top: solid 1px #f7f7f7;
+	margin-top: 2px;
+}
+
+.tooltip-inner {
+    background-color: #73AD21;
+    color: #FFFFFF;
+    border: 1px solid green;
+    padding: 15px;
+    font-size: 20px !important;
+}
+
 /*
 ## Label override
 */

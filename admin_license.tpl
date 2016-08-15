@@ -123,7 +123,7 @@
                     <label for="sdns_license">{$LANG.admin_license_licensekey}:</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="textbox" class="form-padding form-control" name="sdns_license" id="sdns_license" value="{$license.licensekey}">
+                    <input type="text" class="form-padding form-control" name="sdns_license" id="sdns_license" value="{$license.licensekey}">
                 </div>
                 <div class="col-md-5"></div>
             </div>

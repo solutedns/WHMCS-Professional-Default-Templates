@@ -59,7 +59,7 @@
                     <label for="sdns_dns_pagination">{$LANG.admin_accessibility_option_dnspagination}:</label>
                 </div>
                 <div class="col-md-1 chx_desc">
-                    <input type="textbox" class="form-padding form-control" name="sdns_dns_pagination" id="sdns_dns_pagination" value="{$settings.dns_pagination}">
+                    <input type="text" class="form-padding form-control" name="sdns_dns_pagination" id="sdns_dns_pagination" value="{$settings.dns_pagination}">
                 </div>
                 <div class="col-md-8 chx_desc chx_form">
                     <label class="info_text" for="sdns_dns_pagination">{$LANG.admin_accessibility_desc_dnspagination}</label>
@@ -130,7 +130,7 @@
                     <label for="sdns_zone_limit">{$LANG.admin_accessibility_option_zonelimit}:</label>
                 </div>
                 <div class="col-md-1 chx_desc">
-                    <input type="textbox" class="form-padding form-control" name="sdns_zone_limit" id="sdns_zone_limit" value="{$settings.zone_limit}">
+                    <input type="text" class="form-padding form-control" name="sdns_zone_limit" id="sdns_zone_limit" value="{$settings.zone_limit}">
                 </div>
                 <div class="col-md-8 chx_desc chx_form">
                     <label class="info_text" for="sdns_zone_limit">{$LANG.admin_accessibility_desc_zonelimit}</label>

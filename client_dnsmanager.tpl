@@ -101,22 +101,30 @@
                                 {$key.flag}
                             </td>
                             <td align="center">
-                                {if $key.algorithm eq 'RSASHA1'}
+                                {if $key.algorithm eq '1'}
+                                RSA/MD5 (1)
+                                {elseif $key.algorithmeq eq '2'}
+                                Diffie-Hellman (2)
+                                {elseif $key.algorithm eq '3'}
+                                DSA/SHA1 (3)
+                                {elseif $key.algorithm eq '5'}
                                 RSA/SHA-1 (5)
-                                {elseif $key.algorithm eq 'RSANSEC3SHA1'}
+                                {elseif $key.algorithm eq '6'}
+                                DSA-NSEC3-SHA1 (6)
+                                {elseif $key.algorithm eq '7'}
                                 RSASHA1-NSEC3-SHA1 (7)
-                                {elseif $key.algorithm eq 'RSASHA256'}
+                                {elseif $key.algorithm eq '8'}
                                 RSA/SHA-256 (8)
-                                {elseif $key.algorithm eq 'RSASHA512'}
+                                {elseif $key.algorithm eq '10'}
                                 RSA/SHA-512 (10)
-                                {elseif $key.algorithm eq 'ECC-GOST'}
+                                {elseif $key.algorithm eq '12'}
                                 GOST R 34.10-2001 (12)
-                                {elseif $key.algorithm eq 'ECDSA256'}
+                                {elseif $key.algorithm eq '13'}
                                 ECDSA Curve P-256 with SHA-256 (13)
-                                {elseif $key.algorithm eq 'ECDSA384'}
-                                ECDSA Curve P-384 with SHA-384 (14
+                                {elseif $key.algorithm eq '14'}
+                                ECDSA Curve P-384 with SHA-384 (14)
                                 {else}
-                                {$key.algorithm}
+                                {$MLANG.admin_manage_unknown}
                                 {/if}
                             </td>
                             <td align="center" style="padding-right: 8px;">
@@ -169,7 +177,7 @@
                                 {elseif $ds.algorithm eq '14'}
                                 ECDSA Curve P-384 with SHA-384 (14)
                                 {else}
-                                {$LANG.admin_manage_unknown}
+                                {$MLANG.admin_manage_unknown}
                                 {/if}
                             </td>
                             <td align="center">
@@ -182,7 +190,7 @@
                                 {elseif $ds.digest_type  eq '4'}
                                 SHA-384 (4)
                                 {else}
-                                {$LANG.admin_manage_unknown}
+                                {$MLANG.admin_manage_unknown}
                                 {/if}
                             </td>
                             <td align="center" style="padding-right: 8px;">
@@ -213,16 +221,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_addRecord">{$MLANG.client_addrecord}</h4>
+                    <h4 class="modal-title">{$MLANG.client_addrecord}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div id="sdns_z-name_0" class="col-md-3">
-                            <label for "sdns_name_0">{$MLANG.client_name}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="{$zone.domain}">
+                            <label for="sdns_name_0">{$MLANG.client_name}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="{$zone.domain}">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_type_0">{$MLANG.client_type}:</label>
+                            <label for="sdns_type_0">{$MLANG.client_type}:</label>
                             <select class="form-padding form-control" name="sdns_type_0" id="sdns_type_0">
                                 {foreach from=$recordtypes item=type}
                                 <option value="{$type}">{$type}</option>
@@ -230,15 +238,15 @@
                             </select>
                         </div>
                         <div id="sdns_z-content_0" class="col-md-4">
-                            <label for "sdns_content_0">{$MLANG.client_content}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
+                            <label for="sdns_content_0">{$MLANG.client_content}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
                         </div>
                         <div id="sdns_z-prio_0" class="col-md-1">
-                            <label for "sdns_prio_0">{$MLANG.client_prio}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
+                            <label for="sdns_prio_0">{$MLANG.client_prio}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_ttl_0">{$MLANG.client_ttl}:</label>
+                            <label for="sdns_ttl_0">{$MLANG.client_ttl}:</label>
                         	{if $ttl.preset}
                             <select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
                                 <option {if $ttl.default eq "60"}SELECTED{/if} value="60">1 {$MLANG.client_minute}</option>
@@ -250,7 +258,7 @@
                                 {/if}
                             </select>
                             {else}
-                            <input type="textbox" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
+                            <input type="text" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
                             {/if}
                          </div>
                     </div>
@@ -271,7 +279,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_deleteRecord">{$MLANG.client_deleterecord}</h4>
+                    <h4 class="modal-title">{$MLANG.client_deleterecord}</h4>
                 </div>
                 <div class="modal-body">
                     <p>{$MLANG.client_text_deleterecord}</p>
@@ -294,16 +302,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_srvAssist">{$MLANG.client_srvassistant}</h4>
+                    <h4 class="modal-title">{$MLANG.client_srvassistant}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for "sdns_srv_service">{$MLANG.client_service}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_service" id="sdns_srv_service" placeholder="ldap">
+                            <label for="sdns_srv_service">{$MLANG.client_service}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_service" id="sdns_srv_service" placeholder="ldap">
                         </div>
                         <div class="col-md-3">
-                            <label for "sdns_srv_protocol">{$MLANG.client_protocol}:</label>
+                            <label for="sdns_srv_protocol">{$MLANG.client_protocol}:</label>
                             <select class="form-padding form-control" name="sdns_srv_protocol" id="sdns_srv_protocol">
                                 <option value="TCP">TCP</option>
                                 <option value="UDP">UDP</option>
@@ -317,26 +325,26 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label for "sdns_srv_ttl">{$MLANG.client_ttl}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_ttl" id="sdns_srv_ttl" value="{$ttl.default}">
+                            <label for="sdns_srv_ttl">{$MLANG.client_ttl}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_ttl" id="sdns_srv_ttl" value="{$ttl.default}">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_srv_priority">{$MLANG.client_priority}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_priority" id="sdns_srv_priority">
+                            <label for="sdns_srv_priority">{$MLANG.client_priority}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_priority" id="sdns_srv_priority">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_srv_weight">{$MLANG.client_weight}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_weight" id="sdns_srv_weight">
+                            <label for="sdns_srv_weight">{$MLANG.client_weight}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_weight" id="sdns_srv_weight">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            <label for "sdns_srv_target">{$MLANG.client_target}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_target" id="sdns_srv_target">
+                            <label for="sdns_srv_target">{$MLANG.client_target}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_target" id="sdns_srv_target">
                         </div>
                         <div class="col-md-4">
-                            <label for "sdns_srv_port">{$MLANG.client_port}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_port" id="sdns_srv_port">
+                            <label for="sdns_srv_port">{$MLANG.client_port}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_port" id="sdns_srv_port">
                         </div>
                     </div>
                 </div>

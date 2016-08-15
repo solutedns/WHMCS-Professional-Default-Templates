@@ -102,6 +102,53 @@ function sendData(json) {
 	
 }
 
+function autoSend(json, origin) {
+	
+    $.ajax({
+        data: {
+            'data': json
+        },
+        url: location.protocol + '//' + location.host + location.pathname + '?module=solutedns&datahandler',
+        method: "POST",
+        success: function(data) {
+            //alert(data);
+            var data = JSON.parse(data);
+			
+			var status = [];
+			
+			status['status'] = data['status'];
+			
+            if (data['status'] == 'success') {
+				status['msg'] = '<p class="text-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> ' + data['msg'] + '</p>';
+            }
+            if (data['status'] == 'warning') {
+				status['msg'] = '<p class="text-warning"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> ' + data['msg'] + '</p>';
+            }
+            if (data['status'] == 'error') {
+				status['msg'] = '<p class="text-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' + data['msg'] + '</p>';
+            }
+            if (data['status'] == 'info') {
+				status['msg'] = '<p class="text-info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> ' + data['msg'] + '</p>';
+            }
+			
+			autoSelector(status, origin, data.data);
+
+            if (data['reload'] == true) {
+                setTimeout(function() {
+                    location.reload()
+                }, 2000);
+            }
+
+            if (typeof data['field'] !== 'undefined') {
+                setErrorField(data['field']);
+            }
+			
+        }
+	
+    });
+	
+}
+
 function edit(id) {
 	
 	//Reset previous selected field
@@ -456,10 +503,11 @@ function dnssec_addkey(zone) {
 
 }
 
-function reset_cron() {
+function reset_cron(type) {
 
     var item = {
-        action: 'reset_cron'
+        action: 'reset_cron',
+		type: type
     };
 
     jsonString = JSON.stringify(item);
@@ -489,6 +537,103 @@ function check_update() {
     sendData(jsonString);
 }
 
+function product_save(id, type, content) {
+
+    var item = {
+        action: 'product_handling',
+		id: id,
+		type: type,
+		content: content.value
+    };
+
+    jsonString = JSON.stringify(item);
+	
+	var selector = [];
+	
+	if (type == 'settings') {
+		selector['class'] = '#sdns_product_settings_'+id;
+	}
+	if (type == 'dnssec') {
+		selector['class'] = '#sdns_product_dnssec_'+id;
+	}
+	if (type == 'record_limit') {
+		selector['class'] = '#sdns_product_limit_'+id;
+	}	
+	if (type == 'server') {
+		selector['class'] = '#sdns_product_server_'+id;
+	}
+	
+	selector['id'] = id;
+
+    autoSend(jsonString, selector);
+		
+}
+
+function autoSelector(msg, selector, data) {
+	
+	// Set message time
+	if (msg['status'] == 'success') {
+		var delay = 1000;
+	} else {
+		var delay = 4000;
+	}
+		
+	// Set values
+	if (data) {
+		$("#sdns_product_server_"+selector.id).val(data.server_id);
+		$("#sdns_product_limit_"+selector.id).val(data.record_limit);
+		if (data.dnssec == 'on') {
+			$("#sdns_product_dnssec_"+selector.id).prop('checked', true);
+		} else {
+			$("#sdns_product_dnssec_"+selector.id).prop('checked', false);
+		}
+	} else {
+		$("#sdns_product_server_"+selector.id).val('');
+		$("#sdns_product_limit_"+selector.id).val('');
+			$("#sdns_product_dnssec_"+selector.id).prop('checked', false);
+	}
+	
+	// Enable/disable fields
+	if (msg['status'] == 'success') {
+		if (data) {
+			$("#sdns_product_server_"+selector.id).prop('disabled', false);
+			$("#sdns_product_limit_"+selector.id).prop('disabled', false);
+			$("#sdns_product_dnssec_"+selector.id).prop('disabled', false);
+			$("#sdns_product_settings_"+selector.id).prop('checked', true);
+		} else {
+			$("#sdns_product_server_"+selector.id).prop('disabled', true);
+			$("#sdns_product_limit_"+selector.id).prop('disabled', true);
+			$("#sdns_product_dnssec_"+selector.id).prop('disabled', true);
+			$("#sdns_product_settings_"+selector.id).prop('checked', false);
+		}
+	
+	}
+	
+	// Show status message
+	$(selector.class).popover(
+		{
+			placement: 'top',
+			container: 'body',
+			delay: {
+				show: 500,
+				hide: 100
+			},
+			html:true,
+			content:msg['msg']
+		}
+	).popover('show');
+	
+	$(selector.class).on('shown.bs.popover', function () {
+
+		setTimeout(function() {
+			$('.popover').fadeOut('slow',function() { 
+				$(selector.class).popover('destroy');
+			}); 
+		},delay);
+	
+	});	
+	
+}
 
 function setRecord(id) {
     $("#sdns_record").val(id);
@@ -633,7 +778,7 @@ function countupdate() {
 }
 
 function domainResults() {
-
+	
     $('#add_domain .typeahead').typeahead('destroy');
 
     vars.domainResults = new Bloodhound({
@@ -836,6 +981,15 @@ $(document).ready(function() {
 	// Change hash for page-reload
 	$('.nav-tabs a').on('shown.bs.tab', function (e) {
 		window.location.hash = e.target.hash;
+	})
+	
+	// Activate tooltip
+	$(function () {
+	  $('[data-toggle="tooltip"]').tooltip({container: 'body', html: true , 
+	  
+	  template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large"></div></div>'
+	  
+	  })
 	})
 
 	// Disable Console if EventSource not supported

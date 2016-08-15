@@ -20,7 +20,7 @@
                 <p>{$LANG.admin_nameservers_index_desc}</p>
             </div>
             <div class="col-sm-3 text-right">
-                <input class="btn btn-sm btn-info" type="button" data-dismiss="modal" data-toggle="modal" data-target="#dialog_console" data-backdrop="static" data-keyboard="false" onclick="console('index-{$ns_details.id}'); console_name('{$LANG.admin_console_title_index}');"value="{$LANG.admin_index}">
+                <input class="btn btn-sm btn-info" type="button" data-dismiss="modal" data-toggle="modal" data-target="#dialog_console" data-backdrop="static" data-keyboard="false" onclick="console('index-{$ns_details.id}'); console_name('{$LANG.admin_console_title_index}');" value="{$LANG.admin_index}">
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
                     <label for="sdns_db_host">{$LANG.admin_nameservers_option_host}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_db_host" id="sdns_db_host" value="{$ns_details.db_host}">
+                    <input type="text" class="form-padding form-control" name="sdns_db_host" id="sdns_db_host" value="{$ns_details.db_host}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_db_host">{$LANG.admin_nameservers_desc_host}</label>
@@ -49,7 +49,7 @@
                     <label for="sdns_db_port">{$LANG.admin_nameservers_option_port}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_db_port" id="sdns_db_port" placeholder="3306" {if $ns_details.db_port neq '0'}value="{$ns_details.db_port}"{/if}>
+                    <input type="text" class="form-padding form-control" name="sdns_db_port" id="sdns_db_port" placeholder="3306" {if $ns_details.db_port neq '0'}value="{$ns_details.db_port}"{/if}>
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_db_port">{$LANG.admin_nameservers_desc_port}</label>
@@ -60,7 +60,7 @@
                     <label for="sdns_db_user">{$LANG.admin_nameservers_option_user}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_db_user" id="sdns_db_user" value="{$ns_details.db_user}">
+                    <input type="text" class="form-padding form-control" name="sdns_db_user" id="sdns_db_user" value="{$ns_details.db_user}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -78,7 +78,7 @@
                     <label for="sdns_db_database">{$LANG.admin_nameservers_option_database}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_db_database" id="sdns_db_database" value="{$ns_details.db_name}">
+                    <input type="text" class="form-padding form-control" name="sdns_db_database" id="sdns_db_database" value="{$ns_details.db_name}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -105,7 +105,7 @@
                     <label for="sdns_ns0">{$LANG.admin_nameservers_option_nameserver1}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ns0" id="sdns_ns0" value="{$ns_details.ns0}">
+                    <input type="text" class="form-padding form-control" name="sdns_ns0" id="sdns_ns0" value="{$ns_details.ns0}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_ns0">{$LANG.admin_nameservers_desc_nameserver1}</label>
@@ -116,7 +116,7 @@
                     <label for="sdns_ns1">{$LANG.admin_nameservers_option_nameserver2}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ns1" id="sdns_ns1" value="{$ns_details.ns1}">
+                    <input type="text" class="form-padding form-control" name="sdns_ns1" id="sdns_ns1" value="{$ns_details.ns1}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -125,7 +125,7 @@
                     <label for="sdns_ns2">{$LANG.admin_nameservers_option_nameserver3}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ns2" id="sdns_ns2" value="{$ns_details.ns2}">
+                    <input type="text" class="form-padding form-control" name="sdns_ns2" id="sdns_ns2" value="{$ns_details.ns2}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -134,7 +134,7 @@
                     <label for="sdns_ns3">{$LANG.admin_nameservers_option_nameserver4}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ns3" id="sdns_ns3" value="{$ns_details.ns3}">
+                    <input type="text" class="form-padding form-control" name="sdns_ns3" id="sdns_ns3" value="{$ns_details.ns3}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -143,7 +143,7 @@
                     <label for="sdns_ns4">{$LANG.admin_nameservers_option_nameserver5}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ns4" id="sdns_ns4" value="{$ns_details.ns4}">
+                    <input type="text" class="form-padding form-control" name="sdns_ns4" id="sdns_ns4" value="{$ns_details.ns4}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -152,7 +152,7 @@
                     <label for="sdns_ns5">{$LANG.admin_nameservers_option_nameserver6}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ns5" id="sdns_ns5" value="{$ns_details.ns5}">
+                    <input type="text" class="form-padding form-control" name="sdns_ns5" id="sdns_ns5" value="{$ns_details.ns5}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_ns5">{$LANG.admin_nameservers_desc_nameserver6}</label>
@@ -168,7 +168,7 @@
                     <label for="sdns_ssh_host">{$LANG.admin_nameservers_option_host}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ssh_host" id="sdns_ssh_host" value="{$ns_details.ssh_host}">
+                    <input type="text" class="form-padding form-control" name="sdns_ssh_host" id="sdns_ssh_host" value="{$ns_details.ssh_host}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_ssh_host">{$LANG.admin_nameservers_desc_sshhost}</label>
@@ -179,7 +179,7 @@
                     <label for="sdns_ssh_port">{$LANG.admin_nameservers_option_port}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ssh_port" id="sdns_ssh_port" placeholder="22" {if $ns_details.ssh_port neq '0'}value="{$ns_details.ssh_port}"{/if} >
+                    <input type="text" class="form-padding form-control" name="sdns_ssh_port" id="sdns_ssh_port" placeholder="22" {if $ns_details.ssh_port neq '0'}value="{$ns_details.ssh_port}"{/if} >
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_ssh_port">{$LANG.admin_nameservers_desc_sshport}</label>
@@ -190,7 +190,7 @@
                     <label for="sdns_ssh_user">{$LANG.admin_nameservers_option_user}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_ssh_user" id="sdns_ssh_user" value="{$ns_details.ssh_user}">
+                    <input type="text" class="form-padding form-control" name="sdns_ssh_user" id="sdns_ssh_user" value="{$ns_details.ssh_user}">
                 </div>
                 <div class="col-md-6"></div>
             </div>

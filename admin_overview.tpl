@@ -4,7 +4,7 @@
 
             <h4><span id="overview_title">{$LANG.admin_overview_title_domains}</span></h4>
 
-            <div class="links_row">
+            <div class="links_row" role="tablist">
                 <ul id="overview-tabs">
                     <li class="first active" id="domains-tab"><a onclick="setOverview('{$LANG.admin_overview_title_domains}'); drawTable('sdns_domains')" href="#domains" class="ajax" aria-controls="domains" role="tab" data-toggle="tab">{$LANG.admin_overview_title_domains} <span>(?)</span></a></li>
                     {if $lal >= 2}
@@ -130,14 +130,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_addZone">{$LANG.admin_overview_addzone}</h4>
+                    <h4 class="modal-title">{$LANG.admin_overview_addzone}</h4>
                 </div>
                 <div class="modal-body">
                     <form role="form" id="add_zone">
                         <input type="hidden" name="sdns_form" value="add_zone">
                         <div class="row">
                             <div class="col-md-4">
-                                <label for "sdns_addzone_type">{$LANG.admin_overview_zonetype}:</label>
+                                <label for="sdns_addzone_type">{$LANG.admin_overview_zonetype}:</label>
                                 <select name="sdns_addzone_type" id="sdns_addzone_type" class="form-padding form-control">
                                     <option value="" disabled selected>{$LANG.admin_overview_selecttype}</option>
                                     <option value="d">{$LANG.admin_overview_domain}</option>
@@ -147,18 +147,18 @@
                                 </select>
                             </div>
                             <div class="col-md-8" id="add_reverse" style="display: none">
-                                <label for "sdns_addzone_ip">{$LANG.admin_overview_ipaddresszone}:</label>
-                                <input type="textbox" name="sdns_addzone_ip" id="sdns_addzone_ip" class="form-padding form-control">
+                                <label for="sdns_addzone_ip">{$LANG.admin_overview_ipaddresszone}:</label>
+                                <input type="text" name="sdns_addzone_ip" id="sdns_addzone_ip" class="form-padding form-control">
                             </div>
                             <div class="col-md-8" id="add_client" style="display: none">
-                                <label for "sdns_addzone_client">{$LANG.admin_overview_client}:</label>
+                                <label for="sdns_addzone_client">{$LANG.admin_overview_client}:</label>
                                 <input type="text" name="sdns_addzone_client" id="sdns_addzone_client" class="typeahead form-padding form-control" autocomplete="off" spellcheck="false">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12" id="add_domain" style="display: none">
-                                <label for "sdns_addzone_domain">{$LANG.admin_overview_domain}:</label>
-                                <input type="textbox" name="sdns_addzone_domain" id="sdns_addzone_domain" class="typeahead form-padding form-control" autocomplete="off" spellcheck="false">
+                                <label for="sdns_addzone_domain">{$LANG.admin_overview_domain}:</label>
+                                <input type="text" name="sdns_addzone_domain" id="sdns_addzone_domain" class="typeahead form-padding form-control" autocomplete="off" spellcheck="false">
                             </div>
                         </div>
                     </form>
@@ -179,7 +179,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_deleteZone"><div id="sdns_zone_name">{$LANG.admin_overview_delete} <span>{$LANG.admin_overview_zone}</span></div></h4>
+                    <h4 class="modal-title"><div id="sdns_zone_name">{$LANG.admin_overview_delete} <span>{$LANG.admin_overview_zone}</span></div></h4>
                 </div>
                 <div class="modal-body">
                     <p>{$LANG.admin_overview_text_deletezone}</p>
@@ -202,7 +202,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_exportZone">{$LANG.admin_manage_records_exportzone}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_exportzone}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -244,9 +244,12 @@
         syscheck();
 
         var i = 0;
+		
+		var val;
 
         $('#sdns_addzone_type').change(
             function() {
+				
                 $('#add_client').hide();
                 $('#add_domain').hide();
                 $('#add_reverse').hide();
@@ -278,21 +281,18 @@
                 }
 
                 i++;
-
-                if (val == 'd' || val == 'p') {
-                    if (i > 1) {
-                        domainResults();
-                    }
-                }
+				
             }
         );
-        $('#sdns_addzone_client').change(
-            function() {
-                domainResults();
-            }
-        )
         $('#add_client').bind('typeahead:selected', function(obj, datum, name) {
-            $('#sdns_addzone_domain').focus();
+            
+			$('#sdns_addzone_domain').focus();
+			
+			var val = $('#sdns_addzone_type option:selected').val();
+			if (val == 'd' || val == 'p') {
+				domainResults();
+			}
+			
         });
     });
 

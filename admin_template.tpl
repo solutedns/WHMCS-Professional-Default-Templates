@@ -38,7 +38,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_deleteTemplate">{$LANG.admin_template_deletetemplate}</h4>
+                    <h4 class="modal-title">{$LANG.admin_template_deletetemplate}</h4>
                 </div>
                 <div class="modal-body">
                     <p>{$LANG.admin_template_text_deletetemplate}</p>
@@ -64,14 +64,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_addTemplate">{$LANG.admin_template_addnewtemplate}</h4>
+                    <h4 class="modal-title">{$LANG.admin_template_addnewtemplate}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
                             <form role="form" id="add_template">
                                 <input type="hidden" name="sdns_form" value="add_template">
-                                <input type="textbox" class="form-padding form-control" name="sdns_templatename" id="sdns_templatename" placeholder="{$LANG.admin_template_templatename}">
+                                <input type="text" class="form-padding form-control" name="sdns_templatename" id="sdns_templatename" placeholder="{$LANG.admin_template_templatename}">
                             </form>
                         </div>
                     </div>

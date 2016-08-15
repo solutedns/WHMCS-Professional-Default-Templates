@@ -149,16 +149,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_addRecord">{$MLANG.client_addrecord}</h4>
+                    <h4 class="modal-title">{$MLANG.client_addrecord}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div id="sdns_z-name_0" class="col-md-3">
-                            <label for "sdns_name_0">{$MLANG.client_name}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="&lt;domain&gt;">
+                            <label for="sdns_name_0">{$MLANG.client_name}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="&lt;domain&gt;">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_type_0">{$MLANG.client_type}:</label>
+                            <label for="sdns_type_0">{$MLANG.client_type}:</label>
                             <select class="form-padding form-control" name="sdns_type_0" id="sdns_type_0">
                                 {foreach from=$recordtypes item=type}
                                 <option value="{$type}">{$type}</option>
@@ -166,15 +166,15 @@
                             </select>
                         </div>
                         <div id="sdns_z-content_0" class="col-md-4">
-                            <label for "sdns_content_0">{$MLANG.client_content}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
+                            <label for="sdns_content_0">{$MLANG.client_content}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
                         </div>
                         <div id="sdns_z-prio_0" class="col-md-1">
-                            <label for "sdns_prio_0">{$MLANG.client_prio}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
+                            <label for="sdns_prio_0">{$MLANG.client_prio}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_ttl_0">{$MLANG.client_ttl}:</label>
+                            <label for="sdns_ttl_0">{$MLANG.client_ttl}:</label>
                             <select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
                                 <option value="60">1 {$MLANG.client_minute}</option>
                                 <option value="300">5 {$MLANG.client_minutes}</option>
@@ -201,7 +201,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_deleteZone">{$MLANG.client_deletezone}</h4>
+                    <h4 class="modal-title">{$MLANG.client_deletezone}</h4>
                 </div>
                 <div class="modal-body">
                     <p>{$MLANG.client_text_deletezone}</p>
@@ -224,7 +224,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_deleteRecord">{$MLANG.client_deleterecord}</h4>
+                    <h4 class="modal-title">{$MLANG.client_deleterecord}</h4>
                 </div>
                 <div class="modal-body">
                     <p>{$MLANG.client_text_deleterecord}</p>

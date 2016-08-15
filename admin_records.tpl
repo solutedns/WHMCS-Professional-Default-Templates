@@ -114,7 +114,7 @@
                     <label for="sdns_soa_hostmaster">{$LANG.admin_records_option_hostmaster}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_soa_hostmaster" id="sdns_soa_hostmaster" value="{$settings.soa_hostmaster}">
+                    <input type="text" class="form-padding form-control" name="sdns_soa_hostmaster" id="sdns_soa_hostmaster" value="{$settings.soa_hostmaster}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_soa_hostmaster">{$LANG.admin_records_desc_hostmaster}</label>
@@ -140,7 +140,7 @@
                     <label for="sdns_soa_refresh">{$LANG.admin_records_option_refresh}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_soa_refresh" id="sdns_soa_refresh" value="{$settings.soa_refresh}">
+                    <input type="text" class="form-padding form-control" name="sdns_soa_refresh" id="sdns_soa_refresh" value="{$settings.soa_refresh}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -149,7 +149,7 @@
                     <label for="sdns_soa_retry">{$LANG.admin_records_option_retry}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_soa_retry" id="sdns_soa_retry" value="{$settings.soa_retry}">
+                    <input type="text" class="form-padding form-control" name="sdns_soa_retry" id="sdns_soa_retry" value="{$settings.soa_retry}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -158,7 +158,7 @@
                     <label for="sdns_soa_expire">{$LANG.admin_records_option_expire}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_soa_expire" id="sdns_soa_expire" value="{$settings.soa_expire}">
+                    <input type="text" class="form-padding form-control" name="sdns_soa_expire" id="sdns_soa_expire" value="{$settings.soa_expire}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -167,7 +167,7 @@
                     <label for="sdns_soa_ttl">{$LANG.admin_records_option_ttl}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="textbox" class="form-padding form-control" name="sdns_soa_ttl" id="sdns_soa_ttl" value="{$settings.soa_ttl}">
+                    <input type="text" class="form-padding form-control" name="sdns_soa_ttl" id="sdns_soa_ttl" value="{$settings.soa_ttl}">
                 </div>
                 <div class="col-md-6"></div>
             </div>
@@ -180,7 +180,7 @@
                     <label for="sdns_record_limit">{$LANG.admin_records_option_recordlimit}:</label>
                 </div>
                 <div class="col-md-1">
-                    <input name="sdns_record_limit" type="textbox" class="form-control" name="sdns_record_limit" id="sdns_record_limit" value="{$settings.record_limit}">
+                    <input name="sdns_record_limit" type="text" class="form-control" name="sdns_record_limit" id="sdns_record_limit" value="{$settings.record_limit}">
                 </div>
                 <div class="col-md-8 chx_form">
                     <label class="info_text" for="sdns_record_limit">{$LANG.admin_records_desc_recordlimit}</label>

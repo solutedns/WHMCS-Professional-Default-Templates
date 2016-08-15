@@ -40,7 +40,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
                         <li><a href="#" data-toggle="modal" data-target="#dialog_applyTemplate"><span class="glyphicon glyphicon-random" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_applytemplate}</span></a></li>
-                        {if $lal >= 4}
+                        {if $lal >= 3}
                         <li><a href="#" data-toggle="modal" data-target="#dialog_importZone"><span class="glyphicon glyphicon-import" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_importzone}</span></a></li>
                         <li><a href="#" data-toggle="modal" data-target="#dialog_exportZone" onclick="ExportZone('{$zone.id}')"><span class="glyphicon glyphicon-export" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_exportzone}</span></a></li>
                         {/if}
@@ -83,16 +83,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_addRecord">{$LANG.admin_manage_records_addrecord}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_addrecord}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div id="sdns_z-name_0" class="col-md-3">
-                            <label for "sdns_name_0">{$LANG.admin_manage_name}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="{$zone.domain}">
+                            <label for="sdns_name_0">{$LANG.admin_manage_name}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="{$zone.domain}">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_type_0">{$LANG.admin_manage_type}:</label>
+                            <label for="sdns_type_0">{$LANG.admin_manage_type}:</label>
                             <select class="form-padding form-control" name="sdns_type_0" id="sdns_type_0">
                                 <option value="A">A</option>
                                 <option value="AAAA">AAAA</option>
@@ -111,15 +111,15 @@
                             </select>
                         </div>
                         <div id="sdns_z-content_0" class="col-md-4">
-                            <label for "sdns_content_0">{$LANG.admin_manage_content}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
+                            <label for="sdns_content_0">{$LANG.admin_manage_content}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
                         </div>
                         <div id="sdns_z-prio_0" class="col-md-1">
-                            <label for "sdns_prio_0">{$LANG.admin_manage_prio}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
+                            <label for="sdns_prio_0">{$LANG.admin_manage_prio}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_ttl_0">{$LANG.admin_manage_ttl}:</label>
+                            <label for="sdns_ttl_0">{$LANG.admin_manage_ttl}:</label>
                         	{if $ttl.preset}
                             <select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
                                 <option {if $ttl.default eq "60"}SELECTED{/if} value="60">1 {$LANG.admin_manage_minute}</option>
@@ -131,7 +131,7 @@
                                 {/if}
                             </select>
                             {else}
-                            <input type="textbox" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
+                            <input type="text" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
                             {/if}
                         </div>
                     </div>
@@ -152,7 +152,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_deleteRecord">{$LANG.admin_manage_records_deleterecord}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_deleterecord}</h4>
                 </div>
                 <div class="modal-body">
                     <p>{$LANG.admin_manage_text_deleterecord}</p>
@@ -175,7 +175,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_applyTemplate">{$LANG.admin_manage_records_applytemplate}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_applytemplate}</h4>
                 </div>
                 <form role="form" id="applytemplate">
                     <input type="hidden" name="sdns_form" value="applytemplate">
@@ -184,7 +184,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <label for "sdns_apply_template">{$LANG.admin_manage_records_selecttemplate}:</label>
+                                <label for="sdns_apply_template">{$LANG.admin_manage_records_selecttemplate}:</label>
                                 <select class="form-padding form-control" name="sdns_apply_template" id="sdns_apply_template">
                                     {foreach from=$template_list item=item}
                                     <option value="{$item.id}">{$item.name} ({$item.id})</option>
@@ -213,16 +213,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_srvAssist">{$LANG.admin_manage_records_srvassist}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_srvassist}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-4">
-                            <label for "sdns_name_0">{$LANG.admin_manage_service}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_service" id="sdns_srv_service" placeholder="ldap">
+                            <label for="sdns_name_0">{$LANG.admin_manage_service}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_service" id="sdns_srv_service" placeholder="ldap">
                         </div>
                         <div class="col-md-3">
-                            <label for "sdns_type_0">{$LANG.admin_manage_protocol}:</label>
+                            <label for="sdns_type_0">{$LANG.admin_manage_protocol}:</label>
                             <select class="form-padding form-control" name="sdns_srv_protocol" id="sdns_srv_protocol">
                                 <option value="TCP">TCP</option>
                                 <option value="UDP">UDP</option>
@@ -236,26 +236,26 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <label for "sdns_name_0">{$LANG.admin_manage_ttl}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_ttl" id="sdns_srv_ttl" value="{$ttl.default}">
+                            <label for="sdns_name_0">{$LANG.admin_manage_ttl}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_ttl" id="sdns_srv_ttl" value="{$ttl.default}">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_name_0">{$LANG.admin_manage_priority}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_priority" id="sdns_srv_priority">
+                            <label for="sdns_name_0">{$LANG.admin_manage_priority}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_priority" id="sdns_srv_priority">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_name_0">{$LANG.admin_manage_weight}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_weight" id="sdns_srv_weight">
+                            <label for="sdns_name_0">{$LANG.admin_manage_weight}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_weight" id="sdns_srv_weight">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            <label for "sdns_name_0">{$LANG.admin_manage_target}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_target" id="sdns_srv_target">
+                            <label for="sdns_name_0">{$LANG.admin_manage_target}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_target" id="sdns_srv_target">
                         </div>
                         <div class="col-md-4">
-                            <label for "sdns_name_0">{$LANG.admin_manage_port}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_srv_port" id="sdns_srv_port">
+                            <label for="sdns_name_0">{$LANG.admin_manage_port}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_srv_port" id="sdns_srv_port">
                         </div>
                     </div>
                 </div>
@@ -268,7 +268,7 @@
     </div>
 </div>
 
-{if $lal >= 4}
+{if $lal >= 3}
 <!-- Import Zone -->
 <div class="bootstrap">
     <div class="modal fade" id="dialog_importZone" tabindex="-1" role="dialog" aria-labelledby="dialog_importZone" aria-hidden="true">
@@ -276,7 +276,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_importZone">{$LANG.admin_manage_records_importzone}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_importzone}</h4>
                 </div>
                 <form role="form" id="importzone">
                     <input type="hidden" name="sdns_form" value="importzone">
@@ -313,7 +313,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_exportZone">{$LANG.admin_manage_records_exportzone}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_exportzone}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">

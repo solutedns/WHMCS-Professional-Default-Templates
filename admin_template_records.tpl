@@ -45,16 +45,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_addRecord">{$LANG.admin_manage_records_addrecord}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_addrecord}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div id="sdns_z-name_0" class="col-md-3">
-                            <label for "sdns_name_0">{$LANG.admin_manage_name}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="&lt;domain&gt;">
+                            <label for="sdns_name_0">{$LANG.admin_manage_name}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="&lt;domain&gt;">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_type_0">{$LANG.admin_manage_type}:</label>
+                            <label for="sdns_type_0">{$LANG.admin_manage_type}:</label>
                             <select class="form-padding form-control" name="sdns_type_0" id="sdns_type_0">
                                 <option value="A">A</option>
                                 <option value="AAAA">AAAA</option>
@@ -71,15 +71,15 @@
                             </select>
                         </div>
                         <div id="sdns_z-content_0" class="col-md-4">
-                            <label for "sdns_content_0">{$LANG.admin_manage_content}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
+                            <label for="sdns_content_0">{$LANG.admin_manage_content}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
                         </div>
                         <div id="sdns_z-prio_0" class="col-md-1">
-                            <label for "sdns_prio_0">{$LANG.admin_manage_prio}:</label>
-                            <input type="textbox" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
+                            <label for="sdns_prio_0">{$LANG.admin_manage_prio}:</label>
+                            <input type="text" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
                         </div>
                         <div class="col-md-2">
-                            <label for "sdns_ttl_0">{$LANG.admin_manage_ttl}:</label>
+                            <label for="sdns_ttl_0">{$LANG.admin_manage_ttl}:</label>
                         	{if $ttl.preset}
                             <select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
                                 <option {if $template.default_ttl eq "60"}SELECTED{/if} value="60">1 {$LANG.admin_manage_minute}</option>
@@ -91,7 +91,7 @@
                                 {/if}
                             </select>
                             {else}
-                            <input type="textbox" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
+                            <input type="text" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
                             {/if}
                         </div>
                     </div>
@@ -112,7 +112,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_deleteRecord">{$LANG.admin_manage_records_deleterecord}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_deleterecord}</h4>
                 </div>
                 <div class="modal-body">
                     <p>{$LANG.admin_manage_text_deleterecord}</p>

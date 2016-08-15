@@ -20,7 +20,7 @@
                     <label for="sdns_template_ipv4">{$LANG.admin_template_option_defaultipv4}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input name="sdns_template_ipv4" id="sdns_template_ipv4" type="textbox" class="form-padding form-control" value="{$template.default_ipv4}">
+                    <input name="sdns_template_ipv4" id="sdns_template_ipv4" type="text" class="form-padding form-control" value="{$template.default_ipv4}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_template_ipv4">{$LANG.admin_template_desc_defaultipv4}</label>
@@ -31,7 +31,7 @@
                     <label for="sdns_template_ipv6">{$LANG.admin_template_option_defaultipv6}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input name="sdns_template_ipv6" id="sdns_template_ipv6" type="textbox" class="form-padding form-control" value="{$template.default_ipv6}">
+                    <input name="sdns_template_ipv6" id="sdns_template_ipv6" type="text" class="form-padding form-control" value="{$template.default_ipv6}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_template_ipv6">{$LANG.admin_template_desc_defaultipv6}</label>
@@ -57,7 +57,7 @@
                         {/if}
 					</select>
 					{else}
-                    <input name="sdns_template_default_ttl" id="sdns_template_default_ttl" type="textbox" class="form-padding form-control" placeholder="3600" value="{$template.default_ttl}">
+                    <input name="sdns_template_default_ttl" id="sdns_template_default_ttl" type="text" class="form-padding form-control" placeholder="3600" value="{$template.default_ttl}">
                     {/if}
                 </div>
                 <div class="col-md-6">
@@ -68,7 +68,7 @@
                     <label for="sdns_template_soa_ttl">{$LANG.admin_template_option_soattl}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input name="sdns_template_soa_ttl" id="sdns_template_soa_ttl" type="textbox" class="form-padding form-control" placeholder="default" value="{$template.soa_ttl}">
+                    <input name="sdns_template_soa_ttl" id="sdns_template_soa_ttl" type="text" class="form-padding form-control" placeholder="default" value="{$template.soa_ttl}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_template_soa_ttl">{$LANG.admin_template_desc_ttl}</label>
@@ -79,7 +79,7 @@
                     <label for="sdns_template_ns_ttl">{$LANG.admin_template_option_nsttl}:</label>
                 </div>
                 <div class="col-md-3">
-                    <input name="sdns_template_ns_ttl" id="sdns_template_ns_ttl" type="textbox" class="form-padding form-control" placeholder="default" value="{$template.ns_ttl}">
+                    <input name="sdns_template_ns_ttl" id="sdns_template_ns_ttl" type="text" class="form-padding form-control" placeholder="default" value="{$template.ns_ttl}">
                 </div>
                 <div class="col-md-6 chx_form">
                     <label class="info_text" for="sdns_template_ns_ttl">{$LANG.admin_template_desc_ttl}</label>

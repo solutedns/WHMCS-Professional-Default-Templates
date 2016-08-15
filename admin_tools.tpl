@@ -96,7 +96,7 @@
                                 <label>Content</label>
                             </td>
                             <td>
-                                <input id="sdns_mut_where_content" class="where_input form-padding form-control" type="textbox" name="sdns_mut_where_content" value="" />
+                                <input id="sdns_mut_where_content" class="where_input form-padding form-control" type="text" name="sdns_mut_where_content" value="" />
                             </td>
                         </tr>
                         <tr>
@@ -104,7 +104,7 @@
                                 <label>TTL</label>
                             </td>
                             <td>
-                                <input id="sdns_mut_where_ttl" class="where_input form-padding form-control" type="textbox" name="sdns_mut_where_ttl" value="" />
+                                <input id="sdns_mut_where_ttl" class="where_input form-padding form-control" type="text" name="sdns_mut_where_ttl" value="" />
                             </td>
                         </tr>
                         <tr class="altrow">
@@ -112,7 +112,7 @@
                                 <label>Prio</label>
                             </td>
                             <td>
-                                <input id="sdns_mut_where_prio" class="where_input form-padding form-control" type="textbox" name="sdns_mut_where_prio" value="" />
+                                <input id="sdns_mut_where_prio" class="where_input form-padding form-control" type="text" name="sdns_mut_where_prio" value="" />
                             </td>
                         </tr>
                     </tbody>
@@ -152,7 +152,7 @@
                                 <label>Content</label>
                             </td>
                             <td>
-                                <input id="sdns_mut_content_content" class="content_input form-padding form-control" type="textbox" name="sdns_mut_content_content" value="" />
+                                <input id="sdns_mut_content_content" class="content_input form-padding form-control" type="text" name="sdns_mut_content_content" value="" />
                             </td>
                         </tr>
                         <tr>
@@ -160,7 +160,7 @@
                                 <label>TTL</label>
                             </td>
                             <td>
-                                <input id="sdns_mut_content_ttl" class="content_input form-padding form-control" type="textbox" name="sdns_mut_content_ttl" value="" />
+                                <input id="sdns_mut_content_ttl" class="content_input form-padding form-control" type="text" name="sdns_mut_content_ttl" value="" />
                             </td>
                         </tr>
                         <tr class="altrow">
@@ -168,7 +168,7 @@
                                 <label>Prio</label>
                             </td>
                             <td>
-                                <input id="sdns_mut_content_prio" class="content_input form-padding form-control" type="textbox" name="sdns_mut_content_prio" value="" />
+                                <input id="sdns_mut_content_prio" class="content_input form-padding form-control" type="text" name="sdns_mut_content_prio" value="" />
                             </td>
                         </tr>
                     </tbody>
@@ -177,7 +177,7 @@
         </div>
         <div class="col-md-12">
             <div class="text-center">
-                <input id="manage" class="btn btn-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#dialog_console" data-backdrop="static" data-keyboard="false" onclick="console('mutation'); console_name('{$LANG.admin_console_title_mutation}');"value="{$LANG.admin_tools_startmutation}">
+                <input id="manage" class="btn btn-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#dialog_console" data-backdrop="static" data-keyboard="false" onclick="console('mutation'); console_name('{$LANG.admin_console_title_mutation}');" value="{$LANG.admin_tools_startmutation}">
                 <div class="tools-warning"><small>Make sure you have a working back-up before making mutations to the database!</small></div>
             </div>
         </div>
@@ -245,7 +245,7 @@
   
         <div class="col-md-12">
             <div class="text-center">
-                <input id="manage" class="btn btn-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#dialog_console" data-backdrop="static" data-keyboard="false" onclick="console('dnssec'); console_name('{$LANG.admin_console_title_dnssec}');"value="{$LANG.admin_tools_starttool}">
+                <input id="manage" class="btn btn-primary" type="button" data-dismiss="modal" data-toggle="modal" data-target="#dialog_console" data-backdrop="static" data-keyboard="false" onclick="console('dnssec'); console_name('{$LANG.admin_console_title_dnssec}');" value="{$LANG.admin_tools_starttool}">
             </div>
         </div>
     </div>

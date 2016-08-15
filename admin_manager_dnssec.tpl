@@ -75,22 +75,30 @@
                 {$key.flag}
             </td>
             <td align="center">
-                {if $key.algorithm eq 'RSASHA1'}
+            	{if $key.algorithm eq '1'}
+                RSA/MD5 (1)
+                {elseif $key.algorithmeq eq '2'}
+                Diffie-Hellman (2)
+                {elseif $key.algorithm eq '3'}
+                DSA/SHA1 (3)
+                {elseif $key.algorithm eq '5'}
                 RSA/SHA-1 (5)
-                {elseif $key.algorithm eq 'RSANSEC3SHA1'}
+                {elseif $key.algorithm eq '6'}
+                DSA-NSEC3-SHA1 (6)
+                {elseif $key.algorithm eq '7'}
                 RSASHA1-NSEC3-SHA1 (7)
-                {elseif $key.algorithm eq 'RSASHA256'}
+                {elseif $key.algorithm eq '8'}
                 RSA/SHA-256 (8)
-                {elseif $key.algorithm eq 'RSASHA512'}
+                {elseif $key.algorithm eq '10'}
                 RSA/SHA-512 (10)
-                {elseif $key.algorithm eq 'ECC-GOST'}
+                {elseif $key.algorithm eq '12'}
                 GOST R 34.10-2001 (12)
-                {elseif $key.algorithm eq 'ECDSA256'}
-                ECDSA Curve P-256 with SHA-256 (13)
-                {elseif $key.algorithm eq 'ECDSA384'}
-                ECDSA Curve P-384 with SHA-384 (14
+                {elseif $key.algorithm eq '13'}
+				ECDSA Curve P-256 with SHA-256 (13)
+                {elseif $key.algorithm eq '14'}
+                ECDSA Curve P-384 with SHA-384 (14)
                 {else}
-                {$key.algorithm}
+                {$LANG.admin_manage_unknown}
                 {/if}
             </td>
             <td align="center" style="padding-right: 8px;">
@@ -105,10 +113,10 @@
             </td>
             <td align="center">
 				{if $key.active eq '0'}
-                <button {if $isSlave}disabled{/if} type="button" onclick="dnssec('keyactivate','{$zone.id}','{$key.key_tag}');" value='Activate' class="btn btn-success"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
-                <button {if $isSlave}disabled{/if} type="button" onclick="dnssec('keydelete','{$zone.id}','{$key.key_tag}');" value="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <button {if $isSlave}disabled{/if} type="button" onclick="dnssec('keyactivate','{$zone.id}','{$key.id_tag}');" value='Activate' class="btn btn-success"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
+                <button {if $isSlave}disabled{/if} type="button" onclick="dnssec('keydelete','{$zone.id}','{$key.id_tag}');" value="Delete" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 				{else}
-                <button {if $isSlave}disabled{/if} type="button" onclick="dnssec('keydeactivate','{$zone.id}','{$key.key_tag}');" value='Deactivate' class="btn btn-default"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                <button {if $isSlave}disabled{/if} type="button" onclick="dnssec('keydeactivate','{$zone.id}','{$key.id_tag}');" value='Deactivate' class="btn btn-default"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                 {/if}
             </td>
       
@@ -202,26 +210,28 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="dialog_addRecord">{$LANG.admin_manage_dnssec_addnewkey}</h4>
+                    <h4 class="modal-title">{$LANG.admin_manage_dnssec_addnewkey}</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div id="sdns_z-name_0" class="col-md-3">
-                            <label for "sdns_dnssec_flag">{$LANG.admin_manage_dnssec_flag}:</label>
+                            <label for="sdns_dnssec_flag">{$LANG.admin_manage_dnssec_flag}:</label>
                             <select name="sdns_dnssec_flag" id="sdns_dnssec_flag" class="form-padding form-control">
                                 <option value="ksk">KSK</option>
                                 <option value="zsk">ZSK</option>
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label for "sdns_dnssec_bits">{$LANG.admin_manage_dnssec_bits}:</label>
+                            <label for="sdns_dnssec_bits">{$LANG.admin_manage_dnssec_bits}:</label>
                             <select name="sdns_dnssec_bits" id="sdns_dnssec_bits" class="form-padding form-control">
+                                <option value="256">256</option>
+                                <option value="512">512</option>
                                 <option value="1024">1024</option>
                                 <option selected value="2048">2048</option>
                             </select>
                         </div>
                         <div id="sdns_z-content_0" class="col-md-6">
-                            <label for "sdns_dnssec_algorithm">{$LANG.admin_manage_dnssec_algorithm}:</label>
+                            <label for="sdns_dnssec_algorithm">{$LANG.admin_manage_dnssec_algorithm}:</label>
                             <select name="sdns_dnssec_algorithm" id="sdns_dnssec_algorithm" class="form-padding form-control">
                                 <option value="5">RSA-SHA1 (5)</option>
                                 <option value="8">RSA-SHA256 (8)</option>
