@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-md-2">
                             <div class="checkbox">
-                                <input name="sdns_type_alias" id="sdns_type_alias" type="checkbox" {if $settings.ALIAS} CHECKED{/if} DISABLED>
+                                <input name="sdns_type_alias" id="sdns_type_alias" type="checkbox" {if $settings.ALIAS} CHECKED{/if}>
                                 <label for="sdns_type_alias">ALIAS</label>
                             </div>
                         </div>
@@ -170,6 +170,17 @@
                     <input type="text" class="form-padding form-control" name="sdns_soa_ttl" id="sdns_soa_ttl" value="{$settings.soa_ttl}">
                 </div>
                 <div class="col-md-6"></div>
+            </div>
+			<div class="row">
+                <div class="col-md-3 text-right chx_desc">
+                    <label for="sdns_soa_custom_primary">{$LANG.admin_records_option_customprimary}:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="checkbox chx_label">
+                        <input {if $settings.custom_primary} CHECKED{/if} name="sdns_soa_custom_primary" id="sdns_soa_custom_primary" type="checkbox">
+                        <label class="chx_label" for="sdns_soa_custom_primary">{$LANG.admin_records_desc_customprimary}</label>
+                    </div>
+                </div>
             </div>
             
             <hr />

@@ -811,33 +811,42 @@ function dnsassist(type) {
     var action = 'dnsassist';
     var zone = $("#sdns_zone").val();
 
-    if (type = 'srv') {
-        var type = 'srv';
-        var service = $("#sdns_srv_service").val();
-        var protocol = $("#sdns_srv_protocol").val();
-        var ttl = $("#sdns_srv_ttl").val();
-        var priority = $("#sdns_srv_priority").val();
-        var weight = $("#sdns_srv_weight").val();
-        var target = $("#sdns_srv_target").val();
-        var port = $("#sdns_srv_port").val();
+    if (type == 'srv') {
 
         var item = {
-            action: action,
-            type: type,
-            zone: zone,
-            service: service,
-            protocol: protocol,
-            ttl: ttl,
-            priority: priority,
-            weight: weight,
-            target: target,
-            port: port
+            action:		action,
+            type:		'srv',
+            zone:		zone,
+            service:	$("#sdns_srv_service").val(),
+            protocol:	$("#sdns_srv_protocol").val(),
+            ttl:		$("#sdns_srv_ttl").val(),
+            priority:	$("#sdns_srv_priority").val(),
+            weight:		$("#sdns_srv_weight").val(),
+            target:		$("#sdns_srv_target").val(),
+            port:		$("#sdns_srv_port").val()
         };
+    }
+
+	if (type == 'tlsa') {
+
+        var item = {
+            action:			action,
+            type:			'tlsa',
+            zone:			zone,
+            usage:			$('input[name=sdns_tlsa_usage]:checked').val(),
+            selector:		$('input[name=sdns_tlsa_selector]:checked').val(),
+            matching_type:	$('input[name=sdns_tlsa_type]:checked').val(),
+            cert:			$("#sdns_tlsa_certificate").val(),
+            port:			$("#sdns_tlsa_port").val(),
+            protocol:		$("#sdns_tlsa_protocol").val(),
+            name:			$("#sdns_tlsa_name").val()
+        };
+
     }
 
     jsonString = JSON.stringify(item);
 
-    sendData(jsonString);
+	sendData(jsonString);
 }
 
 
@@ -849,6 +858,9 @@ function start_com(e, type) {
     if (!console.isRunning) {
 
         $('#console-close').prop('disabled', true);
+        $('#console-close').html("<i class=\"glyphicon glyphicon-refresh icon-spinner\"></i>");
+		$('#console-close').removeClass('btn-success');
+		$('#console-close').addClass('btn-default');
 
         $("#results").append('<br/>Loading script... <br/><br/>');
         var scroller = setInterval(function() {
@@ -908,6 +920,9 @@ function start_com(e, type) {
                 var el = document.getElementById('results');
                 el.scrollTop = el.scrollHeight;
                 $('#console-close').prop('disabled', false);
+				$('#console-close').text("Close");
+				$('#console-close').addClass('btn-success');
+				$('#console-close').removeClass('btn-default');
 				delete console.isRunning;
             }
         });
@@ -919,6 +934,9 @@ function start_com(e, type) {
             var el = document.getElementById('results');
             el.scrollTop = el.scrollHeight;
             $('#console-close').prop('disabled', false);
+			$('#console-close').text("Close");
+			$('#console-close').addClass('btn-success');
+			$('#console-close').removeClass('btn-default');
 			delete console.isRunning;
         });
 

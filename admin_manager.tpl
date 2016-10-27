@@ -14,7 +14,7 @@
 <ul class="nav nav-tabs" role="tablist">
 	<li role="presentation" class="active"><a href="#records" onclick="drawRecords('sdns_records');" aria-controls="records" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_records}</a></li>
 	{if $lal >= 2}{if $sac.dnssec}<li role="presentation"><a href="#dnssec" aria-controls="dnssec" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_dnssec}</a></li>{/if}{/if}
-	{if $lal >= 4}{if $sac.health}<li role="presentation"><a href="#health" aria-controls="health" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_health}{if $health_count} <span class="label label-danger badge_danger">{$health_count}</span>{/if}</a></li>{/if}{/if}
+	{if $lal >= 3}{if $sac.health}<li role="presentation"><a href="#health" aria-controls="health" role="tab" data-toggle="tab">{$LANG.admin_manage_tab_health}{if $health_count} <span class="label label-danger badge_danger">{$health_count}</span>{/if}</a></li>{/if}{/if}
 </ul>
   
 {if $server_avb eq true}
@@ -23,7 +23,7 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="records">{include file="{$base_path}/template/admin_manager_records.tpl"}</div>
 		{if $lal >= 2}{if $sac.dnssec}<div role="tabpanel" class="tab-pane" id="dnssec">{include file="{$base_path}/template/admin_manager_dnssec.tpl"}</div>{/if}{/if}
-		{if $lal >= 4}{if $sac.health}<div role="tabpanel" class="tab-pane" id="health">{include file="{$base_path}/template/admin_manager_health.tpl"}</div>{/if}{/if}
+		{if $lal >= 3}{if $sac.health}<div role="tabpanel" class="tab-pane" id="health">{include file="{$base_path}/template/admin_manager_health.tpl"}</div>{/if}{/if}
 	</div>
 </div>
 {else if $nozone}
@@ -44,3 +44,16 @@
     </div>
 	<style>.tab-content { display:none; } .nav { display:none; }</style>
 </noscript>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {		
+        $('[data-toggle="popover"]').popover({
+            trigger: 'hover',
+            placement: 'right',
+			container: 'body'
+        });
+		
+	});
+		
+</script>

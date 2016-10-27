@@ -14,12 +14,10 @@
 				<div class="col-md-2">
 				</div>
 				<div class="col-md-1 text-muted">
-					<label>{$LANG.admin_handling_productzone} <a href="javascript:void(0)" class="text-info" data-toggle="tooltip" data-placement="bottom" title="{$LANG.admin_handling_desc_selectcreated}">?</a>
-					</label>
+					<label>{$LANG.admin_handling_productzone} <span data-content="{$LANG.admin_handling_desc_selectcreated}" data-toggle="popover" class="show-details" style="font-size:14px;"><i class="fa fa-question-circle text-info"></i></span></label>
 				</div>
 				<div class="col-md-1 text-muted">
-					<label>{$LANG.admin_handling_domainzone} <a href="javascript:void(0)" class="text-info" data-toggle="tooltip" data-placement="bottom" title="{$LANG.admin_handling_desc_selectignoreproduct}">?</a>
-					</label>
+					<label>{$LANG.admin_handling_domainzone} <span data-content="{$LANG.admin_handling_desc_selectignoreproduct}" data-toggle="popover" class="show-details" style="font-size:14px;"><i class="fa fa-question-circle text-info"></i></span></label>
 				</div>
 				<div class="col-md-1">
 				</div>
@@ -30,8 +28,7 @@
 					<label>{$LANG.admin_handling_dnssec}</label>
 				</div>
 				<div class="col-md-2 text-muted">
-					<label>{$LANG.admin_handling_recordlimit} <a href="javascript:void(0)" class="text-info" data-toggle="tooltip" data-placement="bottom" title="{$LANG.admin_handling_desc_recordlimit}">?</a>
-					</label>
+					<label>{$LANG.admin_handling_recordlimit} <span data-content="{$LANG.admin_handling_desc_recordlimit}" data-toggle="popover" class="show-details" style="font-size:14px;"><i class="fa fa-question-circle text-info"></i></span></label>
 				</div>
 				<div class="col-md-3 text-muted">
 					<label>{$LANG.admin_handling_defaultcluster}</label>

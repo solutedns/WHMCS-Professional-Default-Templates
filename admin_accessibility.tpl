@@ -81,9 +81,19 @@
                     </div>
                 </div>
             </div>
-            {/if}
             
-            {if $lal >= 3}
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc">
+                    <label for="sdns_client_zones_subdomains">{$LANG.admin_accessibility_option_client_zones_subdomains}:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="checkbox chx_label">
+                        <input {if $settings.client_zones_subdomains} CHECKED{/if} name="sdns_client_zones_subdomains" id="sdns_client_zones_subdomains" type="checkbox">
+                        <label class="chx_label" for="sdns_client_zones_subdomains">{$LANG.admin_accessibility_desc_client_zones_subdomains}</label>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_client_template">{$LANG.admin_accessibility_option_clienttemplate}:</label>
@@ -97,7 +107,7 @@
             </div>
             {/if}
             
-            {if $lal >= 4}
+            {if $lal >= 3}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_client_health">{$LANG.admin_accessibility_option_clienthealth}:</label>
@@ -164,6 +174,18 @@
                 </div>
             </div>
             
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc chx_form">
+                    <label for="sdns_client_urlrewrite">{$LANG.admin_accessibility_option_urlrewrite}:</label>
+                </div>
+                <div class="col-md-2 chx_desc">
+                    <input type="text" class="form-padding form-control" name="sdns_client_urlrewrite" id="sdns_client_urlrewrite" value="{$settings.client_urlrewrite}">
+                </div>
+                <div class="col-md-7 chx_desc chx_form">
+                    <label class="info_text" for="sdns_client_urlrewrite">{$LANG.admin_accessibility_desc_urlrewrite}</label>
+                </div>
+            </div>
+            
             <hr />
             <h4>{$LANG.admin_accessibility_title_admin}</h4>
             
@@ -179,7 +201,7 @@
                 </div>
             </div>
             
-            {if $lal >= 4}
+            {if $lal >= 3}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_admin_health">{$LANG.admin_accessibility_option_adminhealth}:</label>

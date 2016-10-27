@@ -31,6 +31,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
                         <li><a href="#" data-toggle="modal" data-target="#dialog_srvAssist">{$LANG.admin_manage_records_srvassist}</a></li>
+                        <li><a href="#" data-toggle="modal" data-target="#dialog_tlsaAssist">{$LANG.admin_manage_records_tlsaassist}</a></li>
                     </ul>
                 </div>
                 <!-- Single button -->
@@ -261,6 +262,106 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal" onclick="dnsassist('srv');">{$LANG.admin_add}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.admin_cancel}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TLSA Assist -->
+<div class="bootstrap">
+    <div class="modal fade" id="dialog_tlsaAssist" tabindex="-1" role="dialog" aria-labelledby="dialog_tlsaAssist" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{$LANG.admin_manage_records_tlsaassist}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                        	<div class="row">
+                                <div class="col-md-12">
+                                    <label>{$LANG.admin_manage_usage}:</label>
+
+                                    <div class="radio">
+                                        <input type="radio" name="sdns_tlsa_usage" id="sdns_tlsa_usage_0" value="0" checked>
+                                        <label for="sdns_tlsa_usage_0">{$LANG.global_tlsa_pkixta} <span data-content="{$LANG.global_tlsa_pkixta_info}" data-toggle="popover" class="show-details"><i class="fa fa-question-circle text-info"></i></span></label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="sdns_tlsa_usage" id="sdns_tlsa_usage_1" value="1">
+                                        <label for="sdns_tlsa_usage_1">{$LANG.global_tlsa_pkixee} <span data-content="{$LANG.global_tlsa_pkixee_info}" data-toggle="popover" class="show-details"><i class="fa fa-question-circle text-info"></i></span></label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="sdns_tlsa_usage" id="sdns_tlsa_usage_2" value="2">
+                                        <label for="sdns_tlsa_usage_2">{$LANG.global_tlsa_daneta} <span data-content="{$LANG.global_tlsa_daneta_info}" data-toggle="popover" class="show-details"><i class="fa fa-question-circle  text-info"></i></span></label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="sdns_tlsa_usage" id="sdns_tlsa_usage_3" value="3">
+                                       <label for="sdns_tlsa_usage_3">{$LANG.global_tlsa_daneee} <span data-content="{$LANG.global_tlsa_daneee_info}" data-toggle="popover" class="show-details"><i class="fa fa-question-circle  text-info"></i></span></label>
+                                    </div>
+                                
+                                </div>
+                                <div class="col-md-12">
+                                    <label>{$LANG.admin_manage_selector}:</label>
+
+                                    <div class="radio">
+                                        <input type="radio" name="sdns_tlsa_selector" id="sdns_tlsa_selector_0" value="0" checked>
+                                        <label for="sdns_tlsa_selector_0">{$LANG.global_tlsa_fullcert}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="sdns_tlsa_selector" id="sdns_tlsa_selector_1" value="1">
+                                        <label for="sdns_tlsa_selector_1">{$LANG.global_tlsa_subjectpublickey}</label>
+                                    </div>
+                                    
+								</div>
+                                <div class="col-md-12">
+                                    <label>{$LANG.admin_manage_matchingtype}:</label>
+
+                                    <div class="radio">
+                                        <input type="radio" name="sdns_tlsa_type" id="sdns_tlsa_type_1" value="1" checked>
+                                        <label for="sdns_tlsa_type_1">{$LANG.global_tlsa_256hash}</label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="sdns_tlsa_type" id="sdns_tlsa_type_2" value="2">
+                                        <label for="sdns_tlsa_type_2">{$LANG.global_tlsa_512hash}</label>
+                                    </div>
+                                    
+								</div>
+                        	</div>
+						</div>                    
+                        <div class="col-md-6">
+                        	<div class="row">
+                            	<div class="col-md-12">
+                                    <label for="sdns_tlsa_certificate">{$LANG.admin_manage_certificate}:</label>
+                                    <span data-content="{$LANG.global_tlsa_certificate_info}" data-toggle="popover" class="show-details"><i class="fa fa-question-circle text-info"></i></span>
+                                    <textarea rows="7" cols="50" class="form-padding form-control" name="sdns_tlsa_certificate" id="sdns_tlsa_certificate"></textarea>
+								</div>
+                                
+                                <div class="col-md-12">
+                                    <label for="sdns_tlsa_port">{$LANG.admin_manage_port}:</label>
+                                    <input type="text" class="form-padding form-control" name="sdns_tlsa_port" id="sdns_tlsa_port" placeholder="443">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="sdns_tlsa_protocol">{$LANG.admin_manage_protocol}:</label>
+                                    <select class="form-padding form-control" name="sdns_tlsa_protocol" id="sdns_tlsa_protocol">
+                                        <option value="TCP">TCP</option>
+                                        <option value="UDP">UDP</option>
+                                        <option value="SCTP">SCTP</option>
+                                        <option value="DCCP">DCCP</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="sdns_tlsa_name">{$LANG.admin_manage_name}:</label>
+                                    <input type="text" class="form-padding form-control" name="sdns_tlsa_name" id="sdns_tlsa_name" placeholder="{$zone.domain}">
+                                </div>
+                            </div>
+						</div>                    
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="dnsassist('tlsa');">{$LANG.admin_add}</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.admin_cancel}</button>
                 </div>
             </div>

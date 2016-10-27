@@ -91,7 +91,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" id="console-close" class="btn btn-success" data-dismiss="modal">Close</button>
+                    <button type="button" id="console-close" class="btn btn-success" data-dismiss="modal">{$LANG.admin_close}</button>
                 </div>
             </div>
         </div>

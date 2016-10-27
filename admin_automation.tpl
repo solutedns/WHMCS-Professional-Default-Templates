@@ -105,7 +105,7 @@
                 </div>
             </div>
             
-            {if $lal >= 4}
+            {if $lal >= 3}
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">
                     <label for="sdns_auto_health">{$LANG.admin_automation_option_health}:</label>

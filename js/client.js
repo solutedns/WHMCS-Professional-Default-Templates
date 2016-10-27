@@ -31,7 +31,7 @@ function sendData(json) {
         data: {
             'data': json
         },
-        url: location.protocol + '//' + location.host + location.pathname + '?m=solutedns&datahandler',
+        url: setDataURL() + 'index.php?m=solutedns&datahandler',
         method: "POST",
         success: function(data) {
             //alert(data);
@@ -104,6 +104,24 @@ function sendData(json) {
 
         }
     });
+}
+
+function setDataURL() {
+	
+	var lastChar = location.pathname.substr(location.pathname.length - 1);
+	
+	if (lastChar.search (/^\s*\d+\s*$/) != -1) {
+		
+		var pathName = location.pathname.substr(0, location.pathname.lastIndexOf("\/"));
+		pathName = pathName.substr(0, pathName.lastIndexOf("\/"));
+
+	} else {
+		var pathName = location.pathname.substr(0, location.pathname.lastIndexOf("\/"));
+	
+	}
+
+	return location.protocol + '//' + location.host + pathName + '/';
+		
 }
 
 function setErrorField(field) {
@@ -368,33 +386,42 @@ function dnsassist(type) {
     var action = 'dnsassist';
     var zone = $("#sdns_zone").val();
 
-    if (type = 'srv') {
-        var type = 'srv';
-        var service = $("#sdns_srv_service").val();
-        var protocol = $("#sdns_srv_protocol").val();
-        var ttl = $("#sdns_srv_ttl").val();
-        var priority = $("#sdns_srv_priority").val();
-        var weight = $("#sdns_srv_weight").val();
-        var target = $("#sdns_srv_target").val();
-        var port = $("#sdns_srv_port").val();
+    if (type == 'srv') {
 
         var item = {
-            action: action,
-            type: type,
-            zone: zone,
-            service: service,
-            protocol: protocol,
-            ttl: ttl,
-            priority: priority,
-            weight: weight,
-            target: target,
-            port: port
+            action:		action,
+            type:		'srv',
+            zone:		zone,
+            service:	$("#sdns_srv_service").val(),
+            protocol:	$("#sdns_srv_protocol").val(),
+            ttl:		$("#sdns_srv_ttl").val(),
+            priority:	$("#sdns_srv_priority").val(),
+            weight:		$("#sdns_srv_weight").val(),
+            target:		$("#sdns_srv_target").val(),
+            port:		$("#sdns_srv_port").val()
         };
+    }
+
+	if (type == 'tlsa') {
+
+        var item = {
+            action:			action,
+            type:			'tlsa',
+            zone:			zone,
+            usage:			$('input[name=sdns_tlsa_usage]:checked').val(),
+            selector:		$('input[name=sdns_tlsa_selector]:checked').val(),
+            matching_type:	$('input[name=sdns_tlsa_type]:checked').val(),
+            cert:			$("#sdns_tlsa_certificate").val(),
+            port:			$("#sdns_tlsa_port").val(),
+            protocol:		$("#sdns_tlsa_protocol").val(),
+            name:			$("#sdns_tlsa_name").val()
+        };
+
     }
 
     jsonString = JSON.stringify(item);
 
-    sendData(jsonString);
+	sendData(jsonString);
 }
 
 /* Enable edit fields */
