@@ -170,6 +170,25 @@ function activate_template() {
 
 }
 
+/* Toggle DNSsec */
+
+function toggle_dnssec(set) {
+
+    var action = 'togglednssec';
+    var zone = $("#sdns_zone").val();
+
+    var item = {
+        action: action,
+        set: set,
+		zone: zone
+    };
+
+    jsonString = JSON.stringify(item);
+
+    sendData(jsonString);
+
+}
+
 /* Add Record */
 function record_add(type) {
 

@@ -93,6 +93,18 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col-md-3 text-right chx_desc">
+                    <label for="sdns_client_zones_dnssec">{$LANG.admin_accessibility_option_client_zones_dnssec}:</label>
+                </div>
+                <div class="col-md-9">
+                    <div class="checkbox chx_label">
+                        <input {if $settings.client_dnssec} CHECKED{/if} name="sdns_client_zones_dnssec" id="sdns_client_zones_dnssec" type="checkbox">
+                        <label class="chx_label" for="sdns_client_zones_dnssec">{$LANG.admin_accessibility_desc_client_zones_dnssec}</label>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-3 text-right chx_desc">

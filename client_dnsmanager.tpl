@@ -15,7 +15,8 @@
 				<h3 class="panel-title">{$zone.domain|ucfirst}</h3>
 			</div>
 			<div class="list-group">
-				<a href="#overview" id="overview-tab" class="list-group-item active" onclick="setOverview('overview');" aria-controls="overview" role="tab" data-toggle="tab">{$MLANG.client_overview}</a> {if $lal >= 2}<a href="#dnssec" id="dnssec-tab" class="list-group-item {if $dnssec eq false}disabled{/if}" {if $dnssec eq true}onclick="setOverview('dnssec');" {/if} aria-controls="template" role="tab" data-toggle="tab">{$MLANG.client_dnssec}</a>{/if}
+				<a href="#overview" id="overview-tab" class="list-group-item active" onclick="setOverview('overview');" aria-controls="overview" role="tab" data-toggle="tab">{$MLANG.client_overview}</a>
+                {if $lal >= 2}<a href="#dnssec" id="dnssec-tab" class="list-group-item {if $dnssec eq false}disabled{/if}" {if $dnssec eq true}onclick="setOverview('dnssec');" {/if} aria-controls="template" role="tab" data-toggle="tab">{$MLANG.client_dnssec}{if $dnssec_keys}<i class="fa fa-lock" style="float: right;" aria-hidden="true"></i>{else}<i class="fa fa-unlock" style="float: right;" aria-hidden="true"></i>{/if}</a>{/if}
 			</div>
 		</div>
 		<div class="text-right">
@@ -81,7 +82,27 @@
 			<!-- DNSsec Tab -->
 			<div role="tabpanel" class="tab-pane" id="dnssec">
 				<div class="table-container clearfix">
-					<h4>{$MLANG.client_dnsseckeys}</h4>
+                                    
+                    <div class="row">
+					<div class="col-md-9 text-left">
+						<h4>{$MLANG.client_dnsseckeys}</h4>
+					</div>
+					<div class="col-md-3">
+						<div class="text-right">
+							<!-- Split button -->
+							<div class="btn-group btn-group-sm">
+								{if $dnssec_control eq true}
+                                {if $dnssec_keys}
+                                <button type="button" class="btn btn-danger" title="{$MLANG.client_disable}" onclick="toggle_dnssec('0')"><i class="fa fa-unlock" aria-hidden="true"></i></button>
+                                {else}
+                                <button type="button" class="btn btn-success" title="{$MLANG.client_enable}" onclick="toggle_dnssec('1')"><i class="fa fa-lock" aria-hidden="true"></i></button>
+                                {/if}
+                                {/if}
+							</div>
+						</div>
+					</div>
+				</div>
+
 					<table width="100%" class="table table-list" border="0" cellspacing="1" cellpadding="3">
 						<tr>
 							<th align="center" width="10%"><strong>{$MLANG.client_keytag}</strong></th>
