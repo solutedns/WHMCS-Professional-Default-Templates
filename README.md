@@ -3,7 +3,7 @@
          *** SoluteDNS for WHMCS ***
 
 
-Copyright (C) NetDistrict 2011-2016
+Copyright (C) NetDistrict 2011-2017
 All Rights Reserved
 
 **********************************************

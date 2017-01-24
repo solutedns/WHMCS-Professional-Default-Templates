@@ -58,7 +58,9 @@
                             <select class="form-padding form-control" name="sdns_type_0" id="sdns_type_0">
                                 <option value="A">A</option>
                                 <option value="AAAA">AAAA</option>
+                                <option value="ALIAS">ALIAS</option>
                                 <option value="CNAME">CNAME</option>
+                                <option value="HINFO">HINFO</option>
                                 <option value="MX">MX</option>
                                 <option value="NAPTR">NAPTR</option>
                                 <option value="PTR">PTR</option>

@@ -68,6 +68,12 @@
                         </div>
                         <div class="col-md-2">
                             <div class="checkbox">
+                                <input name="sdns_type_rp" id="sdns_type_rp" type="checkbox" {if $settings.RP} CHECKED{/if}>
+                                <label for="sdns_type_rp">RP</label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="checkbox">
                                 <input name="sdns_type_soa" id="sdns_type_soa" type="checkbox" disabled>
                                 <label for="sdns_type_soa">SOA</label>
                             </div>
