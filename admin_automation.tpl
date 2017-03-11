@@ -75,6 +75,12 @@
                             <label class="chx_label" for="sdns_deletestate_fraud">{$LANG.admin_fraud}</label>
                         </div>
                     </div>
+					<div class="col-md-2">
+                        <div class="checkbox checkbox-danger chx_label">
+                            <input {if $settings.auto_delete_status.transferredaway} CHECKED{/if} name="sdns_deletestate_transferredaway" id="sdns_deletestate_transferredaway" type="checkbox">
+                            <label class="chx_label" for="sdns_deletestate_transferredaway">{$LANG.admin_transferredaway}</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             
