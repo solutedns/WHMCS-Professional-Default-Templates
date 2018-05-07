@@ -1,86 +1,156 @@
-<div class="col-md-12">
+<h2>
+	<div class="row">
+		<div class="col-md-9">
+			<p>{$LANG.admin_menu_templates}</p>
+		</div>
+		<div class="col-md-3">
+			<div class="text-right"> 
+				<!-- Split button -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dialog_addRecord" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+				</div>
+			</div>
+		</div>
+	</div>
+</h2>
+			
+{assign var=products value=Controller::product_list()}
+{assign var=records value=Controller::inConfig(record_types)}
 
-    <div class="row">
-        <div class="col-md-10">
-            <h4><span id="overview_title">{$LANG.admin_template_title_templates}</span></h4>
-        </div>
-        <div class="col-md-2">
-            <div class="text-right">
-                <h4><button data-toggle="modal" data-target="#dialog_addTemplate" type="button" class="btn btn-success">{$LANG.admin_template_addtemplate}</button></h4>
-            </div>
-        </div>
-    </div>
+<div class="pull-right">
+	<select class="form-padding form-control" name="sdns_template" id="sdns_template" onchange="selectTemplate(value);">
+		<option value="0">{$LANG.global_general_defaulttemplate}</option>
+		{foreach from=$products item=product}
+			<option value="{$product->id}">{$product->name}</option>
+		{/foreach}
+	</select>
+</div>
+	
+<form role="form" id="templatesettings" class="label-form hidden">
+	<fieldset>
+		<input type="hidden" name="sdns_form" value="templatesettings">
+		<input type="hidden" name="product" id="sdns_template_product" value="0">
+		<h3>{$LANG.admin_settings_template_settings}</h3>
+		<div class="row">
+			<div class="col-md-3 text-right title">
+				<label for="sdns_dns_product">{$LANG.admin_settings_dns_product}:</label>
+			</div>
+			<div class="col-md-9">
+				<div class="checkbox chx_label">
+					<input {if Controller::config(custom_primary)}checked {/if}name="sdns_dns_product" id="sdns_dns_product" type="checkbox" onChange="autoSave('template', 'dns_product', this)">
+					<label for="sdns_dns_product">{$LANG.admin_settings_dns_product_desc}</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3 text-right title">
+				<label for="sdns_force_template">{$LANG.admin_settings_force_template}:</label>
+			</div>
+			<div class="col-md-9">
+				<div class="checkbox chx_label">
+					<input {if Controller::config(custom_primary)}checked {/if}name="sdns_force_template" id="sdns_force_template" type="checkbox" onChange="autoSave('template', 'force_template', this)">
+					<label for="sdns_force_template">{$LANG.admin_settings_force_template_desc}</label>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+</form>
 
-    <div class="overview_row">
-        <table class="dataTable display" id="sdns_templates" width="100%" border="0" cellspacing="1" cellpadding="3">
-            <thead>
-                <tr>
-                    <th>{$LANG.admin_template_table_id}</th>
-                    <th>{$LANG.admin_template_table_name}</th>
-                    <th>{$LANG.admin_template_table_type}</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="4" class="dataTables_empty">{$LANG.admin_loading_data}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<h3>{$LANG.global_general_records}</h3>
+<table class="dataTable display" id="sdns_template_records" width="100%" border="0" cellspacing="1" cellpadding="3">
+	<thead>
+		<tr>
+			<th></th>
+			<th>{$LANG.global_dns_id}</th>
+			<th>{$LANG.global_dns_name}</th>
+			<th>{$LANG.global_dns_type}</th>
+			<th>{$LANG.global_dns_content}</th>
+			<th>{$LANG.global_dns_prio}</th>
+			<th>{$LANG.global_dns_ttl}</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="8" class="dataTables_empty">{$LANG.global_general_loading}</td>
+		</tr>
+	</tbody>
+</table>
 
+<!-- Add Modal -->
+<div class="bootstrap">
+	<div class="modal fade" id="dialog_addRecord" tabindex="-1" role="dialog" aria-labelledby="dialog_addRecord" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{$LANG.global_head_add_record}</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div id="sdns_z-name_0" class="col-md-3">
+							<label for="sdns_name_0">{$LANG.global_dns_name}:</label>
+							<input type="text" class="form-padding form-control" name="sdns_name_0" id="sdns_name_0" placeholder="{literal}{domain}{/literal}">
+						</div>
+						<div class="col-md-2">
+							<label for="sdns_type_0">{$LANG.global_dns_type}:</label>
+							<select class="form-padding form-control" name="sdns_type_0" id="sdns_type_0">
+                                {foreach from=$records item=type}
+									<option value="{$type}">{$type}</option>
+                                {/foreach}
+							</select>
+						</div>
+						<div id="sdns_z-content_0" class="col-md-4">
+							<label for="sdns_content_0">{$LANG.global_dns_content}:</label>
+							<input type="text" class="form-padding form-control" name="sdns_content_0" id="sdns_content_0">
+						</div>
+						<div id="sdns_z-prio_0" class="col-md-1">
+							<label for="sdns_prio_0">{$LANG.global_dns_prio}:</label>
+							<input type="text" class="form-padding form-control" name="sdns_prio_0" id="sdns_prio_0">
+						</div>
+						<div class="col-md-2">
+							<label for="sdns_ttl_0">{$LANG.global_dns_ttl}:</label>
+							{if Controller::config(preset_ttl)}
+								<select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
+									<option value="60">1 {$LANG.global_dns_minute}</option>
+									<option value="300">5 {$LANG.global_dns_minutes}</option>
+									<option SELECTED value="3600">1 {$LANG.global_dns_hour}</option>
+									<option value="86400">1 {$LANG.global_dns_day}</option>
+								</select>
+							{else}
+								<input type="text" class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
+							{/if} </div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" data-dismiss="modal" onclick="record_add('template')">{$LANG.global_btn_add}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.global_btn_cancel}</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <!-- Delete Modal -->
 <div class="bootstrap">
-    <div class="modal fade" id="dialog_deleteTemplate" tabindex="-1" role="dialog" aria-labelledby="dialog_deleteTemplate" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{$LANG.admin_template_deletetemplate}</h4>
-                </div>
-                <div class="modal-body">
-                    <p>{$LANG.admin_template_text_deletetemplate}</p>
-                    <br />
-                    <form role="form" id="delete_template">
-                        <input type="hidden" name="sdns_form" value="delete_template">
-                        <input type="hidden" id="sdns_template_id" name="sdns_template_id" value="delete_template">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="updatesettings('delete_template');">{$LANG.admin_delete}</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.admin_cancel}</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="modal fade" id="dialog_deleteRecord" tabindex="-1" role="dialog" aria-labelledby="dialog_deleteRecord" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">{$LANG.global_head_delete_record}</h4>
+				</div>
+				<div class="modal-body">
+					<p>{$LANG.global_text_delete_record}</p>
+					<br />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="record_delete('template')">{$LANG.global_btn_delete}</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.global_btn_cancel}</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
-<!-- Add Modal -->
-<div class="bootstrap">
-    <div class="modal fade" id="dialog_addTemplate" tabindex="-1" role="dialog" aria-labelledby="dialog_addTemplate" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{$LANG.admin_template_addnewtemplate}</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form role="form" id="add_template">
-                                <input type="hidden" name="sdns_form" value="add_template">
-                                <input type="text" class="form-padding form-control" name="sdns_templatename" id="sdns_templatename" placeholder="{$LANG.admin_template_templatename}">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="updatesettings('add_template');">{$LANG.admin_add}</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.admin_cancel}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+				
+<input type="hidden" id="sdns_record">
