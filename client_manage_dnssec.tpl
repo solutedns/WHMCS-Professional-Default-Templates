@@ -1,4 +1,4 @@
-<h4 class="h-top"><a href="clientarea.php?action=domaindetails&id={$domain->id}">{$domain->domain|ucfirst}</a> {if $dnssec.nsec}<span class="label label-primary"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</h4>
+<h4 class="h-top"><a href="clientarea.php?action=domaindetails&id={$domain->id}">{$domain->idn}</a> {if $dnssec.nsec}<span class="label label-primary"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</h4>
 <h3 class="h-top">{$MLANG.client_menu_dnssec}</h3>
 <h5>{$MLANG.global_general_dnssec_keys}</h5>
 <table width="100%" class="table table-list dataTable no-footer dtr-inline th-border" border="0" cellspacing="1" cellpadding="3">

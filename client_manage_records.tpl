@@ -1,4 +1,4 @@
-<h4 class="h-top"><a href="clientarea.php?action=domaindetails&id={$domain->id}">{$domain->domain|ucfirst}</a> {if $dnssec.nsec}<span class="label label-primary"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</h4> 
+<h4 class="h-top"><a href="clientarea.php?action=domaindetails&id={$domain->id}">{$domain->idn}</a> {if $dnssec.nsec}<span class="label label-primary"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</h4> 
 
 <!-- Split button -->
 <div class="btn-group pull-right">

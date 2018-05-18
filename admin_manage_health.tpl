@@ -1,7 +1,7 @@
 <div class="row spacer_10">
 	<div class="col-md-3">
 		<p><strong>{$LANG.admin_manage_title_zone}:</strong> <br />
-			<a href="{if $domain->type eq 'd'}clientsdomains.php?userid={$domain->client_id}&id={$domain->local_id}{elseif $domain->type eq 'p'}clientsservices.php?userid={$domain->client_id}&productselect={$domain->local_id}{else}#{/if}">{$domain->domain}</a> {if $dnssec.nsec}<span class="label inactive"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</p>
+			<a href="{if $domain->type eq 'd'}clientsdomains.php?userid={$domain->client_id}&id={$domain->local_id}{elseif $domain->type eq 'p'}clientsservices.php?userid={$domain->client_id}&productselect={$domain->local_id}{else}#{/if}">{$domain->idn}</a> {if $dnssec.nsec}<span class="label inactive"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</p>
 	</div>
 	<div class="col-md-3">
 		<p><strong>{$LANG.admin_manage_title_client}:</strong> <br />
