@@ -485,10 +485,18 @@ function setZoneName(name) {
 function setDataURL() {
 
     var lastChar = location.pathname.substr(location.pathname.length - 1);
-
-    if (lastChar.search(/^\s*\d+\s*$/) != -1) {
-
+	
+    if (lastChar.search(/^\s*\d+|\/\s*$/) != -1) {
+		
         var pathName = location.pathname.substr(0, location.pathname.lastIndexOf("\/"));
+		
+		var secLastChar= location.pathname.substr(location.pathname.length - 2).replace(/.$/,'')
+	
+		if (lastChar == '\/' && secLastChar.search(/^\s*\d+\s*$/) != -1) {
+			 pathName = location.pathname.substr(0, location.pathname.lastIndexOf("\/"));
+			 pathName = pathName.substr(0, pathName.lastIndexOf("\/"));	
+		}
+
         pathName = pathName.substr(0, pathName.lastIndexOf("\/"));
 
     } else {

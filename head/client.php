@@ -32,15 +32,15 @@ if (!defined("WHMCS")) {
 $return = 
 <<<HTML
 <!-- SoluteDNS CSS -->
-	<link href="{$custom_url}modules/addons/solutedns/templates/{$smarty_template}/css/client.css" rel="stylesheet" type="text/css" />
+	<link href="{$system_url}modules/addons/solutedns/templates/{$smarty_template}/css/client.css" rel="stylesheet" type="text/css" />
 	
 	<!-- SoluteDNS Scripts -->
-	<script type="text/javascript" src="{$custom_url}modules/addons/solutedns/templates/{$smarty_template}/js/nprogress.min.js"></script>
-	<script type="text/javascript" src="{$custom_url}modules/addons/solutedns/templates/{$smarty_template}/js/client.js"></script>
-	<script type="text/javascript" src="{$custom_url}assets/js/jquery.dataTables.min.js"></script>
-	<script type="text/javascript" src="{$custom_url}assets/js/dataTables.bootstrap.min.js"></script>
-	<script type="text/javascript" src="{$custom_url}assets/js/dataTables.responsive.min.js"></script>
-	<script type="text/javascript" src="{$custom_url}modules/addons/solutedns/templates/{$smarty_template}/js/dataTables.fnReloadAjax.js"></script>
+	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/{$smarty_template}/js/nprogress.min.js"></script>
+	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/{$smarty_template}/js/client.js"></script>
+	<script type="text/javascript" src="{$system_url}assets/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="{$system_url}assets/js/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="{$system_url}assets/js/dataTables.responsive.min.js"></script>
+	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/{$smarty_template}/js/dataTables.fnReloadAjax.js"></script>
 
 	<script>
 		function drawOverview(nTable, nData) {
@@ -54,7 +54,7 @@ $return =
 					"processing": true,
 					"serverSide": true,
 					"responsive": true,
-					"ajax": '{$custom_url}index.php?m=solutedns&action=table&table=' + nTable + '&data=' + nData,
+					"ajax": '{$system_url}index.php?m=solutedns&action=table&table=' + nTable + '&data=' + nData,
 					"stateSave": true,
 					"sorting": [[0,"asc"]],
 					"paging": true,
@@ -100,7 +100,7 @@ $return =
 					"processing": true,
 					"serverSide": true,
 					"responsive": true,
-					"ajax": '{$custom_url}index.php?m=solutedns&action=table&table=' + nTable + '&data=' + nData,
+					"ajax": '{$system_url}index.php?m=solutedns&action=table&table=' + nTable + '&data=' + nData,
 					"stateSave": true,
 					"sorting": [[0,"asc"]],
 					"paging": {$paging},
@@ -133,7 +133,7 @@ $return =
 					"processing": true,
 					"serverSide": true,
 					"responsive": true,
-					"ajax": '{$custom_url}index.php?m=solutedns&action=table&table=' + nTable + '&data=' + nData,
+					"ajax": '{$system_url}index.php?m=solutedns&action=table&table=' + nTable + '&data=' + nData,
 					"stateSave": true,
 					"sorting": [[0,"asc"]],
 					"paging": true,
