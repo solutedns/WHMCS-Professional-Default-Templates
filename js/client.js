@@ -127,6 +127,20 @@ function updateSettings(element) {
     sendData(data)
 }
 
+function updatePlain(action) {
+
+    var zone = $("#sdns_zone").val();
+
+    var item = {
+        action: action,
+        zone: zone,
+    };
+
+    jsonString = JSON.stringify(item);
+    sendData(jsonString);
+	
+}
+
 function resetMessages() {
 
     /* Clear Message Box */

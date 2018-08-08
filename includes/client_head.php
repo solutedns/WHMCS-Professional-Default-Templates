@@ -2,7 +2,7 @@
 /**
  *               *** SoluteDNS Professional Edition for WHMCS ***
  *
- * @file        templates/head/client.php
+ * @file        templates/includes/client_head.php
  * @package     solutedns-pro-whmcs
  *
  * Copyright (c) 2018 NetDistrict

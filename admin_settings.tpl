@@ -358,6 +358,17 @@
 		</div>
 		<div class="row spacer_15">
 			<div class="col-md-3 text-right title">
+				<label for="sdns_client_togglednssec">{$LANG.admin_settings_client_toggle_dnssec}:</label>
+			</div>
+			<div class="col-md-9">
+				<div class="checkbox chx_label">
+					<input {if Controller::config(client_togglednssec)}checked {/if}name="sdns_client_togglednssec" id="sdns_client_togglednssec" type="checkbox">
+					<label for="sdns_client_togglednssec">{$LANG.admin_settings_client_toggle_dnssec_desc}</label>
+				</div>
+			</div>
+		</div>
+		<div class="row spacer_15">
+			<div class="col-md-3 text-right title">
 				<label for="sdns_disable_primary">{$LANG.admin_settings_disable_primary}:</label>
 			</div>
 			<div class="col-md-9">
