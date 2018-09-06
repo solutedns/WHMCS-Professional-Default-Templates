@@ -108,7 +108,7 @@
 				</div>
 				<div class="modal-footer">
 					<input type="hidden" id="sdns_zone">
-					<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="zone_delete()">{$LANG.global_btn_delete}</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteZone()">{$LANG.global_btn_delete}</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.global_btn_cancel}</button>
 				</div>
 			</div>

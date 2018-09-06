@@ -109,6 +109,7 @@ $columns_records =
 		'formatter' => function( $d, $row ) {
 			$option = ($row['type'] == 'NS') ? empty($this->config('disable_ns')) ? NULL : " DISABLED" : NULL;
 			$option = ($row['type'] == 'SOA') ? " DISABLED" : $option;
+			$option = ($row['disabled'] == 1) ? " DISABLED" : $option;
 			return '<div class="checkbox tablecheckbox"><input type="checkbox" name="sdns_select" id="sdns_select_' . $row['id'] . '" value="' . $row['id'] . '" style="display: hidden;" ' . $this->maintenance . $option . '/><label for="sdns_select_' . $row['id'] . '" /></div>';
 		}
 	],
@@ -195,6 +196,7 @@ $columns_records =
 			} else {
 				$option = ($row['type'] == 'NS') ? empty($this->config('disable_ns')) ? NULL : " DISABLED" : NULL;
 				$option = ($row['type'] == 'SOA') ? " DISABLED" : $option;
+				$option = ($row['disabled'] == 1) ? " DISABLED" : $option;
 				return '<div class="text-center text-nowrap"><button type="button" class="btn btn-sm btn-success" style="display: none;" id="sdns_save_' . $row['id'] . '" onclick="record_edit(\'zone\', ' . $row['id'] . ')" ' . $this->maintenance . '><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button> <button type="button" class="btn btn-sm btn-warning" id="sdns_edit_' . $row['id'] . '" onclick="edit(\'' . $row['id'] . '\')" ' . $this->maintenance . $option . '><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button> <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#dialog_deleteRecord" onclick="setRecord(\'' . $row['id'] . '\')" ' . $this->maintenance . $option . '><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div>';
 			}
 		}

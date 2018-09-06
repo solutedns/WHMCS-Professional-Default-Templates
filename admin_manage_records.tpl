@@ -30,7 +30,8 @@
 				<ul class="dropdown-menu dropdown-menu-right" role="menu">
 					<li><a href="#" data-toggle="modal" data-target="#dialog_applyTemplate"><span class="glyphicon glyphicon-random" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_applytemplate}</span></a></li>
 					<li><a href="#" data-toggle="modal" data-target="#dialog_importZone"><span class="glyphicon glyphicon-import" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_importzone}</span></a></li>
-					<li><a href="#" data-toggle="modal" data-target="#dialog_exportZone" onclick="ExportZone('{$domain->domain}')"><span class="glyphicon glyphicon-export" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_exportzone}</span></a></li>
+					<li><a href="#" data-toggle="modal" data-target="#dialog_exportZone" onclick="exportZone('{$domain->domain}')"><span class="glyphicon glyphicon-export" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_exportzone}</span></a></li>
+					<li><a href="#" onclick="unassignZone('{$domain->id}');"><span class="glyphicon glyphicon glyphicon-level-up" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_unassignzone}</span></a></li>
 					<li class="divider"></li>
 					<li><a href="#" data-toggle="modal" data-target="#dialog_deleteZone"><span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span><span class="dropmenu_desc text-danger">{$LANG.admin_manage_records_deletezone}</span></a></li>
 				</ul>
@@ -250,7 +251,7 @@
 					<br />
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="zone_delete({$domain->id})">{$LANG.global_btn_delete}</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteZone({$domain->id}, true)">{$LANG.global_btn_delete}</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">{$LANG.global_btn_cancel}</button>
 				</div>
 			</div>

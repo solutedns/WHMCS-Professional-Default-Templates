@@ -33,7 +33,7 @@ function sendData(json) {
             if (result) {
                 result.forEach(function(data) {
 
-                    setMessage(data['title'], data['msg'], data['status'], data['tablereload'], data['pagereload'], data['fieldreset'], data['msgReset'], data['fixed'], data['errorFields'])
+                    setMessage(data['title'], data['msg'], data['status'], data['tablereload'], data['pagereload'], data['redirect'], data['fieldreset'], data['msgReset'], data['fixed'], data['errorFields'])
 
                     if (data['syscheck'] == true) {
                         syscheck();
@@ -85,8 +85,8 @@ function getData(json) {
 
 }
 
-function setMessage(title, desc, status, tableReload, pageReload, fieldReset, msgReset, fixed, errorFields) {
-
+function setMessage(title, desc, status, tableReload, pageReload, redirect, fieldReset, msgReset, fixed, errorFields) {
+	
     /* Message Reset */
     if (msgReset == true) {
         resetMessages();
@@ -134,6 +134,14 @@ function setMessage(title, desc, status, tableReload, pageReload, fieldReset, ms
         setTimeout(function() {
             location.reload()
         }, 2000);
+    }
+	
+	/* Redirect */
+	redirect = redirect || false;
+    if (redirect != false) {
+        setTimeout(function() {
+            location.replace(redirect)
+        }, 2500);
     }
 
     /* Reset Field Entries */
@@ -502,7 +510,23 @@ function record_delete(type) {
 
 }
 
-function ExportZone(zone) {
+function record_disable(record_id) {
+
+    var zone = $("#sdns_zone").val();
+
+    var item = {
+        action: 'disablerecord',
+        zone: zone,
+        record_id: record_id
+    };
+
+    jsonString = JSON.stringify(item);
+
+    sendData(jsonString);
+
+}
+
+function exportZone(zone) {
 
     var item = {
         action: 'export',
@@ -528,13 +552,12 @@ function ExportZone(zone) {
 
 function importZone() {
 
-    var action = 'import';
     var zone = $("#sdns_zone").val();
     var zonedata = $("#textarea_import").val();
     var overwrite = $('#overwrite').is(":checked");
 
     var item = {
-        action: action,
+        action: 'import',
         zone: zone,
         bind: zonedata,
         overwrite: overwrite
@@ -548,12 +571,11 @@ function importZone() {
 
 function applyTemplate() {
 
-    var action = 'applytemplate';
     var zone = $("#sdns_zone").val();
     var template = $("#sdns_apply_template").val();
 
     var item = {
-        action: action,
+        action: 'applytemplate',
         zone: zone,
         template: template
     };
@@ -564,9 +586,8 @@ function applyTemplate() {
 
 }
 
-function zone_delete(id) {
+function unassignZone(id) {
 
-    var action = 'deletezone';
     var zone = id;
 
     if (zone == null) {
@@ -574,8 +595,28 @@ function zone_delete(id) {
     }
 
     var item = {
-        action: action,
+        action: 'unassignzone',
         zone: zone
+    };
+
+    jsonString = JSON.stringify(item);
+
+    sendData(jsonString);
+
+}
+
+function deleteZone(zone,redirect) {
+
+	redirect = redirect || false;
+
+    if (zone == null) {
+        zone = $('#sdns_zone').val();
+    }
+
+    var item = {
+        action: 'deletezone',
+        zone: zone,
+		redirect: redirect
     };
 
     jsonString = JSON.stringify(item);
