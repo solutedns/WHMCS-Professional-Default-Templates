@@ -45,10 +45,6 @@ form p {
 .form-100 {
 	width: 100%;
 }
-.deleteselected {
-	margin-top: -20px;
-	position: relative;
-}
 #textarea_export {
 	font-family: Verdana, Arial, sans-serif;
 	font-size: 0.8em;
@@ -63,6 +59,19 @@ form p {
 }
 .update-warning {
 	font-size: 3.4em;
+}
+.table_checkbox {
+	margin-left: 0 !important;
+	margin-right: 0 !important;	
+	padding-left: 0px !important;
+	padding-right: 0px !important;	
+	width: 0px;
+}
+.modal-body, .whmcs-modal .modal-body {
+    min-height: 50px;
+}
+.center-block {
+    float: none;
 }
 
 /*
@@ -524,6 +533,53 @@ form p {
 	100% {
 		transform: rotate(360deg);
     }
+}
+
+/*
+ ## Indeterminate progress bar
+*/
+
+.progress-box {
+	overflow: hidden;
+	-webkit-border-radius: 1.5px;
+	-moz-border-radius: 1.5px;
+	border-radius: 1.5px;	
+}
+
+.progress-line, .progress-line:before {
+	height: 6px;
+	width: 100%;
+	margin: 0;
+	background-color: #b3d4fc;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.iprogress-line, .iprogress-line:before {
+	height: 6px;
+	width: 100%;
+	margin: 0;
+}
+.iprogress-line {
+	background-color: #b3d4fc;
+	display: -webkit-flex;
+	display: flex;
+}
+.iprogress-line:before {
+	background-color: #337ab7;
+	content: '';
+	-webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+	animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@-webkit-keyframes running-progress {
+	0% { margin-left: 0px; margin-right: 100%; }
+	50% { margin-left: 25%; margin-right: 0%; }
+	100% { margin-left: 100%; margin-right: 0; }
+}
+@keyframes running-progress {
+	0% { margin-left: 0px; margin-right: 100%; }
+	50% { margin-left: 25%; margin-right: 0%; }
+	100% { margin-left: 100%; margin-right: 0; }
 }
 
 /*
@@ -1134,6 +1190,12 @@ span.twitter-typeahead {
 .show-details {
 	cursor: pointer;
 }
+.console-details {
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+	
 .icon-spinner {
 	margin-left: 18px;
 	margin-right: 18px;

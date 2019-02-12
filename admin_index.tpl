@@ -10,7 +10,7 @@
 			<li><a data-toggle="tab" href="#templates" onclick="drawRecords('sdns_template_records')">{$LANG.admin_menu_templates}</a></li>
 			<li><a data-toggle="tab" href="#settings">{$LANG.admin_menu_settings}</a></li>
 			<li><a data-toggle="tab" href="#nameserver">{$LANG.admin_menu_nameserver}</a></li>
-			<li><a data-toggle="tab" href="#tools">{$LANG.admin_menu_tools}</a></li>
+			<li><a data-toggle="tab" href="#tools" {if Controller::config(auto_health)}onclick="getStats('health')"{/if}>{$LANG.admin_menu_tools}</a></li>
 			<li><a data-toggle="tab" href="#system">{$LANG.admin_menu_system}{if $update} <span class="label label-danger badge_danger"><span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></span>{/if}</a></li>
 					{/if}
 	</ul>
@@ -49,6 +49,9 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close" disabled><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="dialog_console_title"></h4>
 				</div>
+				<div class="iprogress-line">
+					<div id="progressbar" style="background:#337ab7; width:0%; height:100%;"></div>
+				</div>
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-md-12">
@@ -56,11 +59,8 @@
 								<div class="col-md-12" id="console-status"> Status: <span>Initiating</span></div>
 							</div>
 							<div class="row">
-								<div class="col-md-12" id="console-job"><small><span>Loading...</span></small></div>
+								<div class="col-md-12 console-details" id="console-job"><small><span>Loading...</span></small></div>
 								<br />
-							</div>
-							<div class="progressbox">
-								<div id="progressbar" style="background:#006699; width:0%; height:100%;"></div>
 							</div>
 							<div class="text-right"><small><a class="show-details" onclick="$('#results').slideToggle('slow');">Toggle details</a></small></div>
 							<div class="console" id="results"><span id="infobox"></span></div>

@@ -6,7 +6,7 @@
 	<ul class="nav nav-tabs">
 		<li class="pull-right"><a target="_blank" href="https://docs.solutedns.com/whmcs/professional-edition/getting-started/"><span class="glyphicon glyphicon-question-sign text-primary" aria-hidden="true"></span></a></li>
 		<li><a href="addonmodules.php?module=solutedns"><span class="glyphicon glyphicon-chevron-left text-muted" aria-hidden="true"></span></a></li>
-		<li class="active"><a data-toggle="tab" href="#records">{$LANG.admin_menu_records}</a></li>
+		<li class="active"><a data-toggle="tab" href="#records">{$LANG.admin_menu_records} {if $pending} <small class="text-primary"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></small>{/if}</a></li>
 		{if Controller::ns_details(dnssec_enable)}
 			<li><a data-toggle="tab" href="#dnssec">{$LANG.admin_menu_dnssec}</a></li>
 		{/if}

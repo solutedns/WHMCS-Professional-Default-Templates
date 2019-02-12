@@ -30,6 +30,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<div class="clearfix"></div>
 	<div class="pull-right"><a class="btn btn-sm btn-default {if $maintenance}disabled{/if}" href="#" onclick="deleteSelected();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="dropmenu_desc">{$MLANG.client_manage_records_deleteselected}</span></a></div>
 </div>
 

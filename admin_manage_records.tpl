@@ -45,7 +45,7 @@
 	<table class="dataTable display" id="sdns_records" width="100%" border="0" cellspacing="1" cellpadding="3">
 		<thead>
 			<tr>
-				<th class="text-center">{if $pending}<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>{/if}</th>
+				<th class="text-center table_checkbox"><button type="button" class="btn btn-xs btn-primary{if Controller::config(maintenance)} disabled{/if}" data-toggle="tooltip" data-placement="right" title="{$LANG.admin_manage_records_deleteselected}" onclick="deleteSelected();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button></th>
 				<th>{$LANG.global_dns_id}</th>
 				<th>{$LANG.global_dns_name}</th>
 				<th>{$LANG.global_dns_type}</th>
@@ -61,7 +61,6 @@
 			</tr>
 		</tbody>
 	</table>
-	<div class="pull-right deleteselected"><a class="btn btn-sm btn-default{if Controller::config(maintenance)} disabled{/if}" href="#" onclick="deleteSelected();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_deleteselected}</span></a></div>
 </div>
 
 <!-- Add Modal -->

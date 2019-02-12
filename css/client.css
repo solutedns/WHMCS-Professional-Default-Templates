@@ -580,3 +580,7 @@ All Rights Reserved
      min-width: 75px;
      font-weight: bold;
 }
+
+ .dataTables_wrapper .dataTables_length {
+    margin-bottom: 6px;
+}

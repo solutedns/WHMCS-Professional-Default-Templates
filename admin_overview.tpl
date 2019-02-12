@@ -15,13 +15,18 @@
 </h2>
 
 <div class="pull-right">
-	<select class="form-padding form-control" name="sdns_overview" id="sdns_overview" onchange="selectOverview(value);">
-		<option value="0">{$LANG.admin_overview_all}</option>
-		<option value="d">{$LANG.admin_overview_domains}</option>
-		<option value="p">{$LANG.admin_overview_products}</option>
-		<option value="s">{$LANG.admin_overview_standalone}</option>
-		<option value="r">{$LANG.admin_overview_reverse}</option>
-	</select>
+	<div class="input-group">
+		<select class="form-padding form-control" name="sdns_overview" id="sdns_overview" onchange="selectOverview(value);">
+			<option value="0">{$LANG.admin_overview_all}</option>
+			<option value="d">{$LANG.admin_overview_domains}</option>
+			<option value="p">{$LANG.admin_overview_products}</option>
+			<option value="s">{$LANG.admin_overview_standalone}</option>
+			<option value="r">{$LANG.admin_overview_reverse}</option>
+		</select>
+		<span class="input-group-btn">
+			<button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="{$LANG.admin_overview_reset_table}" onclick="resetDataTable('sdns_overview_zones'); $(this).blur();"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+		</span>
+	</div>
 </div>
 
 <h3>{$LANG.global_general_zones}</h3>

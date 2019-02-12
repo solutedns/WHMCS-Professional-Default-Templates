@@ -13,13 +13,6 @@ function sendData(json) {
 
 	NProgress.start();
 
-	if (typeof time1 !== 'undefined') {
-		clearTimeout(time1);
-	}
-	if (typeof time2 !== 'undefined') {
-		clearTimeout(time2);
-	}
-
 	$.ajax({
 		data: {
 			'data': json
@@ -56,13 +49,6 @@ function sendData(json) {
 function getData(json) {
 
 	NProgress.start();
-
-	if (typeof time1 !== 'undefined') {
-		clearTimeout(time1);
-	}
-	if (typeof time2 !== 'undefined') {
-		clearTimeout(time2);
-	}
 
 	$.ajax({
 		data: {
@@ -264,11 +250,25 @@ function processData(result) {
 		}
 
 	}
+	
+	if (result.data == 'stats' && result.type == 'health') {
+		
+		drawStats(result);
+
+	}
+
 
 }
 
 function isDataTable(nTable) {
 	return $.fn.DataTable.fnIsDataTable('#' + nTable);
+}
+
+function resetDataTable(nTable) {
+	$.fn.dataTable.Api('#' + nTable)
+	 .search('')
+	 .columns().search('')
+	 .draw();
 }
 
 function selectOverview(value) {
@@ -317,6 +317,123 @@ function autoSave(type, field, data) {
 	jsonString = JSON.stringify(item);
 
 	sendData(jsonString);
+
+}
+
+function getStats(value) {
+
+	if (value != 0) {
+		
+		var item = {
+			action: 'stats',
+			data: value,
+		};
+	
+		jsonString = JSON.stringify(item);
+		getData(jsonString);
+	}
+}
+
+function drawStats(result) {
+	
+	if (result.type == 'health'){
+
+		var config = {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [
+						result.global.issues,
+						result.global.noissues,
+					],
+					backgroundColor: [
+						window.chartColors.red,
+						window.chartColors.green,
+					],
+					label: 'Dataset 1'
+				}],
+				labels: [
+					'Issues',
+					'Other zones',
+				]
+			},
+			options: {
+				responsive: true
+			}
+		};
+		
+		var ctx = document.getElementById('chart-area-overview').getContext('2d');
+		window.myPie = new Chart(ctx, config);
+		
+		var config = {
+			type: 'radar',
+			data: {
+				labels: ['7000', '7001', '7002', '7003', '7004', '7005', '7006', '7007'],
+				datasets: [{
+					label: 'Errors for type',
+					borderColor: window.chartColors.red,
+					backgroundColor: 'rgba(255, 99, 132, 0.5)',
+					pointBackgroundColor: window.chartColors.red,
+					data: [
+						result.errors['7000'],
+						result.errors['7001'],
+						result.errors['7002'],
+						result.errors['7003'],
+						result.errors['7004'],
+						result.errors['7005'],
+						result.errors['7006'],
+						result.errors['7007'],
+					]
+				}]
+			},
+			options: {
+				responsive: true,
+				tooltips: {
+					callbacks: {
+						label: function(tooltipItem, data) {
+							var label = data.datasets[tooltipItem.datasetIndex].label || '';
+		
+							if (label) {
+								label += ': ';
+							}
+							label += Math.round(tooltipItem.yLabel * 100) / 100;
+							
+							if (tooltipItem.index == 0) {
+								var msg = 'One or more nameservers failed to report.';
+							}
+							if (tooltipItem.index == 1) {
+								var msg = 'Not all nameservers agree on the SOA serial for this zone.';
+							}
+							if (tooltipItem.index == 2) {
+								var msg = 'The registry returned one or more unknown nameservers.';
+							}
+							if (tooltipItem.index == 3) {
+								var msg = 'There are NS records in this zone which are not known by the registry.';
+							}
+							if (tooltipItem.index == 4) {
+								var msg = 'There is one or more nameservers which do not seem to be authoritative for this zone.';
+							}
+							if (tooltipItem.index == 5) {
+								var msg = 'It seems the domain is using an different DNS cluster.';
+							}
+							if (tooltipItem.index == 6) {
+								var msg = 'There is one or more record(s) with errors in this zone.';
+							}
+							if (tooltipItem.index == 7) {
+								var msg = 'There is one or more record(s) with warnings in this zone.';
+							}
+							
+							return label + ' | ' + msg;
+						}
+					}
+				}
+			}
+		};
+		
+		var ctx2 = document.getElementById('chart-area-issues').getContext('2d');
+		window.myPie2 = new Chart(ctx2, config);
+		
+	}
 
 }
 
@@ -800,12 +917,16 @@ function start_com(e, type) {
 		$('#console-close').html("<i class=\"glyphicon glyphicon-refresh icon-spinner\"></i>");
 		$('#console-close').removeClass('btn-success');
 		$('#console-close').addClass('btn-default');
+		$(".progress-line").addClass("iprogress-line").removeClass("progress-line");
+		$('#progressbar').css('background-color', '#337ab7');
 
 		$("#results").append('<br/>Loading script... <br/><br/>');
 		var scroller = setInterval(function () {
 			var el = document.getElementById('results');
 			el.scrollTop = el.scrollHeight;
 		}, 120);
+		
+		console_monitor();
 
 		if (document.URL.indexOf('#') === -1) {
 			var URL = document.URL;
@@ -833,6 +954,13 @@ function start_com(e, type) {
 			};
 
 			source = new EventSource(URL + '&action=console&console=' + type + '&data=' + JSON.stringify(data));
+		} else if(type == 'health') {
+
+			var data = {
+				type: $("#sdns_health_tool_option").val(),
+			};
+
+			source = new EventSource(URL + '&action=console&console=' + type + '&data=' + JSON.stringify(data));
 		} else {
 			source = new EventSource(URL + '&action=console&console=' + type);
 		}
@@ -855,6 +983,10 @@ function start_com(e, type) {
 				$('#console-close').addClass('btn-success');
 				$('#console-close').removeClass('btn-default');
 				delete console.isRunning;
+				
+				if (result.progress == 100) {
+					$('#progressbar').css('background-color', '#5cb85c');
+				}
 			}
 		});
 
@@ -870,6 +1002,9 @@ function start_com(e, type) {
 			$('#console-close').addClass('btn-success');
 			$('#console-close').removeClass('btn-default');
 			delete console.isRunning;
+			
+			$(".iprogress-line").addClass("progress-line").removeClass("iprogress-line");
+			
 		});
 
 		console.isRunning = true;
@@ -907,6 +1042,43 @@ function console(type) {
 function console_name(name) {
 	$('h4#dialog_console_title').text(name);
 }
+
+function console_monitor() {
+
+	// target element that we will observe
+	const target = $(".console");
+
+	// config object
+	const config = {
+		characterData: true,
+		characterDataOldValue: true,
+		childList: true,
+		subtree: true
+	};
+
+	// subscriber function
+	function subscriber(mutations) {
+		mutations.forEach((mutation) => {
+			
+			var console = target.text();
+			
+			if(console.indexOf("---")>=0){
+			
+				$(".iprogress-line").addClass("progress-line").removeClass("iprogress-line");
+				observer.disconnect();
+			}
+
+		});
+	}
+
+	// instantiating observer
+	const observer = new MutationObserver(subscriber);
+
+	// observing target
+	observer.observe(target[0], config);
+
+}
+
 
 
 $(document).ready(function () {
@@ -947,9 +1119,11 @@ $(document).ready(function () {
 
 	/* Load table of active tab  */
 	if (atab == 'templates') {
-		drawRecords('sdns_template_records')
+		drawRecords('sdns_template_records');
+	} else if (atab == 'tools') {
+		getStats('health');
 	} else if (atab == 'overview' || atab == 'index' || atab == null) {
-		drawTable('sdns_overview_zones')
+		drawTable('sdns_overview_zones');
 	} else if (document.URL.indexOf("server") != -1 || atab != null && atab != 'overview' && atab != 'templates') {
 		// No table in active tab
 	}
