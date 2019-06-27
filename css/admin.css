@@ -354,6 +354,9 @@ form p {
 .modal-dialog label {
 	padding-top: 6px;
 }
+.input-group-btn {
+	width: auto;
+}
 
 /*
  ## Bootstrap Switch
