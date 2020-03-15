@@ -280,8 +280,18 @@
 					<div class="col-md-3 text-right title">
 						<p>{$LANG.admin_system_license_limit}:</p>
 					</div>
-					<div class="col-md-9">
-						<p>{if $core.license.zonelimit}{if {$core.license.zonelimit} eq '0'}{$LANG.admin_system_license_unlimited}{else}{$core.license.zonelimit} {$LANG.admin_system_license_zones}{/if}{else}{$LANG.global_status_na}{/if}</p>
+					<div class="col-md-3">
+						<p>{if $core.license.zonelimit eq '0'}{$LANG.admin_system_license_unlimited}{else}{$core.license.zonelimit} {$LANG.admin_system_license_zones}
+							<div class="progress">
+								{$percentage=$core.server.zones/$core.license.zonelimit*100}
+								{if $percentage > 100}{$percentage=100}{/if}
+								<div class="progress-bar progress-bar-{if $percentage > 95}danger{else if $percentage > 80}warning{else}success{/if}" role="progressbar" aria-valuenow="{$percentage}"
+								aria-valuemin="0" aria-valuemax="{$percentage}" style="width:{$percentage}%">
+									{$core.server.zones}
+								</div>
+							</div>
+						{/if}
+						</p>
 					</div>
 				</div>
 				<div class="row">
@@ -289,15 +299,13 @@
 						<p>{$LANG.admin_system_license_addons}:</p>
 					</div>
 					<div class="col-md-9">
-						<p>
-							{if $core.license.addon}
-								{foreach from=$core.license.addon item=addon}
-									<p>- {$addon.name} {if $addon.status eq 'Active'} <span class="label active">{$addon.status}</span> {elseif $addon.status eq 'Pending'} <span class="label pending">{$addon.status}</span> {else} <span class="label inactive">{$addon.status}</span> {/if} {$addon.duedate} </p>
-								{/foreach}
-							{else}
-								{$LANG.global_status_none}
-							{/if}
-						</p>
+						{if $core.license.addon}
+							{foreach from=$core.license.addon item=addon}
+								<p>- {$addon.name} {if $addon.status eq 'Active'} <span class="label active">{$addon.status}</span> {elseif $addon.status eq 'Pending'} <span class="label pending">{$addon.status}</span> {else} <span class="label inactive">{$addon.status}</span> {/if} {$addon.duedate} </p>
+							{/foreach}
+						{else}
+							<p>{$LANG.global_status_none}</p>
+						{/if}
 					</div>
 				</div>
 				<div class="row spacer_15">

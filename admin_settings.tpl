@@ -140,7 +140,6 @@
 					<select class="form-padding form-control" name="sdns_soa_serial" id="sdns_soa_serial">
 						<option {if Controller::config(soa_serial) eq 'default'}SELECTED{/if} value="default">{$LANG.admin_settings_record_select_default}</option>
 						<option {if Controller::config(soa_serial) eq 'epoch'}SELECTED{/if} value="epoch">{$LANG.admin_settings_record_select_epoch}</option>
-						<option {if Controller::config(soa_serial) eq 'zero'}SELECTED{/if} value="zero">{$LANG.admin_settings_record_select_zero}</option>
 					</select>
 				</div>
 			</div>
