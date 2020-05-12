@@ -1,4 +1,4 @@
-{assign var=records value=Controller::inConfig(record_types)}
+{assign var=records value=$Controller->inConfig(record_types)}
 
 <div class="row">
 	<div class="col-md-12">
@@ -113,7 +113,7 @@
 </div>
 <hr />
 
-{if Controller::config(auto_health)}
+{if $Controller->config(auto_health)}
 <b>{$LANG.admin_tools_title_health}</b>
 	<span class="pull-right">
 		<button type="button" class="btn btn-default btn-sm" onclick="getStats('health');"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>

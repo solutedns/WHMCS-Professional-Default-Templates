@@ -10,8 +10,8 @@
 			<li><a data-toggle="tab" href="#templates" onclick="drawRecords('sdns_template_records')">{$LANG.admin_menu_templates}</a></li>
 			<li><a data-toggle="tab" href="#settings">{$LANG.admin_menu_settings}</a></li>
 			<li><a data-toggle="tab" href="#nameserver">{$LANG.admin_menu_nameserver}</a></li>
-			<li><a data-toggle="tab" href="#tools" {if Controller::config(auto_health)}onclick="getStats('health')"{/if}>{$LANG.admin_menu_tools}</a></li>
-			<li><a data-toggle="tab" href="#system">{$LANG.admin_menu_system}{if $update} <span class="label label-danger badge_danger"><span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></span>{/if}</a></li>
+			<li><a data-toggle="tab" href="#tools" {if $Controller->config(auto_health)}onclick="getStats('health')"{/if}>{$LANG.admin_menu_tools}</a></li>
+			<li><a data-toggle="tab" href="#system">{$LANG.admin_menu_system}{if isset($update)} <span class="label label-danger badge_danger"><span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></span>{/if}</a></li>
 					{/if}
 	</ul>
 
@@ -107,8 +107,70 @@
 	</div>
 </div>
 
-<script>
+<!-- Hook Modal -->
+<div class="modal fade" id="hookModal" tabindex="-1" role="dialog" aria-labelledby="hookModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content panel panel-primary">
+			<div class="modal-header panel-heading">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="hookModalLabel"><strong>Oh No!</strong> Something has gone wrong!</h4>
+			</div>
+			<div class="modal-body panel-body">
+				<p>It seems not all required files could be loaded into WHMCS for this module to work. But don't worry we are going to try and fix this!</p>
+				<p><strong>Please follow the steps below:</strong></p>
+				<hr />
+				<div class="row">
+					<div class="col-md-8">
+						<p>Find the SoluteDNS module in the '<i>Addon Modules</i>' Configuration page:<p>
+						<ul>
+							<li>Press '<span class="text-primary">Configure</span>'.</li>
+							<li>Press '<span class="text-primary">Save Changes</span>'. </li>
+						</ul>	
+					</div>
+					<div class="col-md-4 text-right">
+						<a class="btn btn-default" href="configaddonmods.php" target="_blank" role="button">Addon Modules <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-md-8">
+						<p>Empty the Template Cache at the '<i>System Cleanup</i>' page:</p>
+						<ul>
+							<li>Press '<span class="text-primary">Go</span>'  for '<i>Empty Template cache</i>'.</li>
+						</ul>	
+					</div>
+					<div class="col-md-4 text-right">
+						<a class="btn btn-default" href="systemcleanup.php" target="_blank" role="button">System Cleanup <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></a>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="col-md-8">
+						<p>Force to load a fresh copy of this page in your browser:</p>
+						<ul>
+							<li>Press <span class="label label-default">ctrl</span> + <span class="label label-default">F5</span> on your keyboard.</li>
+						</ul>	
+					</div>
+					<div class="col-md-4 text-right">
+						<a class="btn btn-default disabled" href="systemcleanup.php" target="_blank" role="button"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a>
+					</div>
+				</div>
+				<hr />
+				<center><p><i>If you followed the above steps but this error keeps showing, please contact Support.</i></p></center>
+			</div>
+			<div class="modal-footer panel-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="location.reload();">Reload</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+	if (typeof updateSettings !== "function") $("#hookModal").modal();
 	getState();
+});
 </script>
 
 <noscript>

@@ -73,6 +73,13 @@ form p {
 .center-block {
     float: none;
 }
+#savezone {
+	position:-webkit-sticky;
+	position:sticky;
+	bottom:5px	;
+	z-index: 10;	
+	display: none;
+}
 
 /*
  ## Loading CSS
@@ -341,6 +348,13 @@ form p {
 /*
  ## Bootstrap
 */
+.contentarea {
+	overflow: visible;	
+}
+
+/*
+ ## Bootstrap
+*/
 .tooltip-inner {
 	max-width: none;
 	white-space: nowrap;
@@ -356,6 +370,19 @@ form p {
 }
 .input-group-btn {
 	width: auto;
+}
+
+.dataTable .btn-group-first {
+	border-top-left-radius: 4px !important;
+	border-bottom-left-radius: 4px !important;
+}
+.dataTable .btn-group-last {
+	border-top-right-radius: 4px !important;
+	border-bottom-right-radius: 4px !important;
+}
+.dataTable .input-group {
+    display: inline;
+    vertical-align: middle;
 }
 
 /*

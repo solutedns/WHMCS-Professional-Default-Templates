@@ -3,7 +3,7 @@
 /**
  *               *** SoluteDNS Professional Edition for WHMCS ***
  *
- * @file        templates/includes/client_tables.php
+ * @file        templates/includes/admin_tables.php
  * @package     solutedns-pro-whmcs
  *
  * Copyright (c) 2020 NetDistrict
@@ -30,13 +30,18 @@ if (!defined("WHMCS")) {
 	die("This file cannot be accessed directly");
 }
 
-
 /**
  * Overview Table Columns
  */
-$tColumns->overview = [
+$tColumns->zones = [
 			[
-				'db' => 'domain', 'dt' => 0,
+				'db' => 'id', 'dt' => 0,
+				'formatter' => function( $d, $row ) {
+					return '<div class="text-center">' . $d . '</div>';
+				}
+			],
+			[
+				'db' => 'domain', 'dt' => 1,
 				'formatter' => function( $d, $row ) {
 
 					if (extension_loaded('intl')) {
@@ -46,84 +51,72 @@ $tColumns->overview = [
 				}
 			],
 			[
-				'db' => 'id', 'dt' => 1,
+				'db' => 'date', 'dt' => 2,
 				'formatter' => function( $d, $row ) {
-
-					if ($row['type'] == 's') {
-						$button = '<button type="button" class="btn btn-danger btn-sm" onClick="setZone(\'' . $row['id'] . '\'), setZoneName(\'' . $row['domain'] . '\')" data-toggle="modal" data-target="#dialog_deleteZone"><span class="glyphicon glyphicon-remove"></span></button>';
-					} else {
-						$button = '<button type="button" class="btn btn-default btn-sm disabled" disabled><span class="glyphicon glyphicon-remove"></span></button>';
-					}
-
-					$url = !is_null($this->custom_url) ? $this->system_url . $this->custom_url . '/' : 'index.php?m=solutedns&action=manage&id=';
-
-					return '<div class="text-right">
-					<!-- Split button -->
-					<div class="btn-group">
-					  <button type="button" class="btn btn-default btn-sm" onClick="location.href=\'' . $url . $row['id'] . '\'">' . $this->lang['global_btn_manage'] . '</button>
-					  ' . $button . '
-					</div>';
+					return self::formatDate($d);
 				}
 			],
 			[
-				'db' => 'type', 'dt' => 2
+				'db' => 'local_id', 'dt' => 3,
+				'formatter' => function( $d, $row ) {
+					return self::whmcsStatus($row['local_id'], $row['type']);
+				}
+			],
+			[
+				'db' => 'type', 'dt' => 4,
+				'formatter' => function( $d, $row ) {
+					return '<div class="text-right">
+					<!-- Split button -->
+					<div class="btn-group">
+					  <button type="button" class="btn btn-default btn-sm" onClick="location.href=\'addonmodules.php?module=solutedns&action=manage&id=' . $row['id'] . '\'">' . $this->lang['global_btn_manage'] . '</button>
+					  <button type="button" class="btn btn-danger btn-sm" onClick="setZone(\'' . $row['id'] . '\'), setZoneName(\'' . $row['domain'] . '\')" data-toggle="modal" data-target="#dialog_deleteZone"><span class="glyphicon glyphicon-remove"></span></button>
+					</div>';
+				}
 			]
 ];
 
 /**
- * Reverse Table Columns
- */
-$tColumns->reverse = [
-			[
-				'db' => 'hostname', 'dt' => 0,
-				'formatter' => function( $d, $row ) {
-					return '<div id="sdns_z-ip_' . $row['id'] . '"><input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_ip_' . $row['id'] . '" id="sdns_ip_' . $row['id'] . '" value="' . $row['ip'] . '"></div>';
-				}
-			],
-			[
-				'db' => 'ip', 'dt' => 1,
-				'formatter' => function( $d, $row ) {
-					return '
-							<div id="sdns_z-hostname_' . $row['id'] . '" class="input-group dnsfield">
-   	  <input type="textbox" class="form-padding form-control dnsfield" name="sdns_hostname_' . $row['id'] . '" id="sdns_hostname_' . $row['id'] . '" value="' . htmlentities($row['hostname']) . '">
-   <span class="input-group-btn dnsmergefield">
-        	  <button type="button" class="btn btn-warning" onclick="update_reverse(\'' . $row['id'] . '\')"><span class="glyphicon glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></button>
-   </span>
-</div>';
-				}
-			],
-			[
-				'db' => 'id', 'dt' => 2,
-			],
-];
-
-/**
- * Records Table Columns
+ * Records Columns
  */
 $tColumns->records = [
 			[
 				'db' => 'id', 'dt' => 0,
 				'formatter' => function( $d, $row ) {
-					$option = ($row['type'] == 'NS') ? empty($this->config('disable_ns')) ? NULL : " DISABLED" : NULL;
-					$option = ($row['type'] == 'SOA') ? " DISABLED" : $option;
-					$option = ($row['disabled'] == 1) ? " DISABLED" : $option;
-					return '<div class="checkbox tablecheckbox"><input type="checkbox" name="sdns_select" id="sdns_select_' . $row['id'] . '" value="' . $row['id'] . '" style="display: hidden;" ' . $this->maintenance . $option . '/><label for="sdns_select_' . $row['id'] . '" /></div>';
+					return '<div class="checkbox tablecheckbox"><input type="checkbox" name="sdns_select" id="sdns_select_' . $row['id'] . '" value="' . $row['id'] . '" style="display: hidden;" ' . $this->maintenance . '/><label for="sdns_select_' . $row['id'] . '" /></div>';
 				}
 			],
 			[
-				'db' => 'name', 'dt' => 1,
+				'db' => 'id', 'dt' => 1,
 				'formatter' => function( $d, $row ) {
-					return '<div id="sdns_z-name_' . $row['id'] . '"><input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_name_' . $row['id'] . '" id="sdns_name_' . $row['id'] . '" value="' . $row['name'] . '"></div>';
+					$option = ($row['disabled'] == 1) ? "sdns_row_disabled" : "sdns_row_id";
+
+					return '<input type="hidden" name="' . $option . '" id="' . $d . '" value="' . $d . '"><div class="text-center">' . $d . '</div>';
 				}
 			],
 			[
-				'db' => 'type', 'dt' => 2,
+				'db' => 'name', 'dt' => 2,
 				'formatter' => function( $d, $row ) {
 
+					$option = ($row['disabled'] == 1) ? " DISABLED" : NULL;
+
+					$record_disabled = ($row['disabled'] == '1') ? NULL : 'checked';
+					return '<div id="sdns_z-name_' . $row['id'] . '" class="dnsfield form-group has-feedback has-switch">
+								<input ' . $option . ' type="textbox" class="form-padding form-control dnsfield" name="sdns_name_' . $row['id'] . '" id="sdns_name_' . $row['id'] . '" value="' . $row['name'] . '" row="' . $row['id'] . '">
+									<label class="cl-switch cl-switch-primary form-control-feedback">
+										<input type="checkbox" ' . $record_disabled . ' onclick="record_disable(\'' . $row['id'] . '\');">
+										<span class="switcher"></span>
+									</label>
+							</div>';
+				}
+			],
+			[
+				'db' => 'type', 'dt' => 3,
+				'formatter' => function( $d, $row ) {
+
+					$option = ($row['disabled'] == 1) ? " DISABLED" : NULL;
 					$record_types = $this->inConfig('record_types');
 
 					foreach ($record_types as $record_type) {
-
 						$selected = ($row['type'] == $record_type) ? 'SELECTED ' : NULL;
 						$allowed_types[] = '<option ' . $selected . 'value="' . $record_type . '">' . $record_type . '</option>';
 					}
@@ -134,28 +127,37 @@ $tColumns->records = [
 
 					$allowed_types = implode("\r\n", $allowed_types);
 
-					return '<select DISABLED class="form-padding form-control dnsfield" name="sdns_type_' . $row['id'] . '" id="sdns_type_' . $row['id'] . '">
+					return '<select ' . $option . ' class="form-padding form-control dnsfield" name="sdns_type_' . $row['id'] . '" id="sdns_type_' . $row['id'] . '" row="' . $row['id'] . '">
 							' . $allowed_types . '
 						</select>';
 				}
 			],
 			[
-				'db' => 'content', 'dt' => 3,
+				'db' => 'content', 'dt' => 4,
 				'formatter' => function( $d, $row ) {
-					return '<div id="sdns_z-content_' . $row['id'] . '"><input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_content_' . $row['id'] . '" id="sdns_content_' . $row['id'] . '" value="' . htmlentities($row['content']) . '"></div>';
-				}
-			],
-			[
-				'db' => 'prio', 'dt' => 4,
-				'formatter' => function( $d, $row ) {
-					return '<div id="sdns_z-prio_' . $row['id'] . '"><input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_prio_' . $row['id'] . '" id="sdns_prio_' . $row['id'] . '" value="' . $row['prio'] . '"></div>';
+
+					$option = ($row['disabled'] == 1) ? " DISABLED" : NULL;
+
+					$prio_types = ['MX', 'SRV'];
+
+					if (in_array($row['type'], $prio_types)) {
+						return '<div class="input-group">
+									<span id="sdns_z-prio_' . $row['id'] . '"><input type="textbox" class="form-padding form-control btn-group-first text-center" style="width:20%;" name="sdns_prio_' . $row['id'] . '" id="sdns_prio_' . $row['id'] . '" row="' . $row['id'] . '" value="' . $row['prio'] . '"' . $option . '></span>
+									<div class="input-group-btn" style="width:0px; display: inline;"></div>
+									<span id="sdns_z-content_' . $row['id'] . '"><input type="textbox" class="form-padding form-control btn-group-last" style="width:80%;" name="sdns_content_' . $row['id'] . '" id="sdns_content_' . $row['id'] . '" row="' . $row['id'] . '" value="' . htmlentities($row['content']) . '"' . $option . '></span>
+								</div>';
+					} else {
+						return '<div id="sdns_z-content_' . $row['id'] . '"><input type="textbox" class="form-padding form-control dnsfield" name="sdns_content_' . $row['id'] . '" id="sdns_content_' . $row['id'] . '" row="' . $row['id'] . '" value="' . htmlentities($row['content']) . '"' . $option . '></div>';
+					}
 				}
 			],
 			[
 				'db' => 'ttl', 'dt' => 5,
 				'formatter' => function( $d, $row ) {
 
+					$option = ($row['disabled'] == 1) ? " DISABLED" : NULL;
 					$preset_ttl = $this->config('preset_ttl');
+
 					if ($preset_ttl == 'on' || $preset_ttl == '1') {
 
 						$selected = [
@@ -173,7 +175,7 @@ $tColumns->records = [
 							$custom_ttl = '<option SELECTED value="' . $row['ttl'] . '">' . $row['ttl'] . '</option>';
 						}
 
-						return '<select DISABLED class="form-padding form-control dnsfield" name="sdns_ttl_' . $row['id'] . '" id="sdns_ttl_' . $row['id'] . '">
+						return '<select ' . $option . ' class="form-padding form-control dnsfield" name="sdns_ttl_' . $row['id'] . '" id="sdns_ttl_' . $row['id'] . '" row="' . $row['id'] . '">
 						<option ' . $selected['60'] . ' value="60">1 ' . $this->lang['global_dns_minute'] . '</option>
 						<option ' . $selected['300'] . ' value="300">5 ' . $this->lang['global_dns_minutes'] . '</option>
 						<option ' . $selected['3600'] . ' value="3600">1 ' . $this->lang['global_dns_hour'] . '</option>
@@ -181,48 +183,47 @@ $tColumns->records = [
 						' . $custom_ttl . '
 					</select>';
 					} else {
-						return '<input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_ttl_' . $row['id'] . '" id="sdns_ttl_' . $row['id'] . '" value="' . $row['ttl'] . '">';
+						return '<input ' . $option . ' type="textbox" class="form-padding form-control dnsfield" name="sdns_ttl_' . $row['id'] . '" id="sdns_ttl_' . $row['id'] . '" value="' . $row['ttl'] . '">';
 					}
 				}
 			],
 			[
-				'db' => 'id', 'dt' => 6,
+				'db' => 'prio', 'dt' => 6,
 				'formatter' => function( $d, $row ) {
-					$option = ($row['type'] == 'NS') ? empty($this->config('disable_ns')) ? NULL : " DISABLED" : NULL;
-					$option = ($row['type'] == 'SOA') ? " DISABLED" : $option;
-					$option = ($row['disabled'] == 1) ? " DISABLED" : $option;
-					return '<div class="text-center text-nowrap"><button type="button" class="btn btn-sm btn-success" style="display: none;" id="sdns_save_' . $row['id'] . '" onclick="record_edit(\'zone\', ' . $row['id'] . ')" ' . $this->maintenance . '><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button> <button type="button" class="btn btn-sm btn-warning" id="sdns_edit_' . $row['id'] . '" onclick="edit(\'' . $row['id'] . '\')" ' . $this->maintenance . $option . '><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button> <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#dialog_deleteRecord" onclick="setRecord(\'' . $row['id'] . '\')" ' . $this->maintenance . $option . '><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div>';
+					return '<div class="text-center text-nowrap"><button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#dialog_deleteRecord" onclick="setRecord(\'' . $row['id'] . '\')" ' . $this->maintenance . '><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div>';
 				}
 			]
 ];
 
 /**
- * Template Records Table Columns
+ * Template Records Columns
  */
 $tColumns->template = [
 			[
 				'db' => 'id', 'dt' => 0,
 				'formatter' => function( $d, $row ) {
-					$option = ($row['type'] == 'NS') ? empty($this->config('disable_ns')) ? NULL : " DISABLED" : NULL;
-					$option = ($row['type'] == 'SOA') ? " DISABLED" : $option;
-					$option = ($row['disabled'] == 1) ? " DISABLED" : $option;
-					return '<div class="checkbox tablecheckbox"><input type="checkbox" name="sdns_select" id="sdns_select_' . $row['id'] . '" value="' . $row['id'] . '" style="display: hidden;" ' . $this->maintenance . $option . '/><label for="sdns_select_' . $row['id'] . '" /></div>';
+					return '<div class="checkbox tablecheckbox"><input type="checkbox" name="sdns_select" id="sdns_select_' . $row['id'] . '" value="' . $row['id'] . '" style="display: hidden;" ' . $this->maintenance . '/><label for="sdns_select_' . $row['id'] . '" /></div>';
 				}
 			],
 			[
-				'db' => 'name', 'dt' => 1,
+				'db' => 'id', 'dt' => 1,
+				'formatter' => function( $d, $row ) {
+					return '<div class="text-center">' . $d . '</div>';
+				}
+			],
+			[
+				'db' => 'name', 'dt' => 2,
 				'formatter' => function( $d, $row ) {
 					return '<div id="sdns_z-name_' . $row['id'] . '"><input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_name_' . $row['id'] . '" id="sdns_name_' . $row['id'] . '" value="' . $row['name'] . '"></div>';
 				}
 			],
 			[
-				'db' => 'type', 'dt' => 2,
+				'db' => 'type', 'dt' => 3,
 				'formatter' => function( $d, $row ) {
 
 					$record_types = $this->inConfig('record_types');
 
 					foreach ($record_types as $record_type) {
-
 						$selected = ($row['type'] == $record_type) ? 'SELECTED ' : NULL;
 						$allowed_types[] = '<option ' . $selected . 'value="' . $record_type . '">' . $record_type . '</option>';
 					}
@@ -233,25 +234,23 @@ $tColumns->template = [
 
 					$allowed_types = implode("\r\n", $allowed_types);
 
-					return '<select DISABLED class="form-padding form-control dnsfield" name="sdns_type_' . $row['id'] . '" id="sdns_type_' . $row['id'] . '">
-							' . $allowed_types . '
-						</select>';
+					return '<select DISABLED class="form-padding form-control dnsfield" name="sdns_type_' . $row['id'] . '" id="sdns_type_' . $row['id'] . '">' . $allowed_types . '</select>';
 				}
 			],
 			[
-				'db' => 'content', 'dt' => 3,
+				'db' => 'content', 'dt' => 4,
 				'formatter' => function( $d, $row ) {
 					return '<div id="sdns_z-content_' . $row['id'] . '"><input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_content_' . $row['id'] . '" id="sdns_content_' . $row['id'] . '" value="' . htmlentities($row['content']) . '"></div>';
 				}
 			],
 			[
-				'db' => 'prio', 'dt' => 4,
+				'db' => 'prio', 'dt' => 5,
 				'formatter' => function( $d, $row ) {
 					return '<div id="sdns_z-prio_' . $row['id'] . '"><input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_prio_' . $row['id'] . '" id="sdns_prio_' . $row['id'] . '" value="' . $row['prio'] . '"></div>';
 				}
 			],
 			[
-				'db' => 'ttl', 'dt' => 5,
+				'db' => 'ttl', 'dt' => 6,
 				'formatter' => function( $d, $row ) {
 
 					$preset_ttl = $this->config('preset_ttl');
@@ -273,19 +272,19 @@ $tColumns->template = [
 						}
 
 						return '<select DISABLED class="form-padding form-control dnsfield" name="sdns_ttl_' . $row['id'] . '" id="sdns_ttl_' . $row['id'] . '">
-						<option ' . $selected['60'] . ' value="60">1 ' . $this->lang['global_dns_minute'] . '</option>
-						<option ' . $selected['300'] . ' value="300">5 ' . $this->lang['global_dns_minutes'] . '</option>
-						<option ' . $selected['3600'] . ' value="3600">1 ' . $this->lang['global_dns_hour'] . '</option>
-						<option ' . $selected['86400'] . ' value="86400">1 ' . $this->lang['global_dns_day'] . '</option>
-						' . $custom_ttl . '
-					</select>';
+									<option ' . $selected['60'] . ' value="60">1 ' . $this->lang['global_dns_minute'] . '</option>
+									<option ' . $selected['300'] . ' value="300">5 ' . $this->lang['global_dns_minutes'] . '</option>
+									<option ' . $selected['3600'] . ' value="3600">1 ' . $this->lang['global_dns_hour'] . '</option>
+									<option ' . $selected['86400'] . ' value="86400">1 ' . $this->lang['global_dns_day'] . '</option>
+									' . $custom_ttl . '
+								</select>';
 					} else {
 						return '<input DISABLED type="textbox" class="form-padding form-control dnsfield" name="sdns_ttl_' . $row['id'] . '" id="sdns_ttl_' . $row['id'] . '" value="' . $row['ttl'] . '">';
 					}
 				}
 			],
 			[
-				'db' => 'id', 'dt' => 6,
+				'db' => 'id', 'dt' => 7,
 				'formatter' => function( $d, $row ) {
 					return '<div class="text-center text-nowrap"><button type="button" class="btn btn-sm btn-success" style="display: none;" id="sdns_save_' . $row['id'] . '" onclick="record_edit(\'template\', ' . $row['id'] . ')"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button> <button type="button" class="btn btn-sm btn-warning" id="sdns_edit_' . $row['id'] . '" onclick="edit(\'' . $row['id'] . '\')"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button> <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#dialog_deleteRecord" onclick="setRecord(\'' . $row['id'] . '\')"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div>';
 				}

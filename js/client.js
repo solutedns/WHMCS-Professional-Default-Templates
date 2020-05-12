@@ -3,26 +3,21 @@
  *** SoluteDNS PRO for WHMCS ***
  
  File:					template/js/client.js
- File version:			3.18.001
+ File version:			4.20.001
  
- Copyright (C) NetDistrict 2016-2018
+ Copyright (C) NetDistrict 2016-2020
  All Rights Reserved
  
  **********************************************/
-function sendData(json) {
+function sendData(inputData) {
 
 	NProgress.start();
 
-	if (typeof time1 !== 'undefined') {
-		clearTimeout(time1);
-	}
-	if (typeof time2 !== 'undefined') {
-		clearTimeout(time2);
-	}
+	inputData.csrfToken = csrfToken;
 
 	$.ajax({
 		data: {
-			'data': json
+			'data': JSON.stringify(inputData)
 		},
 		url: setDataURL() + 'index.php?m=solutedns&action=post',
 		method: "POST",
@@ -120,13 +115,6 @@ function setMessage(title, desc, status, tableReload, pageReload, fieldReset, ms
 
 }
 
-function updateSettings(element) {
-	var fields = $("#" + element + " :input").serializeArray();
-	var data = JSON.stringify(fields);
-
-	sendData(data)
-}
-
 function updatePlain(action) {
 
 	var zone = $("#sdns_zone").val();
@@ -136,8 +124,7 @@ function updatePlain(action) {
 		zone: zone,
 	};
 
-	jsonString = JSON.stringify(item);
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -164,9 +151,7 @@ function getState() {
 		zone: zone,
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -270,9 +255,7 @@ function zone_add() {
 		zone: zone,
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 	$("#sdns_addzone_domain").val('');
 
@@ -287,12 +270,9 @@ function zone_delete() {
 		zone: zone,
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
-
 
 function record_add(type) {
 
@@ -328,9 +308,7 @@ function record_add(type) {
 		};
 	}
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -374,9 +352,7 @@ function record_edit(type, record_id) {
 		};
 	}
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -399,9 +375,7 @@ function record_delete(type) {
 		};
 	}
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -422,9 +396,7 @@ function deleteSelected() {
 		records: records
 	};
 
-	jsonString = JSON.stringify(data);
-
-	sendData(jsonString);
+	sendData(data);
 
 }
 
@@ -438,9 +410,7 @@ function update_reverse(id) {
 		id: id
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 }
 
 /* DNS Assistant */
@@ -481,9 +451,7 @@ function dnsassist(type) {
 
 	}
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 }
 
 function setRecord(id) {

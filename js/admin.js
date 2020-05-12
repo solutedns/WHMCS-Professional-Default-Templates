@@ -3,29 +3,36 @@
  *** SoluteDNS PRO for WHMCS ***
  
  File:					template/js/admin.js
- File version:			3.18.001
+ File version:			4.20.001
  
- Copyright (C) NetDistrict 2016-2018
+ Copyright (C) NetDistrict 2016-2020
  All Rights Reserved
  
  **********************************************/
-function sendData(json) {
+function sendData(inputData) {
 
 	NProgress.start();
+	
+	inputData.csrfToken = csrfToken;
 
 	$.ajax({
 		data: {
-			'data': json
+			'data': JSON.stringify(inputData)
 		},
 		url: location.protocol + '//' + location.host + location.pathname + '?module=solutedns&action=post',
 		method: "POST",
 		success: function (data) {
 
 			var result = JSON.parse(data);
+			var dnsErrors = [];
 
 			if (result) {
 				result.forEach(function (data) {
-
+					
+					if (result.length > 1) {
+						data['tablereload'] = false;
+					}
+					
 					setMessage(data['title'], data['msg'], data['status'], data['tablereload'], data['pagereload'], data['redirect'], data['fieldreset'], data['msgReset'], data['fixed'], data['errorFields'])
 
 					if (data['syscheck'] == true) {
@@ -33,12 +40,13 @@ function sendData(json) {
 					}
 
 					if (typeof data['field'] !== 'undefined') {
-						setErrorField(data['field']);
+						$("#"+data['id']).attr("changed","true");
+						setErrorField(data['id'], data['field']);
 					}
 
-				});
+				});	
 			}
-
+			
 			NProgress.done();
 
 		}
@@ -46,13 +54,15 @@ function sendData(json) {
 
 }
 
-function getData(json) {
+function getData(inputData) {
 
 	NProgress.start();
+	
+	inputData.csrfToken = csrfToken;
 
 	$.ajax({
 		data: {
-			'data': json
+			'data': JSON.stringify(inputData)
 		},
 		url: location.protocol + '//' + location.host + location.pathname + '?module=solutedns&action=get',
 		method: "GET",
@@ -143,17 +153,30 @@ function setMessage(title, desc, status, tableReload, pageReload, redirect, fiel
 }
 
 function updateSettings(element) {
-	var fields = $("#" + element + " :input").serializeArray();
-	var data = JSON.stringify(fields);
+	/* Get Input Values */
+	const form = document.querySelector('[id="'+element+'"] form');
+	
+	/* Convert Input Data */
+	var data = Object.values(form).reduce((obj,field) => { 
 
+			if (field.type == 'checkbox') {
+				obj[field.name] = (field.checked) ? "on" : ""; 
+			} else {
+				obj[field.name] = field.value; 
+			}
+
+			return obj 
+			
+		}, {});
+	
+	/* Send Data to Server*/
 	sendData(data)
 }
 
 function updateInit(element, tab) {
 	var fields = $("#" + element + " :input").serializeArray();
-	var data = JSON.stringify(fields);
 
-	data = sendData(data);
+	sendData(fields);
 
 	$('.nav-tabs a[href="#' + tab + '"]').tab('show');
 
@@ -177,10 +200,9 @@ function updateInit(element, tab) {
 	}
 
 	$("#dynamic")
-			.css("width", progress + "%")
-			.attr("aria-valuenow", progress)
-	//.text(progress + "% Complete");
-
+		.css("width", progress + "%")
+		.attr("aria-valuenow", progress)
+		//.text(progress + "% Complete");
 
 }
 
@@ -204,10 +226,8 @@ function getState(zone) {
 		action: 'systemState',
 		zone: zone,
 	};
-
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	
+	sendData(item);
 
 }
 
@@ -251,10 +271,8 @@ function processData(result) {
 
 	}
 	
-	if (result.data == 'stats' && result.type == 'health') {
-		
+	if (result.data == 'stats' && result.type == 'health') {	
 		drawStats(result);
-
 	}
 
 
@@ -288,8 +306,7 @@ function selectTemplate(value) {
 			data: value,
 		};
 
-		jsonString = JSON.stringify(item);
-		getData(jsonString);
+		getData(item);
 
 	} else {
 		$("#sdns_template_product").val('0');
@@ -314,9 +331,7 @@ function autoSave(type, field, data) {
 		data: send,
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -328,9 +343,8 @@ function getStats(value) {
 			action: 'stats',
 			data: value,
 		};
-	
-		jsonString = JSON.stringify(item);
-		getData(jsonString);
+
+		getData(item);
 	}
 }
 
@@ -490,15 +504,14 @@ function deleteSelected() {
 		records: records
 	};
 
-	jsonString = JSON.stringify(data);
-
-	sendData(jsonString);
+	sendData(data);
 
 }
 
-function setErrorField(field) {
-	var record_id = $("#sdns_record").val();
-
+function setErrorField(record_id, field) {
+	if (record_id === undefined) {
+		record_id = 0;
+    }
 	$("#sdns_z-" + field + "_" + record_id).addClass("has-error");
 }
 
@@ -509,15 +522,8 @@ function clearFields() {
 }
 
 function clearErrorField() {
-
-	var record_id = $("#sdns_record").val();
-
-	$("#sdns_z-name_" + record_id).removeClass("has-error");
-	$("#sdns_z-type_" + record_id).removeClass("has-error");
-	$("#sdns_z-content_" + record_id).removeClass("has-error");
-	$("#sdns_z-prio_" + record_id).removeClass("has-error");
-	$("#sdns_z-ttl_" + record_id).removeClass("has-error");
-
+	$(".dataTable div").removeClass("has-error");
+	$("#dialog_addRecord div").removeClass("has-error");
 }
 
 function record_add(type) {
@@ -556,55 +562,84 @@ function record_add(type) {
 		};
 	}
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
 function record_edit(type, record_id) {
 
+	/* Clear any fields with marked errors */
 	clearErrorField()
 
+	/* Get zone name */
 	var zone = $("#sdns_zone").val();
-
-	var var1 = $("#sdns_name_" + record_id).val();
-	var var2 = $("#sdns_type_" + record_id).val();
-	var var3 = $("#sdns_content_" + record_id).val();
-	var var4 = $("#sdns_prio_" + record_id).val();
-	var var5 = $("#sdns_ttl_" + record_id).val();
-
+	
+	/* Process Template Entry */
 	if (type == 'template') {
+
+		/* Add entry to records lsit */
 		var item = {
 			action: 'edittemplate',
 			zone: zone,
 			record_id: record_id,
-			name: var1,
-			type: var2,
-			content: var3,
-			prio: var4,
-			ttl: var5,
+			name: $("#sdns_name_" + record_id).val(),
+			type: $("#sdns_type_" + record_id).val(),
+			content: $("#sdns_content_" + record_id).val(),
+			prio: $("#sdns_prio_" + record_id).val(),
+			ttl: $("#sdns_ttl_" + record_id).val()
 		};
-	} else {
+		
+	} 
+	/* Process Zone Entry */ 
+	else {
+		
+		/* Start key value */
+		var i = 0;
+		
+		/* Create recors object */
+		var records = new Object();
+		
+		/* Process each record row */
+		$('input[name=sdns_row_id]').each(function(row){
+			
+			/* Only process changed rows */
+			if ($(this).context.attributes.changed) {
+				
+				/* Add row to records list */
+				records[i] = 
+					{
+						record_id: $(this).val(),
+						name: $("#sdns_name_" + $(this).val()).val(),
+						type: $("#sdns_type_" + $(this).val()).val(),
+						content: $("#sdns_content_" + $(this).val()).val(),
+						prio: $("#sdns_prio_" + $(this).val()).val(),
+						ttl: $("#sdns_ttl_" + $(this).val()).val(),
+					};
+					
+				/* Remove changed attribute */
+				$("#"+$(this).val()).removeAttr("changed");
+				
+				/* Create next row key */ 
+				i++
+			}
+
+		})
+		
+		/* Create array to send to server */
 		var item = {
 			action: 'editrecord',
 			zone: zone,
-			records: {
-				0: {
-					record_id: record_id,
-					name: var1,
-					type: var2,
-					content: var3,
-					prio: var4,
-					ttl: var5
-				}
-			}
+			records: 
+				records
+			
 		};
 	}
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	/* Hide Save Changes box*/
+	$("#savezone").hide('fast');
+	
+	/* Send Request */
+	sendData(item);
 
 }
 
@@ -626,10 +661,15 @@ function record_delete(type) {
 		};
 	}
 
-	jsonString = JSON.stringify(item);
+	sendData(item);
 
-	sendData(jsonString);
+}
 
+function cancel_edit() {
+
+	SDNS_zoneTable.fnReloadAjax();
+	$("#savezone").hide('fast');
+	
 }
 
 function record_disable(record_id) {
@@ -642,9 +682,7 @@ function record_disable(record_id) {
 		record_id: record_id
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -654,12 +692,12 @@ function exportZone(zone) {
 		action: 'export',
 		zone: zone
 	};
-
-	jsonString = JSON.stringify(item);
+	
+	item.csrfToken = csrfToken;
 
 	$.ajax({
 		data: {
-			'data': jsonString
+			'data': JSON.stringify(item)
 		},
 		url: location.protocol + '//' + location.host + location.pathname + '?module=solutedns&action=post',
 		method: "GET",
@@ -685,9 +723,7 @@ function importZone() {
 		overwrite: overwrite
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -702,9 +738,7 @@ function applyTemplate() {
 		template: template
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -721,9 +755,7 @@ function unassignZone(id) {
 		zone: zone
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -741,9 +773,7 @@ function deleteZone(zone, redirect) {
 		redirect: redirect
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -755,9 +785,7 @@ function dnssec(action, zone, key) {
 		key: key
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -775,9 +803,7 @@ function dnssec_addkey(zone) {
 		algorithm: algorithm
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -788,9 +814,7 @@ function health(action, zone) {
 		zone: zone
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -817,9 +841,7 @@ function syscheck(type) {
 		type: type,
 	};
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 
 }
 
@@ -901,9 +923,7 @@ function dnsassist(type) {
 
 	}
 
-	jsonString = JSON.stringify(item);
-
-	sendData(jsonString);
+	sendData(item);
 }
 
 /* SoluteDNS Console */

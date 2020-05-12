@@ -1,4 +1,4 @@
-{assign var=records value=Controller::inConfig(record_types)}
+{assign var=records value=$Controller->inConfig(record_types)}
 
 <div class="row spacer_10">
 	<div class="col-md-3">
@@ -17,7 +17,7 @@
 		<div class="text-right"> 
 			<!-- Split button -->
 			<div class="btn-group">
-				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dialog_addRecord" title="{$LANG.admin_manage_records_addrecord}" {if Controller::config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dialog_addRecord" title="{$LANG.admin_manage_records_addrecord}" {if $Controller->config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 				<button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <span class="caret"></span> <span class="sr-only">Toggle Dropdown</span> </button>
 				<ul class="dropdown-menu dropdown-menu-right" role="menu">
 					<li><a href="#" data-toggle="modal" data-target="#dialog_srvAssist">{$LANG.admin_manage_records_addsrv}</a></li>
@@ -26,7 +26,7 @@
 			</div>
 			<!-- Single button -->
 			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" {if Controller::config(maintenance)}DISABLED{/if}><span class="caret"></span></button>
+				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" {if $Controller->config(maintenance)}DISABLED{/if}><span class="caret"></span></button>
 				<ul class="dropdown-menu dropdown-menu-right" role="menu">
 					<li><a href="#" data-toggle="modal" data-target="#dialog_applyTemplate"><span class="glyphicon glyphicon-random" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_applytemplate}</span></a></li>
 					<li><a href="#" data-toggle="modal" data-target="#dialog_importZone"><span class="glyphicon glyphicon-import" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_records_importzone}</span></a></li>
@@ -45,12 +45,11 @@
 	<table class="dataTable display" id="sdns_records" width="100%" border="0" cellspacing="1" cellpadding="3">
 		<thead>
 			<tr>
-				<th class="text-center table_checkbox"><button type="button" class="btn btn-xs btn-primary{if Controller::config(maintenance)} disabled{/if}" data-toggle="tooltip" data-placement="right" title="{$LANG.admin_manage_records_deleteselected}" onclick="deleteSelected();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button></th>
+				<th class="text-center table_checkbox"><button type="button" class="btn btn-xs btn-primary{if $Controller->config(maintenance)} disabled{/if}" data-toggle="tooltip" data-placement="right" title="{$LANG.admin_manage_records_deleteselected}" onclick="deleteSelected();"><span class="glyphicon glyphicon-remove" aria-hidden="true"></button></th>
 				<th>{$LANG.global_dns_id}</th>
 				<th>{$LANG.global_dns_name}</th>
 				<th>{$LANG.global_dns_type}</th>
 				<th>{$LANG.global_dns_content}</th>
-				<th>{$LANG.global_dns_prio}</th>
 				<th>{$LANG.global_dns_ttl}</th>
 				<th></th>
 			</tr>
@@ -61,6 +60,17 @@
 			</tr>
 		</tbody>
 	</table>
+	
+	<div id="savezone" class="alert2 alert2-success">
+		<span class="pull-right">
+			<button type="button" class="btn btn-success" onclick="record_edit('zone');" title="{$LANG.admin_btn_save_changes}" {if $Controller->config(maintenance)}DISABLED{/if}>{$LANG.admin_btn_save_changes}</button>
+			<button type="button" class="btn btn-default" onclick="cancel_edit();" title="{$LANG.global_btn_cancel}" {if $Controller->config(maintenance)}DISABLED{/if}>{$LANG.global_btn_cancel}</button>
+			</span>
+		<h4>{$LANG.global_text_zone_save_title}</h4>
+		<p>{$LANG.global_text_zone_save_desc}</p>
+	</div>
+
+
 </div>
 
 <!-- Add Modal -->
@@ -96,7 +106,7 @@
 						</div>
 						<div class="col-md-2">
 							<label for="sdns_ttl_0">{$LANG.global_dns_ttl}:</label>
-							{if Controller::config(preset_ttl)}
+							{if $Controller->config(preset_ttl)}
 								<select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
 									<option value="60">1 {$LANG.global_dns_minute}</option>
 									<option value="300">5 {$LANG.global_dns_minutes}</option>
@@ -156,7 +166,7 @@
 							<div class="col-md-12">
 								<label for="sdns_apply_template">{$LANG.admin_manage_records_selecttemplate}:</label>
 								<select class="form-padding form-control" name="sdns_apply_template" id="sdns_apply_template">
-									{assign var=products value=Controller::product_list()}
+									{assign var=products value=$Controller->product_list()}
 									<option value="0">{$LANG.global_general_defaulttemplate}</option>
                                     {foreach from=$products item=product}
 										<option value="{$product->id}">{$product->name}</option>

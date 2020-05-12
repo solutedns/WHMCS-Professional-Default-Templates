@@ -15,7 +15,7 @@
 		<div class="text-right"> 
 			<!-- Split button -->
 			<div class="btn-group">
-				<button type="button" class="btn btn-primary btn-sm" onclick="health('reload', '{$domain->id}');" data-toggle="tooltip" data-placement="bottom" title="{$LANG.admin_manage_health_recheck}" {if Controller::config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+				<button type="button" class="btn btn-primary btn-sm" onclick="health('reload', '{$domain->id}');" data-toggle="tooltip" data-placement="bottom" title="{$LANG.admin_manage_health_recheck}" {if $Controller->config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
 			</div>
 		</div>
 	</div>
@@ -35,12 +35,13 @@
 				<td class="text-center"> {if $code eq '7001' or $code eq '7002' or $code eq '7004'} <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> {else} <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> {/if} </td>
 				<td><div class="col-md-12 font_size">
 						<div class="row"> {$error_code="global_error_`$code`"}
-							{$LANG.$error_code} </div>
-							{foreach from=$array item=item}
-							<div class="row col-md-12"><code>{$item}</code></div>
-								{/foreach}
-						<div class="col-md-1">{if $health.status eq 'warning'}<span class="label pending">{$LANG.admin_manage_health_warning}</span>{else}<span class="label closed">{$LANG.admin_manage_health_error}</span>{/if}</div>
-						<div class="col-md-11">{$health.log}</div>
+							{$LANG.$error_code}
+						</div>
+						{foreach from=$array item=item}
+						<div class="row col-md-12">
+							<code>{$item}</code>
+						</div>
+						{/foreach}
 					</div>
 				</td>
 			</tr>

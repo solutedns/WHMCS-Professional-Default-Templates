@@ -15,12 +15,12 @@
 		<div class="text-right"> 
 			<!-- Split button -->
 			<div class="btn-group">
-				<button type="button" class="btn btn-warning btn-sm" onclick="dnssec('rectify', '{$domain->id}');" data-toggle="tooltip" data-placement="bottom" title="{$LANG.admin_manage_dnssec_rectify}" {if Controller::config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> {$LANG.admin_dnssec_rectify}</button>
+				<button type="button" class="btn btn-warning btn-sm" onclick="dnssec('rectify', '{$domain->id}');" data-toggle="tooltip" data-placement="bottom" title="{$LANG.admin_manage_dnssec_rectify}" {if $Controller->config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-flash" aria-hidden="true"></span></button>
 			</div>
 
 			<!-- Single button -->
 			<div class="btn-group">
-				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" {if Controller::config(maintenance)}DISABLED{/if}><span class="caret"></span></button>
+				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" {if $Controller->config(maintenance)}DISABLED{/if}><span class="caret"></span></button>
 				<ul class="dropdown-menu dropdown-menu-right" role="menu">
 					<li><a href="javascript:void(0);" data-toggle="modal" data-target="#dialog_addDNSsec" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_add}</span></a></li>
 					<li class="divider"></li>
@@ -89,10 +89,10 @@
 				<td align="center"> {if $key.active eq '1'} <span class="label active">active</span> {else} <span class="label label-default">inactive</span> {/if} </td>
 				<td align="center">
 					{if $key.active eq '0'}
-						<button type="button" onclick="dnssec('activatekey', '{$domain->id}', '{$key.id}');" value='Activate' class="btn btn-success" {if Controller::config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
-						<button type="button" onclick="dnssec('deletekey', '{$domain->id}', '{$key.id}');" value="Delete" class="btn btn-danger" {if Controller::config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+						<button type="button" onclick="dnssec('activatekey', '{$domain->id}', '{$key.id}');" value='Activate' class="btn btn-success" {if $Controller->config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></button>
+						<button type="button" onclick="dnssec('deletekey', '{$domain->id}', '{$key.id}');" value="Delete" class="btn btn-danger" {if $Controller->config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
 					{else}
-						<button type="button" onclick="dnssec('deactivatekey', '{$domain->id}', '{$key.id}');" value='Deactivate' class="btn btn-default" {if Controller::config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+						<button type="button" onclick="dnssec('deactivatekey', '{$domain->id}', '{$key.id}');" value='Deactivate' class="btn btn-default" {if $Controller->config(maintenance)}DISABLED{/if}><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
 					{/if}
 				</td>
 			</tr>

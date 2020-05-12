@@ -14,8 +14,8 @@
 	</div>
 </h2>
 			
-{assign var=products value=Controller::product_list()}
-{assign var=records value=Controller::inConfig(record_types)}
+{assign var=products value=$Controller->product_list()}
+{assign var=records value=$Controller->inConfig(record_types)}
 
 <div class="pull-right">
 	<select class="form-padding form-control" name="sdns_template" id="sdns_template" onchange="selectTemplate(value);">
@@ -37,7 +37,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(custom_primary)}checked {/if}name="sdns_dns_product" id="sdns_dns_product" type="checkbox" onChange="autoSave('template', 'dns_product', this)">
+					<input {if $Controller->config(custom_primary)}checked {/if}name="sdns_dns_product" id="sdns_dns_product" type="checkbox" onChange="autoSave('template', 'dns_product', this)">
 					<label for="sdns_dns_product">{$LANG.admin_settings_dns_product_desc}</label>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(custom_primary)}checked {/if}name="sdns_force_template" id="sdns_force_template" type="checkbox" onChange="autoSave('template', 'force_template', this)">
+					<input {if $Controller->config(custom_primary)}checked {/if}name="sdns_force_template" id="sdns_force_template" type="checkbox" onChange="autoSave('template', 'force_template', this)">
 					<label for="sdns_force_template">{$LANG.admin_settings_force_template_desc}</label>
 				</div>
 			</div>
@@ -110,7 +110,7 @@
 						</div>
 						<div class="col-md-2">
 							<label for="sdns_ttl_0">{$LANG.global_dns_ttl}:</label>
-							{if Controller::config(preset_ttl)}
+							{if $Controller->config(preset_ttl)}
 								<select class="form-padding form-control" name="sdns_ttl_0" id="sdns_ttl_0">
 									<option value="60">1 {$LANG.global_dns_minute}</option>
 									<option value="300">5 {$LANG.global_dns_minutes}</option>

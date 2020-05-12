@@ -1,15 +1,15 @@
-{assign var=core value=Controller::core()}
+{assign var=core value=$Controller->core()}
 
 <h2>{$LANG.admin_menu_system}</h2>
 <form role="form" id="system" class="label-form">
 	<fieldset>
-		<input type="hidden" name="sdns_form" value="system">
+		<input type="hidden" name="action" value="system">
 		<div class="row">
 			<div class="col-md-3 text-right title">
 				<p>{$LANG.admin_system_module_version}:</p>
 			</div>
 			<div class="col-md-9">
-				<p>{Controller::version()} {if $update} <a class="btn btn-default btn-xs" data-target="#dialog_update" data-toggle="modal">{$LANG.admin_btn_update_now}</a>{/if}</p>
+				<p>{$Controller->version()} {if $update} <a class="btn btn-default btn-xs" data-target="#dialog_update" data-toggle="modal">{$LANG.admin_btn_update_now}</a>{/if}</p>
 			</div>
 		</div>
 		<div class="row">
@@ -25,7 +25,7 @@
 				<p>{$LANG.admin_system_idn_support}:</p>
 			</div>
 			<div class="col-md-9">
-				<p>{if Controller::idnCheck() eq true}<span class="label label-success">{$LANG.global_status_enabled}</span>{else}<span class="label label-default">{$LANG.global_status_disabled}</span>{/if}</p>
+				<p>{if $Controller->idnCheck() eq true}<span class="label label-success">{$LANG.global_status_enabled}</span>{else}<span class="label label-default">{$LANG.global_status_disabled}</span>{/if}</p>
 			</div>
 		</div>
 		<div class="row">
@@ -33,7 +33,7 @@
 				<p>{$LANG.admin_system_cron_status}:</p>
 			</div>
 			<div class="col-md-9">
-				<p>{$LANG.admin_system_cron_status_tasks} <span class="label label-primary">{$cron_queue}</span> | {$LANG.admin_system_cron_status_run} <i>{if Controller::config(last_cron)}{Controller::config(last_cron)|date_format:"%B %e, %Y (%T)"}{else}{$LANG.admin_never}{/if}</i> 
+				<p>{$LANG.admin_system_cron_status_tasks} <span class="label label-primary">{$cron_queue}</span> | {$LANG.admin_system_cron_status_run} <i>{if $Controller->config(last_cron)}{$Controller->config(last_cron)|date_format:"%B %e, %Y (%T)"}{else}{$LANG.admin_never}{/if}</i> 
 			</div>
 		</div>
 		<div class="row spacer_15">
@@ -42,7 +42,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(logging)}checked {/if}name="sdns_system_logging" id="sdns_system_logging" type="checkbox">
+					<input {if $Controller->config(logging)}checked {/if}name="sdns_system_logging" id="sdns_system_logging" type="checkbox">
 					<label for="sdns_system_logging">{$LANG.admin_system_system_logging_desc}</label>
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(maintenance)}checked {/if}name="sdns_maintenance_mode" id="sdns_maintenance_mode" type="checkbox">
+					<input {if $Controller->config(maintenance)}checked {/if}name="sdns_maintenance_mode" id="sdns_maintenance_mode" type="checkbox">
 					<label for="sdns_maintenance_mode">{$LANG.admin_system_maintenance_mode_desc}</label>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 			<div class="col-md-2">
 				<select class="form-padding form-control" name="sdns_system_template" id="sdns_system_template">
 					{foreach from=$system_templates item=template}
-						<option value="{$template}" {if Controller::config(template) eq {$template}}selected{/if}>{$template|ucfirst}</option>
+						<option value="{$template}" {if $Controller->config(template) eq {$template}}selected{/if}>{$template|ucfirst}</option>
 					{/foreach}
 				</select>
 			</div>
@@ -79,9 +79,9 @@
 			</div>
 			<div class="col-md-2">
 				<select class="form-padding form-control" name="sdns_system_admin_group" id="sdns_system_admin_group">
-					<option class="text-muted" value="0" {if Controller::config(admin_group) eq '0'}selected{/if}>{$LANG.global_status_disabled}</option>
+					<option class="text-muted" value="0" {if $Controller->config(admin_group) eq '0'}selected{/if}>{$LANG.global_status_disabled}</option>
 					{foreach from=$admin_groups item=group}
-						<option value="{$group->id}" {if Controller::config(admin_group) eq {$group->id}}selected{/if}>{$group->name}</option>
+						<option value="{$group->id}" {if $Controller->config(admin_group) eq {$group->id}}selected{/if}>{$group->name}</option>
 					{/foreach}
 				</select>
 			</div>
@@ -101,6 +101,11 @@
 		</div>
 		{if $core.license.addon}
 			{foreach from=$core.license.addon item=addon}
+
+				{if $addon.status neq 'Active' AND  $addon.status neq 'Pending'}
+					{continue}
+				{/if}
+				
 				<div class="row">
 					<div class="col-md-3 text-right title">
 						<p>{$LANG.admin_system_license_edition}:
@@ -301,7 +306,7 @@
 					<div class="col-md-9">
 						{if $core.license.addon}
 							{foreach from=$core.license.addon item=addon}
-								<p>- {$addon.name} {if $addon.status eq 'Active'} <span class="label active">{$addon.status}</span> {elseif $addon.status eq 'Pending'} <span class="label pending">{$addon.status}</span> {else} <span class="label inactive">{$addon.status}</span> {/if} {$addon.duedate} </p>
+								<p>- {$addon.name} {if $addon.status eq 'Active'} <span class="label active">{$addon.status}</span> {elseif $addon.status eq 'Pending'} <span class="label pending">{$addon.status}</span> {else} <span class="label inactive">{$addon.status}</span> {/if} {if $addon.duedate eq '0000-00-00'} {$LANG.admin_never} {else} {$addon.duedate} {/if}</p>
 							{/foreach}
 						{else}
 							<p>{$LANG.global_status_none}</p>
@@ -346,7 +351,7 @@
 				<label for="sdns_system_license">{$LANG.admin_system_license_key}:</label>
 			</div>
 			<div class="col-md-4">
-				<input type="text" class="form-padding form-control" name="sdns_system_license" id="sdns_system_license" value="{Controller::config(license)}">
+				<input type="text" class="form-padding form-control" name="sdns_system_license" id="sdns_system_license" value="{$Controller->config(license)}">
 			</div>
 			<div class="col-md-5"></div>
 		</div>

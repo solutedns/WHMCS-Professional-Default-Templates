@@ -1,10 +1,10 @@
-{assign var=records value=Controller::inConfig(record_types)}
-{assign var=status value=Controller::inConfig(auto_delete)}
+{assign var=records value=$Controller->inConfig(record_types)}
+{assign var=status value=$Controller->inConfig(auto_delete)}
 
 <h2>{$LANG.admin_menu_settings}</h2>
 <form role="form" id="settings" class="label-form">
 	<fieldset>
-		<input type="hidden" name="sdns_form" value="settings">
+		<input type="hidden" name="action" value="settings">
 		<h3>{$LANG.admin_settings_allowed_records}</h3>
 		<div class="row">
 			<div class="col-md-3 text-right title">
@@ -124,7 +124,7 @@
 			</div>
 			<div class="col-md-3">
 				<div id="sdns_soa_hostmaster_field">
-					<input type="text" class="form-padding form-control" name="sdns_soa_hostmaster" id="sdns_soa_hostmaster" value="{Controller::config(soa_hostmaster)}">
+					<input type="text" class="form-padding form-control" name="sdns_soa_hostmaster" id="sdns_soa_hostmaster" value="{$Controller->config(soa_hostmaster)}">
 				</div>
 			</div>
 			<div class="col-md-6">
@@ -138,8 +138,8 @@
 			<div class="col-md-3">
 				<div id="sdns_soa_serial_field">
 					<select class="form-padding form-control" name="sdns_soa_serial" id="sdns_soa_serial">
-						<option {if Controller::config(soa_serial) eq 'default'}SELECTED{/if} value="default">{$LANG.admin_settings_record_select_default}</option>
-						<option {if Controller::config(soa_serial) eq 'epoch'}SELECTED{/if} value="epoch">{$LANG.admin_settings_record_select_epoch}</option>
+						<option {if $Controller->config(soa_serial) eq 'default'}SELECTED{/if} value="default">{$LANG.admin_settings_record_select_default}</option>
+						<option {if $Controller->config(soa_serial) eq 'epoch'}SELECTED{/if} value="epoch">{$LANG.admin_settings_record_select_epoch}</option>
 					</select>
 				</div>
 			</div>
@@ -153,7 +153,7 @@
 			</div>
 			<div class="col-md-3">
 				<div id="sdns_soa_refresh_field">
-					<input type="text" class="form-padding form-control" name="sdns_soa_refresh" id="sdns_soa_refresh" value="{Controller::config(soa_refresh)}">
+					<input type="text" class="form-padding form-control" name="sdns_soa_refresh" id="sdns_soa_refresh" value="{$Controller->config(soa_refresh)}">
 				</div>
 			</div>
 			<div class="col-md-6"></div>
@@ -164,7 +164,7 @@
 			</div>
 			<div class="col-md-3">
 				<div id="sdns_soa_retry_field">
-					<input type="text" class="form-padding form-control" name="sdns_soa_retry" id="sdns_soa_retry" value="{Controller::config(soa_retry)}">
+					<input type="text" class="form-padding form-control" name="sdns_soa_retry" id="sdns_soa_retry" value="{$Controller->config(soa_retry)}">
 				</div>
 			</div>
 			<div class="col-md-6"></div>
@@ -175,7 +175,7 @@
 			</div>
 			<div class="col-md-3">
 				<div id="sdns_soa_expire_field">
-					<input type="text" class="form-padding form-control" name="sdns_soa_expire" id="sdns_soa_expire" value="{Controller::config(soa_expire)}">
+					<input type="text" class="form-padding form-control" name="sdns_soa_expire" id="sdns_soa_expire" value="{$Controller->config(soa_expire)}">
 				</div>
 			</div>
 			<div class="col-md-6"></div>
@@ -186,7 +186,7 @@
 			</div>
 			<div class="col-md-3">
 				<div id="sdns_soa_ttl_field">
-					<input type="text" class="form-padding form-control" name="sdns_soa_ttl" id="sdns_soa_ttl" value="{Controller::config(soa_ttl)}">
+					<input type="text" class="form-padding form-control" name="sdns_soa_ttl" id="sdns_soa_ttl" value="{$Controller->config(soa_ttl)}">
 				</div>
 			</div>
 			<div class="col-md-6"></div>
@@ -197,7 +197,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(custom_primary)}checked {/if}name="sdns_soa_custom_primary" id="sdns_soa_custom_primary" type="checkbox">
+					<input {if $Controller->config(custom_primary)}checked {/if}name="sdns_soa_custom_primary" id="sdns_soa_custom_primary" type="checkbox">
 					<label for="sdns_soa_custom_primary">{$LANG.admin_settings_default_custom_primary_desc}</label>
 				</div>
 			</div>
@@ -211,7 +211,7 @@
 			</div>
 			<div class="col-md-1">
 				<div id="sdns_record_limit_field">
-					<input name="sdns_record_limit" type="text" class="form-control" name="sdns_record_limit" id="sdns_record_limit" value="{Controller::config(record_limit)}">
+					<input name="sdns_record_limit" type="text" class="form-control" name="sdns_record_limit" id="sdns_record_limit" value="{$Controller->config(record_limit)}">
 				</div>
 			</div>
 			<div class="col-md-8">
@@ -231,7 +231,7 @@
 						<div class="col-md-2">
 							<div class="checkbox chx_label">
 								<input {if $name->
-							registrar|in_array:Controller::inConfig(respect_registrar)}checked {/if} name="sdns_respect_registrar_{$name->registrar}" id="sdns_respect_registrar_{$name->registrar}" type="checkbox">
+							registrar|in_array:$Controller->inConfig(respect_registrar)}checked {/if} name="sdns_respect_registrar_{$name->registrar}" id="sdns_respect_registrar_{$name->registrar}" type="checkbox">
 								<label for="sdns_respect_registrar_{$name->registrar}">{$name->registrar|ucfirst}</label>
 							</div>
 						</div>
@@ -249,7 +249,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(force_dns)}checked {/if}name="sdns_force_dns" id="sdns_force_dns" type="checkbox">
+					<input {if $Controller->config(force_dns)}checked {/if}name="sdns_force_dns" id="sdns_force_dns" type="checkbox">
 					<label for="sdns_force_dns">{$LANG.admin_settings_force_dns_desc}</label>
 				</div>
 			</div>
@@ -260,7 +260,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(hide_soa)}checked {/if}name="sdns_hide_soa" id="sdns_hide_soa" type="checkbox">
+					<input {if $Controller->config(hide_soa)}checked {/if}name="sdns_hide_soa" id="sdns_hide_soa" type="checkbox">
 					<label for="sdns_hide_soa">{$LANG.admin_settings_hide_soa_desc}</label>
 				</div>
 			</div>
@@ -271,7 +271,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(disable_ns)}checked {/if}name="sdns_disable_ns" id="sdns_disable_ns" type="checkbox">
+					<input {if $Controller->config(disable_ns)}checked {/if}name="sdns_disable_ns" id="sdns_disable_ns" type="checkbox">
 					<label for="sdns_disable_ns">{$LANG.admin_settings_disable_ns_desc}</label>
 				</div>
 			</div>
@@ -282,7 +282,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(preset_ttl)}checked {/if}name="sdns_preset_ttl" id="sdns_preset_ttl" type="checkbox">
+					<input {if $Controller->config(preset_ttl)}checked {/if}name="sdns_preset_ttl" id="sdns_preset_ttl" type="checkbox">
 					<label for="sdns_preset_ttl">{$LANG.admin_settings_preset_ttl_desc}</label>
 				</div>
 			</div>
@@ -293,7 +293,7 @@
 			</div>
 			<div class="col-md-9">
 				<div id="sdns_dns_pagination_field" class="checkbox chx_label">
-					<input {if Controller::config(dns_pagination)}checked {/if}name="sdns_dns_pagination" id="sdns_dns_pagination" type="checkbox">
+					<input {if $Controller->config(dns_pagination)}checked {/if}name="sdns_dns_pagination" id="sdns_dns_pagination" type="checkbox">
 					<label for="sdns_dns_pagination">{$LANG.admin_settings_paging_desc}</label>
 				</div>
 			</div>
@@ -304,7 +304,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(client_zones)}checked {/if}name="sdns_client_zones" id="sdns_client_zones" type="checkbox">
+					<input {if $Controller->config(client_zones)}checked {/if}name="sdns_client_zones" id="sdns_client_zones" type="checkbox">
 					<label for="sdns_client_zones">{$LANG.admin_settings_client_zones_desc}</label>
 				</div>
 			</div>
@@ -315,7 +315,7 @@
 			</div>
 			<div class="col-md-1 info_text">
 				<div id="sdns_zone_limit">
-					<input type="text" class="form-padding form-control" name="sdns_zone_limit" id="sdns_zone_limit" value="{Controller::config(zone_limit)}">
+					<input type="text" class="form-padding form-control" name="sdns_zone_limit" id="sdns_zone_limit" value="{$Controller->config(zone_limit)}">
 				</div>
 			</div>
 			<div class="col-md-8 info_text">
@@ -328,7 +328,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(allow_subdomains)}checked {/if}name="sdns_allow_subdomains" id="sdns_allow_subdomains" type="checkbox">
+					<input {if $Controller->config(allow_subdomains)}checked {/if}name="sdns_allow_subdomains" id="sdns_allow_subdomains" type="checkbox">
 					<label for="sdns_allow_subdomains">{$LANG.admin_settings_allow_subdomains_desc}</label>
 				</div>
 			</div>
@@ -339,7 +339,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(client_template)}checked {/if}name="sdns_client_template" id="sdns_client_template" type="checkbox">
+					<input {if $Controller->config(client_template)}checked {/if}name="sdns_client_template" id="sdns_client_template" type="checkbox">
 					<label for="sdns_client_template">{$LANG.admin_settings_client_template_desc}</label>
 				</div>
 			</div>
@@ -350,7 +350,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(client_reverse)}checked {/if}name="sdns_client_reverse" id="sdns_client_reverse" type="checkbox">
+					<input {if $Controller->config(client_reverse)}checked {/if}name="sdns_client_reverse" id="sdns_client_reverse" type="checkbox">
 					<label for="sdns_client_reverse">{$LANG.admin_settings_client_reverse_desc}</label>
 				</div>
 			</div>
@@ -361,7 +361,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(client_togglednssec)}checked {/if}name="sdns_client_togglednssec" id="sdns_client_togglednssec" type="checkbox">
+					<input {if $Controller->config(client_togglednssec)}checked {/if}name="sdns_client_togglednssec" id="sdns_client_togglednssec" type="checkbox">
 					<label for="sdns_client_togglednssec">{$LANG.admin_settings_client_toggle_dnssec_desc}</label>
 				</div>
 			</div>
@@ -372,7 +372,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(disable_primary)}checked {/if}name="sdns_disable_primary" id="sdns_disable_primary" type="checkbox">
+					<input {if $Controller->config(disable_primary)}checked {/if}name="sdns_disable_primary" id="sdns_disable_primary" type="checkbox">
 					<label for="sdns_disable_primary">{$LANG.admin_settings_disable_primary_desc}</label>
 				</div>
 			</div>
@@ -383,7 +383,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(disable_management)}checked {/if}name="sdns_disable_management" id="sdns_disable_management" type="checkbox">
+					<input {if $Controller->config(disable_management)}checked {/if}name="sdns_disable_management" id="sdns_disable_management" type="checkbox">
 					<label for="sdns_disable_management">{$LANG.admin_settings_disable_management_desc}</label>
 				</div>
 			</div>
@@ -394,7 +394,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(disable_sidebar)}checked {/if}name="sdns_disable_sidebar" id="sdns_disable_sidebar" type="checkbox">
+					<input {if $Controller->config(disable_sidebar)}checked {/if}name="sdns_disable_sidebar" id="sdns_disable_sidebar" type="checkbox">
 					<label for="sdns_disable_sidebar">{$LANG.admin_settings_disable_sidebar_desc}</label>
 				</div>
 			</div>
@@ -405,7 +405,7 @@
 			</div>
 			<div class="col-md-2 info_text">
 				<div id="sdns_client_urlrewrite_field">
-					<input type="text" class="form-padding form-control" name="sdns_client_urlrewrite" id="sdns_client_urlrewrite" value="{Controller::config(client_urlrewrite)}">
+					<input type="text" class="form-padding form-control" name="sdns_client_urlrewrite" id="sdns_client_urlrewrite" value="{$Controller->config(client_urlrewrite)}">
 				</div>
 			</div>
 			<div class="col-md-7 info_text">
@@ -421,7 +421,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox checkbox-success chx_label">
-					<input {if Controller::config(auto_create)}checked {/if}name="sdns_auto_create" id="sdns_auto_create" type="checkbox">
+					<input {if $Controller->config(auto_create)}checked {/if}name="sdns_auto_create" id="sdns_auto_create" type="checkbox">
 					<label for="sdns_auto_create">{$LANG.admin_settings_auto_create_desc}</label>
 				</div>
 			</div>
@@ -469,7 +469,7 @@
 			<div class="col-md-3 text-right title"></div>
 			<div class="col-md-9">
 				<div class="checkbox checkbox-danger chx_label">
-					<input {if Controller::config(auto_delete_whmcs)}checked {/if}name="sdns_auto_delete_whmcs" id="sdns_auto_delete_whmcs" type="checkbox">
+					<input {if $Controller->config(auto_delete_whmcs)}checked {/if}name="sdns_auto_delete_whmcs" id="sdns_auto_delete_whmcs" type="checkbox">
 					<label for="sdns_auto_delete_whmcs">{$LANG.admin_settings_auto_delete_remove}</label>
 				</div>
 			</div>
@@ -480,7 +480,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(auto_enabled)}checked {/if}name="sdns_auto_enable" id="sdns_auto_enable" type="checkbox">
+					<input {if $Controller->config(auto_enabled)}checked {/if}name="sdns_auto_enable" id="sdns_auto_enable" type="checkbox">
 					<label for="sdns_auto_enable">{$LANG.admin_settings_auto_dns_management_desc}</label>
 				</div>
 			</div>
@@ -491,7 +491,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(auto_health)}checked {/if}name="sdns_auto_health" id="sdns_auto_health" type="checkbox">
+					<input {if $Controller->config(auto_health)}checked {/if}name="sdns_auto_health" id="sdns_auto_health" type="checkbox">
 					<label for="sdns_auto_health">{$LANG.admin_settings_auto_health_desc}</label>
 				</div>
 			</div>
@@ -502,7 +502,7 @@
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if Controller::config(auto_todo)}checked {/if}name="sdns_auto_todo" id="sdns_auto_todo" type="checkbox">
+					<input {if $Controller->config(auto_todo)}checked {/if}name="sdns_auto_todo" id="sdns_auto_todo" type="checkbox">
 					<label for="sdns_auto_todo">{$LANG.admin_settings_auto_todo_desc}</label>
 				</div>
 			</div>
