@@ -314,6 +314,22 @@ All Rights Reserved
 }
 
 /*
+ ## Text Color
+*/
+.text2-danger {
+	color: #c60f13 
+}
+.text2-warning {
+	color: #e3b000 
+}
+.text2-info {
+	color: #2ba6cb 
+}
+.text2-success {
+	color: #5da423 
+}
+
+/*
  ## NProgress Bar
 */
 

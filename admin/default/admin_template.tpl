@@ -1,18 +1,16 @@
-<h2>
-	<div class="row">
-		<div class="col-md-9">
-			<p>{$LANG.admin_menu_templates}</p>
-		</div>
-		<div class="col-md-3">
-			<div class="text-right"> 
-				<!-- Split button -->
-				<div class="btn-group">
-					<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dialog_addRecord" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-				</div>
+<div class="row">
+	<div class="col-md-9">
+		<h2>{$LANG.admin_menu_templates}</h2>
+	</div>
+	<div class="col-md-3">
+		<div class="text-right"> 
+			<!-- Split button -->
+			<div class="btn-group">
+				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dialog_addRecord" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 			</div>
 		</div>
 	</div>
-</h2>
+</div>
 			
 {assign var=products value=$Controller->product_list()}
 {assign var=records value=$Controller->inConfig(record_types)}

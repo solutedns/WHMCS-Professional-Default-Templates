@@ -6,35 +6,47 @@
 	<ul class="nav nav-tabs">
 		<li class="pull-right"><a target="_blank" href="https://docs.solutedns.com/whmcs/professional-edition/getting-started/"><span class="glyphicon glyphicon-question-sign text-primary" aria-hidden="true"></span></a></li>
 		<li class="active"><a data-toggle="tab" href="#overview" onclick="drawTable('sdns_overview_zones')">{$LANG.admin_menu_overview}</a></li>
-			{if $admin}
+		{if $admin}
 			<li><a data-toggle="tab" href="#templates" onclick="drawRecords('sdns_template_records')">{$LANG.admin_menu_templates}</a></li>
 			<li><a data-toggle="tab" href="#settings">{$LANG.admin_menu_settings}</a></li>
 			<li><a data-toggle="tab" href="#nameserver">{$LANG.admin_menu_nameserver}</a></li>
 			<li><a data-toggle="tab" href="#tools" {if $Controller->config(auto_health)}onclick="getStats('health')"{/if}>{$LANG.admin_menu_tools}</a></li>
 			<li><a data-toggle="tab" href="#system">{$LANG.admin_menu_system}{if isset($update)} <span class="label label-danger badge_danger"><span class="glyphicon glyphicon glyphicon-refresh" aria-hidden="true"></span></span>{/if}</a></li>
-					{/if}
+		{/if}
 	</ul>
 
 	<!-- Tab Panes -->
-	<div class="tab-content">
+	<div class="tab-content tab-container">
 		<div id="overview" class="tab-pane fade in active">
-			<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_overview.tpl"}</div>
-		</div>
+			<div class="row content-container">
+				<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_overview.tpl"}</div>
+				</div>
+			</div>
 		{if $admin}
 			<div id="templates" class="tab-pane fade">
-				<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_template.tpl"}</div>
+				<div class="row content-container">
+					<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_template.tpl"}</div>
+				</div>
 			</div>
 			<div id="settings" class="tab-pane fade">
-				<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_settings.tpl"}</div>
+				<div class="row content-container">
+					<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_settings.tpl"}</div>
+				</div>
 			</div>
 			<div id="nameserver" class="tab-pane fade">
-				<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_nameserver.tpl"}</div>
+				<div class="row content-container">
+					<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_nameserver.tpl"}</div>
+				</div>
 			</div>
 			<div id="tools" class="tab-pane fade">
-				<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_tools.tpl"}</div>
+				<div class="row content-container">
+					<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_tools.tpl"}</div>
+				</div>
 			</div>
 			<div id="system" class="tab-pane fade">
-				<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_system.tpl"}</div>
+				<div class="row content-container">
+					<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_system.tpl"}</div>
+				</div>
 			</div>
 		{/if}
 	</div>
@@ -168,7 +180,7 @@
 
 <script type="text/javascript">
 $( document ).ready(function() {
-	if (typeof updateSettings !== "function") $("#hookModal").modal();
+	if (typeof updateSettings !== "function") setTimeout(function(){ $("#hookModal").modal();}, 500);
 	getState();
 });
 </script>

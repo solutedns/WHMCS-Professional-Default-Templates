@@ -64,9 +64,9 @@
 			</div>
 			<div class="col-md-2">
 				<select class="form-padding form-control" name="sdns_system_template" id="sdns_system_template">
-					{foreach from=$system_templates item=template}
-						<option value="{$template}" {if $Controller->config(template) eq {$template}}selected{/if}>{$template|ucfirst}</option>
-					{/foreach}
+				{foreach from=$system_templates item=template}
+					<option value="{$template}" {if $Controller->config(template) eq {$template}}selected{/if}>{$template|ucfirst}</option>
+				{/foreach}
 				</select>
 			</div>
 			<div class="col-md-6">

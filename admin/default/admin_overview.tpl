@@ -1,18 +1,16 @@
-<h2>
-	<div class="row">
-		<div class="col-md-9">
-			<p>{$LANG.admin_menu_overview}</p>
-		</div>
-		<div class="col-md-3">
-			<div class="text-right"> 
-				<!-- Split button -->
-				<div class="btn-group">
-					<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dialog_addZone" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-				</div>
+<div class="row">
+	<div class="col-md-9">
+		<h2>{$LANG.admin_menu_overview}</h2>
+	</div>
+	<div class="col-md-3">
+		<div class="text-right"> 
+			<!-- Split button -->
+			<div class="btn-group">
+				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#dialog_addZone" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
 			</div>
 		</div>
 	</div>
-</h2>
+</div>
 
 <div class="pull-right">
 	<div class="input-group">
@@ -58,7 +56,7 @@
 				</div>
 				<div class="modal-body">
 					<form role="form" id="addzone">
-						<input type="hidden" name="sdns_form" value="addzone">
+						<input type="hidden" name="action" value="addzone">
 						<div class="row">
 							<div class="col-md-4">
 								<label for="sdns_addzone_type">{$LANG.admin_overview_zone_type}:</label>

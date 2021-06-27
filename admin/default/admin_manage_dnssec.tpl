@@ -1,4 +1,4 @@
-<div class="row spacer_10">
+<div class="row spacer_5">
 	<div class="col-md-3">
 		<p><strong>{$LANG.admin_manage_title_zone}:</strong> <br />
 			<a href="{if $domain->type eq 'd'}clientsdomains.php?userid={$domain->client_id}&id={$domain->local_id}{elseif $domain->type eq 'p'}clientsservices.php?userid={$domain->client_id}&productselect={$domain->local_id}{else}#{/if}">{$domain->idn}</a> {if $dnssec.nsec}<span class="label inactive"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</p>
@@ -79,6 +79,10 @@
 						ECDSA Curve P-256 with SHA-256 (13)
 					{elseif $key.algorithm eq '14'}
 						ECDSA Curve P-384 with SHA-384 (14)
+					{elseif $key.algorithm eq '15'}
+						ED25519 (15)
+					{elseif $key.algorithm eq '16'}
+						ED448 (16)
 					{else}
 						{$LANG.global_general_unknown}
 					{/if}
@@ -140,6 +144,10 @@
 						ECDSA Curve P-256 with SHA-256 (13)
 					{elseif $ds.algorithm eq '14'}
 						ECDSA Curve P-384 with SHA-384 (14)
+					{elseif $ds.algorithm eq '15'}
+						ED25519 (15)
+					{elseif $ds.algorithm eq '16'}
+						ED448 (16)
 					{else}
 						{$LANG.admin_manage_unknown}
 					{/if} </td>
@@ -190,6 +198,7 @@
 							<label for="sdns_dnssec_bits">{$LANG.global_dns_bits}:</label>
 							<select name="sdns_dnssec_bits" id="sdns_dnssec_bits" class="form-padding form-control">
 								<option value="256">256</option>
+								<option value="384">384</option>
 								<option value="512">512</option>
 								<option value="1024">1024</option>
 								<option selected value="2048">2048</option>
@@ -198,12 +207,14 @@
 						<div id="sdns_z-content_0" class="col-md-6">
 							<label for="sdns_dnssec_algorithm">{$LANG.global_dns_algorithm}:</label>
 							<select name="sdns_dnssec_algorithm" id="sdns_dnssec_algorithm" class="form-padding form-control">
-								<option value="rsasha1">RSA-SHA1 (5)</option>
-								<option value="rsasha256">RSA-SHA256 (8)</option>
-								<option selected value="rsasha512">RSA-SHA512 (10)</option>
-								<option value="gost">GOST R 34.10-2001 (12)</option>
-								<option value="ecdsa256">EC-DSA-256 (13)</option>
-								<option value="ecdsa384">EC-DSA-384 (14)</option>
+								<option value="rsasha1">RSA/SHA-1 (5)</option>
+								<option value="rsasha1-nsec3-sha1">RSASHA1-NSEC3-SHA1 (7)</option>
+								<option value="rsasha256">RSA/SHA-256 (8)</option>
+								<option value="rsasha512">RSA/SHA-512 (10)</option>
+								<option value="ecdsa256">ECDSA P-256 with SHA256 (13)</option>
+								<option value="ecdsa384">ECDSA P-384 with SHA384 (14)</option>
+								<option value="ed25519">Ed25519 (15)</option>
+								<option value="ed448">Ed448 (16)</option>
 							</select>
 						</div>
 					</div>

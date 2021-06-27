@@ -223,29 +223,7 @@
 		<h3>{$LANG.admin_settings_accessibility}</h3>
 		<div class="row">
 			<div class="col-md-3 text-right title">
-				<label for="sdns_respect_registrar">{$LANG.admin_settings_respect_registrar}:</label>
-			</div>
-			<div class="col-md-9">
-				<div class="row">
-					{foreach from=$registrars item=name}
-						<div class="col-md-2">
-							<div class="checkbox chx_label">
-								<input {if $name->
-							registrar|in_array:$Controller->inConfig(respect_registrar)}checked {/if} name="sdns_respect_registrar_{$name->registrar}" id="sdns_respect_registrar_{$name->registrar}" type="checkbox">
-								<label for="sdns_respect_registrar_{$name->registrar}">{$name->registrar|ucfirst}</label>
-							</div>
-						</div>
-					{foreachelse}
-						<div class="col-md-2">
-							<div class="checkbox"> <small><i class="text-muted">{$LANG.global_status_noneavailable}</i></small> </div>
-						</div>
-					{/foreach}
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3 text-right title">
-				<label for="sdns_hide_soa">{$LANG.admin_settings_force_dns}:</label>
+				<label for="sdns_force_dns">{$LANG.admin_settings_force_dns}:</label>
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
@@ -485,7 +463,40 @@
 				</div>
 			</div>
 		</div>
+		<div class="row spacer_15">
+			<div class="col-md-3 text-right title">
+				<label for="sdns_respect_registrar">{$LANG.admin_settings_respect_registrar}:</label>
+			</div>
+			<div class="col-md-9">
+				<div class="row">
+					{foreach from=$registrars item=name}
+						<div class="col-md-2">
+							<div class="checkbox checkbox-primary chx_label">
+								<input {if $name->
+							registrar|in_array:$Controller->inConfig(respect_registrar)}checked {/if} name="sdns_respect_registrar_{$name->registrar}" id="sdns_respect_registrar_{$name->registrar}" type="checkbox">
+								<label for="sdns_respect_registrar_{$name->registrar}">{$name->registrar|ucfirst}</label>
+							</div>
+						</div>
+					{foreachelse}
+						<div class="col-md-2">
+							<div class="checkbox"> <small><i class="text-muted">{$LANG.global_status_noneavailable}</i></small> </div>
+						</div>
+					{/foreach}
+				</div>
+			</div>
+		</div>
 		<div class="row">
+			<div class="col-md-3 text-right title">
+				<label for="sdns_respect_product">{$LANG.admin_settings_respect_product}:</label>
+			</div>
+			<div class="col-md-9">
+				<div class="checkbox chx_label">
+					<input {if $Controller->config(respect_product)}checked {/if}name="sdns_respect_product" id="sdns_respect_product" type="checkbox">
+					<label for="sdns_respect_product">{$LANG.admin_settings_respect_product_desc}</label>
+				</div>
+			</div>
+		</div>
+		<div class="row spacer_15">
 			<div class="col-md-3 text-right title">
 				<label for="sdns_auto_health">{$LANG.admin_settings_auto_health}:</label>
 			</div>

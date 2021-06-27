@@ -29,7 +29,7 @@ function sendData(inputData) {
 			if (result) {
 				result.forEach(function (data) {
 					
-					if (result.length > 1) {
+					if (result.length > 1 && inputData.action != 'applytemplate') {
 						data['tablereload'] = false;
 					}
 					
@@ -106,19 +106,21 @@ function setMessage(title, desc, status, tableReload, pageReload, redirect, fiel
 	$('#msgConsole').append('<div id=' + id + ' style="display: none;" class="' + state + '"><div><h4>' + title + '</h4></div><div><p>' + desc + '</p></div></div>');
 
 	/* Display Message */
-	$("#" + id).show("slow", function () {
-		$('html, body').animate({
-			scrollTop: $("#msgConsole").offset().top - 10
-		}, 400);
-		if (fixed != true) {
-			setTimeout(function () {
-				$("#" + id).hide("slow");
-			}, 8000);
-			setTimeout(function () {
-				$("#" + id).remove();
-			}, 8500);
-		}
-	});
+	if (title || desc) {
+		$("#" + id).show("slow", function () {
+			$('html, body').animate({
+				scrollTop: $("#msgConsole").offset().top - 10
+			}, 400);
+			if (fixed != true) {
+				setTimeout(function () {
+					$("#" + id).hide("slow");
+				}, 8000);
+				setTimeout(function () {
+					$("#" + id).remove();
+				}, 8500);
+			}
+		});
+	}
 
 	/* Reload Table Date */
 	if (tableReload == true) {
@@ -154,7 +156,7 @@ function setMessage(title, desc, status, tableReload, pageReload, redirect, fiel
 
 function updateSettings(element) {
 	/* Get Input Values */
-	const form = document.querySelector('[id="'+element+'"] form');
+	const form = document.querySelector('form[id="'+element+'"]');
 	
 	/* Convert Input Data */
 	var data = Object.values(form).reduce((obj,field) => { 
@@ -292,6 +294,7 @@ function resetDataTable(nTable) {
 function selectOverview(value) {
 	SDNS_zoneTable.fnDestroy();
 	drawTable('sdns_overview_zones', value);
+	$.fn.dataTable.Api('#sdns_overview_zones').page('first').draw();
 }
 
 function selectTemplate(value) {

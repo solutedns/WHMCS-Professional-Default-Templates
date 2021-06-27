@@ -36,6 +36,9 @@ form label {
 form p {
 	font-size: 12px;
 }
+.spacer_5 {
+	margin-top: 5px;
+}
 .spacer_10 {
 	margin-top: 10px;
 }
@@ -79,6 +82,21 @@ form p {
 	bottom:5px	;
 	z-index: 10;	
 	display: none;
+}
+.tab-container {
+	border: 1px solid #f6f6f6;
+	border-top: 0px;    
+	border-bottom: 0px; 
+	border-radius: 6px;
+	border-top: 0px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+	background-color: #fff;	
+	-webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+}
+.content-container {
+	padding: 10px 15px 8px 15px
 }
 
 /*
@@ -349,7 +367,20 @@ form p {
  ## Bootstrap
 */
 .contentarea {
+	background-color: #f7f9fa;
 	overflow: visible;	
+}
+.nav-tabs {
+	padding-left: 6px;
+	padding-right: 6px;
+    border-bottom: 1px solid #f6f6f6;
+}
+.nav-tabs > li > a:hover {
+	border-color:#eee #eee #f6f6f6
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+	border:1px solid #f6f6f6;
+	border-bottom-color:transparent
 }
 
 /*
@@ -365,6 +396,12 @@ form p {
 .dnsfield {
 	width: 100% !important;
 }
+
+.dataTables_wrapper .form-control, .modal-body .form-control{
+    border-radius: 4px;
+    height: 34px;
+}
+
 .modal-dialog label {
 	padding-top: 6px;
 }
@@ -391,6 +428,7 @@ form p {
 .has-switch .form-control-feedback {
     width: 48px;
     pointer-events: initial;
+	line-height: 31px;
 }
 .has-switch .form-control {
     padding-right: 47.5px !important;
@@ -620,7 +658,7 @@ form p {
 	margin: 10px 0;
 	border: 1px solid #eee;
 	border-left-width: 5px;
-	border-radius: 3px;
+	border-radius: 5px;
 	background-color: #FDFDFD;
 }
 .alert2 h4 {

@@ -32,15 +32,15 @@ if (!defined("WHMCS")) {
 $return = 
 <<<HTML
 <!-- SoluteDNS CSS -->
-	<link href="{$system_url}modules/addons/solutedns/templates/{$smarty_template}/css/client.css" rel="stylesheet" type="text/css" />
+	<link href="{$system_url}modules/addons/solutedns/templates/client/{$smarty_template}/css/client.css" rel="stylesheet" type="text/css" />
 	
 	<!-- SoluteDNS Scripts -->
-	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/{$smarty_template}/js/nprogress.min.js"></script>
-	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/{$smarty_template}/js/client.js"></script>
+	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/common/js/nprogress.min.js"></script>
+	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/client/{$smarty_template}/js/client.js"></script>
 	<script type="text/javascript" src="{$system_url}assets/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="{$system_url}assets/js/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript" src="{$system_url}assets/js/dataTables.responsive.min.js"></script>
-	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/{$smarty_template}/js/dataTables.fnReloadAjax.js"></script>
+	<script type="text/javascript" src="{$system_url}modules/addons/solutedns/templates/common/js/dataTables.fnReloadAjax.js"></script>
 
 	<script>
 		function drawOverview(nTable, nData) {

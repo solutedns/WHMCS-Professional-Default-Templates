@@ -32,17 +32,17 @@ if (!defined("WHMCS")) {
 $return = 
 <<<HTML
 	<!-- SoluteDNS CSS -->
-	<link href="{$system_url}/modules/addons/solutedns/templates/{$smarty_template}/css/admin.css" rel="stylesheet" type="text/css" />
+	<link href="{$system_url}/modules/addons/solutedns/templates/admin/{$smarty_template}/css/admin.css" rel="stylesheet" type="text/css" />
 	
 	<!-- SoluteDNS Scripts -->
-	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/{$smarty_template}/js/nprogress.min.js"></script>
-	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/{$smarty_template}/js/admin.js"></script>
+	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/common/js/nprogress.min.js"></script>
+	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/admin/{$smarty_template}/js/admin.js"></script>
 	<script type="text/javascript" src="{$system_url}/assets/js/jquery.dataTables.min.js"></script>
 	<script type="text/javascript" src="{$system_url}/assets/js/dataTables.bootstrap.min.js"></script>
 	<script type="text/javascript" src="{$system_url}/assets/js/dataTables.responsive.min.js"></script>
-	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/{$smarty_template}/js/dataTables.fnReloadAjax.js"></script>
-	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/{$smarty_template}/js/typeahead.js"></script>
-	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/{$smarty_template}/js/chart.min.js"></script>
+	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/common/js/dataTables.fnReloadAjax.js"></script>
+	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/common/js/typeahead.js"></script>
+	<script type="text/javascript" src="{$system_url}/modules/addons/solutedns/templates/common/js/chart.min.js"></script>
 
 	<script>
 		function drawTable(nTable, nData) {
@@ -71,9 +71,11 @@ $return =
 						NProgress.start();
 					},
 					"fnDrawCallback": function( oSettings ) {
-					  NProgress.done();
+						//this.api().state.clear();
+						NProgress.done();
 					}
 				});
+				
 			}
 		}
 		function drawRecords(nTable, nData) {
@@ -123,7 +125,7 @@ $return =
 						NProgress.start();
 					},
 					"fnDrawCallback": function( oSettings ) {
-					  NProgress.done();
+					 	NProgress.done();
 					}
 				});
 			}

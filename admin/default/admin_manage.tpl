@@ -16,18 +16,24 @@
 	</ul>
 
 	<!-- Tab Panes -->
-	<div class="tab-content">
+	<div class="tab-content tab-container">
 		<div id="records" class="tab-pane fade in active">
-			<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_manage_records.tpl"}</div>
+			<div class="row content-container">
+				<div class="col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_manage_records.tpl"}</div>
+			</div>
 		</div>
 		{if $Controller->ns_details(dnssec_enable)}
 			<div id="dnssec" class="tab-pane fade">
-				<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_manage_dnssec.tpl"}</div>
+				<div class="row content-container">
+					<div class="col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_manage_dnssec.tpl"}</div>
+				</div>
 			</div>
 		{/if}
 		{if $Controller->config(auto_health)}
 			<div id="health" class="tab-pane fade">
-				<div class= "col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_manage_health.tpl"}</div>
+				<div class="row content-container">
+					<div class="col-md-12"> {include file="{$base_path}{DIRECTORY_SEPARATOR}templates{DIRECTORY_SEPARATOR}admin{DIRECTORY_SEPARATOR}{$moduletemplate}{DIRECTORY_SEPARATOR}admin_manage_health.tpl"}</div>
+				</div>
 			</div>
 		{/if}
 	</div>

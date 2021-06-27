@@ -39,6 +39,10 @@
 						ECDSA Curve P-256 with SHA-256 (13)
 					{elseif $key.algorithm eq '14'}
 						ECDSA Curve P-384 with SHA-384 (14)
+					{elseif $key.algorithm eq '15'}
+						ED25519 (15)
+					{elseif $key.algorithm eq '16'}
+						ED448 (16)
 					{else}
 						{$MLANG.global_general_unknown}
 					{/if}
@@ -92,6 +96,10 @@
 						ECDSA Curve P-256 with SHA-256 (13)
 					{elseif $ds.algorithm eq '14'}
 						ECDSA Curve P-384 with SHA-384 (14)
+					{elseif $ds.algorithm eq '15'}
+						ED25519 (15)
+					{elseif $ds.algorithm eq '16'}
+						ED448 (16)
 					{else}
 						{$MLANG.admin_manage_unknown}
 					{/if}
