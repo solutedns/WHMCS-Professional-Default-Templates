@@ -66,7 +66,7 @@ $return =
 							"lengthMenu":	'{$_lang['client_table_overview_lengthMenu']}',
 							"sSearch":		'',
 							"zeroRecords":	'{$_lang['client_table_zeroRecords']}',
-                            "processing":	'<div class="data_spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div',
+                            "processing":	'<div class="data_spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>',
 							"First":		'{$_lang['client_table_First']}',
 							"Last":			'{$_lang['client_table_Last']}',
 							"Next":			'{$_lang['client_table_Next']}',

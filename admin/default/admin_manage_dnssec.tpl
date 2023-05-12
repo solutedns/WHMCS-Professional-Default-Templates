@@ -22,15 +22,15 @@
 			<div class="btn-group">
 				<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" {if $Controller->config(maintenance)}DISABLED{/if}><span class="caret"></span></button>
 				<ul class="dropdown-menu dropdown-menu-right" role="menu">
-					<li><a href="javascript:void(0);" data-toggle="modal" data-target="#dialog_addDNSsec" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_add}</span></a></li>
+					<li{if $dnssec_state gt 0} class="disabled"{/if}><a href="javascript:void(0);" data-toggle="modal" data-target="#dialog_addDNSsec" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_add}</span></a></li>
 					<li class="divider"></li>
 						{if $dnssec.nsec eq 'NSEC'}
-						<li><a href="javascript:void(0);" onclick="dnssec('nsec3', '{$domain->id}');"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_nsec3}</span></a></li>
+						<li{if $dnssec_state gt 0} class="disabled"{/if}><a href="javascript:void(0);" onclick="dnssec('nsec3', '{$domain->id}');"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_nsec3}</span></a></li>
 								{else}
-						<li><a href="javascript:void(0);" onclick="dnssec('nsec', '{$domain->id}');"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_nsec}</span></a></li>
+						<li{if $dnssec_state gt 0} class="disabled"{/if}><a href="javascript:void(0);" onclick="dnssec('nsec', '{$domain->id}');"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_nsec}</span></a></li>
 								{/if}
 					<li><a href="javascript:void(0);" onclick="dnssec('reload', '{$domain->id}');"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_reload}</span></a></li>
-					<li><a href="javascript:void(0);" onclick="dnssec('reset', '{$domain->id}');"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_reset}</span></a></li>
+					<li{if $dnssec_state gt 0} class="disabled"{/if}><a href="javascript:void(0);" onclick="dnssec('reset', '{$domain->id}');"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_reset}</span></a></li>
 					<li class="divider"></li>
 					<li><a href="javascript:void(0);" onclick="dnssec('unset', '{$domain->id}');"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_unset}</span></a></li>
 				</ul>

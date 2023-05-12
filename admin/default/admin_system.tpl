@@ -22,6 +22,14 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3 text-right title">
+				<p>{$LANG.admin_system_dnsmanager_version}:</p>
+			</div>
+			<div class="col-md-9">
+				<p>{$Controller->dnsmanager_version()}</p>
+			</div>
+		</div>
+		<div class="row spacer_15">
+			<div class="col-md-3 text-right title">
 				<p>{$LANG.admin_system_idn_support}:</p>
 			</div>
 			<div class="col-md-9">

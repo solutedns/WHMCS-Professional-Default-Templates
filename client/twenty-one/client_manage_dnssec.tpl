@@ -1,5 +1,5 @@
 {if $toggle_dnssec}<div class="btn-group float-right">
-	<button type="button" class="btn btn-{if $dnssec.keys}default{else}primary{/if} btn-sm" onclick="updatePlain('{if $dnssec.keys}dnssec_unset{else}dnssec_secure{/if}'); this.disabled=true;" title="{if $dnssec.keys}{$MLANG.client_menu_unsecure}{else}{$MLANG.client_menu_secure}{/if}" {if $maintenance}DISABLED{/if}><span class="{if $dnssec.keys}fas fa-power-off{else}fas fa-lock{/if}" aria-hidden="true"></span></button>
+	<button type="button" class="btn btn-{if $dnssec.keys}default{else}primary{/if} btn-sm" onclick="updatePlain('{if $dnssec.keys}dnssec_unset{else}dnssec_secure{/if}'); this.disabled=true;" title="{if $dnssec.keys}{$MLANG.client_menu_unsecure}{else}{$MLANG.client_menu_secure}{/if}" {if $maintenance}DISABLED{/if}{if $dnssec_state gt 0} DISABLED{/if}><span class="{if $dnssec.keys}fas fa-power-off{else}fas fa-lock{/if}" aria-hidden="true"></span></button>
 </div>{/if}
 <h3 class="h-top">{$MLANG.client_menu_dnssec}</h3>
 <h5>{$MLANG.global_general_dnssec_keys}</h5>

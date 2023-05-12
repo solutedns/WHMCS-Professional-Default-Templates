@@ -117,7 +117,7 @@ $return =
 					"paging": {$paging},
 					"searching": false,
 					"language": {
-                            "processing": '<div class="data_spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div',
+                            "processing": '<div class="data_spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div>',
 					},
 					"fnStateSaveParams": function (oSettings, oData) {
 					},
