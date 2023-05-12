@@ -1,5 +1,7 @@
 <?php
 
+namespace SoluteDNS\WebInterface;
+    
 /**
  *               *** SoluteDNS Professional Edition for WHMCS ***
  *
