@@ -1,7 +1,7 @@
 <div class="row spacer_5">
 	<div class="col-md-3">
 		<p><strong>{$LANG.admin_manage_title_zone}:</strong> <br />
-			<a href="{if $domain->type eq 'd'}clientsdomains.php?userid={$domain->client_id}&id={$domain->local_id}{elseif $domain->type eq 'p'}clientsservices.php?userid={$domain->client_id}&productselect={$domain->local_id}{else}#{/if}">{$domain->idn}</a> {if $dnssec.nsec}<span class="label inactive"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</p>
+			<a href="{if $domain->type eq 'd'}clientsdomains.php?userid={$domain->client_id}&id={$domain->local_id}{elseif $domain->type eq 'p'}clientsservices.php?userid={$domain->client_id}&productselect={$domain->local_id}{else}#{/if}">{$domain->idn}</a> {if isset($dnssec.nsec)}<span class="label inactive"><span class="glyphicons glyphicons-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</p>
 	</div>
 	<div class="col-md-3">
 		<p><strong>{$LANG.admin_manage_title_client}:</strong> <br />
@@ -24,11 +24,11 @@
 				<ul class="dropdown-menu dropdown-menu-right" role="menu">
 					<li{if $dnssec_state gt 0} class="disabled"{/if}><a href="javascript:void(0);" data-toggle="modal" data-target="#dialog_addDNSsec" onclick=""><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_add}</span></a></li>
 					<li class="divider"></li>
-						{if $dnssec.nsec eq 'NSEC'}
+						{if isset($dnssec.nsec) && $dnssec.nsec eq 'NSEC'}
 						<li{if $dnssec_state gt 0} class="disabled"{/if}><a href="javascript:void(0);" onclick="dnssec('nsec3', '{$domain->id}');"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_nsec3}</span></a></li>
-								{else}
+						{else}
 						<li{if $dnssec_state gt 0} class="disabled"{/if}><a href="javascript:void(0);" onclick="dnssec('nsec', '{$domain->id}');"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_nsec}</span></a></li>
-								{/if}
+						{/if}
 					<li><a href="javascript:void(0);" onclick="dnssec('reload', '{$domain->id}');"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_reload}</span></a></li>
 					<li{if $dnssec_state gt 0} class="disabled"{/if}><a href="javascript:void(0);" onclick="dnssec('reset', '{$domain->id}');"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span><span class="dropmenu_desc">{$LANG.admin_manage_dnssec_reset}</span></a></li>
 					<li class="divider"></li>
@@ -50,7 +50,7 @@
 		<th align="center" width="10%"><strong>{$LANG.global_dns_status}</strong></th>
 		<th align="center" width="15%"><strong></strong></th>
 	</tr>
-	{if $dnssec.keys}
+	{if isset($dnssec.keys)}
 		{foreach from=$dnssec.keys item=key}
 			<tr>
 				<td align="center" class="font_size"> {$key.id} </td>
@@ -117,7 +117,7 @@
 		<th align="center" width="17%"><strong>{$LANG.global_dns_digesttype}</strong></th>
 		<th align="center" width="55%"><strong>{$LANG.global_dns_digest}</strong></th>
 	</tr>
-	{if $dnssec.ds}
+	{if isset($dnssec.ds)}
 		{foreach from=$dnssec.ds item=ds}
 			<tr>
 				<td align="center" class="font_size"> {$ds.key_tag} </td>

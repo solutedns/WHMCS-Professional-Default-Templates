@@ -5,7 +5,7 @@
 {else}
 	<div id="msgConsole"></div>
 
-	<h4 class="h-top"><a href="clientarea.php?action=domaindetails&id={$domain->id}">{$domain->idn}</a> {if $dnssec.nsec}<span class="badge badge-primary"><span class="fas fa-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</h4>
+	<h4 class="h-top"><a href="clientarea.php?action=domaindetails&id={$domain->id}">{$domain->idn}</a> {if isset($dnssec.nsec)}<span class="badge badge-primary"><span class="fas fa-unlock" aria-hidden="true"></span> {$dnssec.nsec}</span>{/if}</h4>
 
 	<div class="tab-content margin-bottom">
 		<div class="tab-pane fade active show" id="tabRecords"> 

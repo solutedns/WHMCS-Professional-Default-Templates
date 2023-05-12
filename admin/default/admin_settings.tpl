@@ -502,18 +502,45 @@
 				</div>
 			</div>
 		</div>
-		<div class="row spacer_15">
+        <div class="row spacer_15">
 			<div class="col-md-3 text-right title">
 				<label for="sdns_auto_health">{$LANG.admin_settings_auto_health}:</label>
 			</div>
 			<div class="col-md-9">
 				<div class="checkbox chx_label">
-					<input {if $Controller->config(auto_health)}checked {/if}name="sdns_auto_health" id="sdns_auto_health" type="checkbox">
-					<label for="sdns_auto_health">{$LANG.admin_settings_auto_health_desc}</label>
+					<input {if $Controller->config(health_self_check)}checked {/if}name="sdns_health_self_check" id="sdns_health_self_check" type="checkbox">
+					<label for="sdns_health_self_check">{$LANG.admin_settings_health_self_check}</label>
 				</div>
 			</div>
 		</div>
-		<div class="row">
+        <div class="row">
+			<div class="col-md-3 text-right title"></div>
+			<div class="col-md-9">
+				<div class="checkbox chx_label">
+					<input {if $Controller->config(health_consistency_check)}checked {/if}name="sdns_health_consistency_check" id="sdns_health_consistency_check" type="checkbox">
+					<label for="sdns_health_consistency_check">{$LANG.admin_settings_health_consistency_check}</label>
+				</div>
+			</div>
+		</div>
+        <div class="row">
+			<div class="col-md-3 text-right title"></div>
+			<div class="col-md-9">
+				<div class="checkbox chx_label">
+					<input {if $Controller->config(health_registry_check)}checked {/if}name="sdns_health_registry_check" id="sdns_health_registry_check" type="checkbox">
+					<label for="sdns_health_registry_check">{$LANG.admin_settings_health_registry_check}</label>
+				</div>
+			</div>
+		</div>
+        <div class="row">
+			<div class="col-md-3 text-right title"></div>
+			<div class="col-md-9">
+				<div class="checkbox chx_label">
+					<input {if $Controller->config(health_record_check)}checked {/if}name="sdns_health_record_check" id="sdns_health_record_check" type="checkbox">
+					<label for="sdns_health_record_check">{$LANG.admin_settings_health_record_check}</label>
+				</div>
+			</div>
+		</div>
+		<div class="row spacer_15">
 			<div class="col-md-3 text-right title">
 				<label for="sdns_auto_todo">{$LANG.admin_settings_auto_todo}:</label>
 			</div>

@@ -9,7 +9,7 @@
 				<p>{$LANG.admin_system_module_version}:</p>
 			</div>
 			<div class="col-md-9">
-				<p>{$Controller->version()} {if $update} <a class="btn btn-default btn-xs" data-target="#dialog_update" data-toggle="modal">{$LANG.admin_btn_update_now}</a>{/if}</p>
+				<p>{$Controller->version()} {if isset($update)} <a class="btn btn-default btn-xs" data-target="#dialog_update" data-toggle="modal">{$LANG.admin_btn_update_now}</a>{/if}</p>
 			</div>
 		</div>
 		<div class="row">
@@ -17,7 +17,7 @@
 				<p>{$LANG.admin_system_core_version}:</p>
 			</div>
 			<div class="col-md-9">
-				<p>{$core.version}</p>
+				<p>{if isset($core.version)}{$core.version}{else}{$LANG.global_status_na}{/if}</p>
 			</div>
 		</div>
 		<div class="row">
@@ -52,6 +52,17 @@
 				<div class="checkbox chx_label">
 					<input {if $Controller->config(logging)}checked {/if}name="sdns_system_logging" id="sdns_system_logging" type="checkbox">
 					<label for="sdns_system_logging">{$LANG.admin_system_system_logging_desc}</label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3 text-right title">
+				<label for="sdns_audit_logging">{$LANG.admin_system_audit_logging}:</label>
+			</div>
+			<div class="col-md-9">
+				<div class="checkbox chx_label">
+					<input {if $Controller->config(audit_log)}checked {/if}name="sdns_audit_logging" id="sdns_audit_logging" type="checkbox">
+					<label for="sdns_audit_logging">{$LANG.admin_system_audit_logging_desc}</label>
 				</div>
 			</div>
 		</div>
@@ -107,7 +118,7 @@
 				<p><strong>SoluteDNS for WHMCS</strong></p>
 			</div>
 		</div>
-		{if $core.license.addon}
+		{if isset($core.license.addon)}
 			{foreach from=$core.license.addon item=addon}
 
 				{if $addon.status neq 'Active' AND  $addon.status neq 'Pending'}
@@ -165,7 +176,7 @@
 				<hr />
 			</div>
 		</div>
-		{if $core.license}
+		{if isset($core.license)}
 
 			{if $core.license.status eq 'Invalid'}
 				<div class="row">

@@ -205,7 +205,6 @@ $tColumns->template = [
 				'formatter' => function( $d, $row ) {
 					$option = ($row['type'] == 'NS') ? empty($this->config('disable_ns')) ? NULL : " DISABLED" : NULL;
 					$option = ($row['type'] == 'SOA') ? " DISABLED" : $option;
-					$option = ($row['disabled'] == 1) ? " DISABLED" : $option;
 					return '<div class="checkbox tablecheckbox"><input type="checkbox" name="sdns_select" id="sdns_select_' . $row['id'] . '" value="' . $row['id'] . '" style="display: hidden;" ' . $this->maintenance . $option . '/><label for="sdns_select_' . $row['id'] . '" /></div>';
 				}
 			],

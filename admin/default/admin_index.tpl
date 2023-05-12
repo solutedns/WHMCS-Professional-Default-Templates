@@ -1,6 +1,6 @@
 <div id="msgConsole"></div>
 
-<div role="tabpanel"> 
+<div role="tabpanel">
 
 	<!-- Nav Tabs -->
 	<ul class="nav nav-tabs">
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" id="console-close" class="btn btn-success" data-dismiss="modal">{$LANG.admin_close}</button>
+					<button type="button" id="console-close" class="btn btn-success" data-dismiss="modal">{$LANG.global_btn_close}</button>
 				</div>
 			</div>
 		</div>

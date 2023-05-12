@@ -124,8 +124,8 @@ function setMessage(title, desc, status, tableReload, pageReload, redirect, fiel
 
 	/* Reload Table Date */
 	if (tableReload == true) {
-		SDNS_zoneTable.fnReloadAjax();
-		SDNS_recordTable.fnReloadAjax();
+		if (typeof SDNS_zoneTable !== 'undefined') { SDNS_zoneTable.fnReloadAjax(); }
+		if (typeof SDNS_recordTable !== 'undefined') { SDNS_recordTable.fnReloadAjax(); }
 	}
 
 	/* Reload Page */

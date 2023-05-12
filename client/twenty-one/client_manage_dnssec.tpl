@@ -1,5 +1,5 @@
 {if $toggle_dnssec}<div class="btn-group float-right">
-	<button type="button" class="btn btn-{if $dnssec.keys}default{else}primary{/if} btn-sm" onclick="updatePlain('{if $dnssec.keys}dnssec_unset{else}dnssec_secure{/if}'); this.disabled=true;" title="{if $dnssec.keys}{$MLANG.client_menu_unsecure}{else}{$MLANG.client_menu_secure}{/if}" {if $maintenance}DISABLED{/if}{if $dnssec_state gt 0} DISABLED{/if}><span class="{if $dnssec.keys}fas fa-power-off{else}fas fa-lock{/if}" aria-hidden="true"></span></button>
+	<button type="button" class="btn btn-{if isset($dnssec.keys)}default{else}primary{/if} btn-sm" onclick="updatePlain('{if isset($dnssec.keys)}dnssec_unset{else}dnssec_secure{/if}'); this.disabled=true;" title="{if isset($dnssec.keys)}{$MLANG.client_menu_unsecure}{else}{$MLANG.client_menu_secure}{/if}" {if $maintenance}DISABLED{/if}{if $dnssec_state gt 0} DISABLED{/if}><span class="{if isset($dnssec.keys)}fas fa-power-off{else}fas fa-lock{/if}" aria-hidden="true"></span></button>
 </div>{/if}
 <h3 class="h-top">{$MLANG.client_menu_dnssec}</h3>
 <h5>{$MLANG.global_general_dnssec_keys}</h5>
@@ -11,7 +11,7 @@
 		<th align="center" width="9%"><strong>{$MLANG.global_dns_status}</strong></th>
 		<th align="center" width="55%"><strong>{$MLANG.global_dns_publickey}</strong></th>
 	</tr>
-	{if $dnssec.keys}
+	{if isset($dnssec.keys)}
 		{foreach from=$dnssec.keys item=key}
 			<tr>
 				<td align="center"> {$key.key_tag} </td>
@@ -68,7 +68,7 @@
 		<th align="center" width="17%"><strong>{$MLANG.global_dns_digesttype}</strong></th>
 		<th align="center" width="55%"><strong>{$MLANG.global_dns_digest}</strong></th>
 	</tr>
-	{if $dnssec.ds}
+	{if isset($dnssec.ds)}
 		{foreach from=$dnssec.ds item=ds}
 			<tr>
 				<td align="center"> {$ds.key_tag} </td>
