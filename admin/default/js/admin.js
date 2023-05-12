@@ -125,6 +125,7 @@ function setMessage(title, desc, status, tableReload, pageReload, redirect, fiel
 	/* Reload Table Date */
 	if (tableReload == true) {
 		SDNS_zoneTable.fnReloadAjax();
+		SDNS_recordTable.fnReloadAjax();
 	}
 
 	/* Reload Page */
@@ -298,7 +299,7 @@ function selectOverview(value) {
 }
 
 function selectTemplate(value) {
-	SDNS_zoneTable.fnDestroy();
+	SDNS_recordTable.fnDestroy();
 
 	if (value != 0) {
 		$("#sdns_template_product").val(value);

@@ -49,6 +49,12 @@
 				</div>
 				<div class="col-md-2">
 					<div class="checkbox">
+						<input name="sdns_type_lua" id="sdns_type_lua" type="checkbox" {if 'LUA'|in_array:$records}CHECKED{/if}>
+						<label for="sdns_type_lua">LUA</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="checkbox">
 						<input name="sdns_type_mx" id="sdns_type_mx" type="checkbox" {if 'MX'|in_array:$records}CHECKED{/if}>
 						<label for="sdns_type_mx">MX</label>
 					</div>

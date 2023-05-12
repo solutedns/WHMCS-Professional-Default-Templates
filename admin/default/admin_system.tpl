@@ -166,21 +166,14 @@
 			</div>
 		</div>
 		{if $core.license}
+
 			{if $core.license.status eq 'Invalid'}
-				<div class="row">
-					<div class="col-md-3 text-right title">
-						<p>{$LANG.admin_system_license_product}:</p>
-					</div>
-					<div class="col-md-9">
-						<p><strong>SoluteDNS Core</strong></p>
-					</div>
-				</div>
 				<div class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-9">
 						<div class="bootstrap">
 							<div class="alert2 alert2-danger">
-								<h4>License {$core.license.status}</h4>
+								<h4>License {if $core.license.message|default:FALSE}{$core.license.message}{else}{$core.license.status}{/if}</h4>
 								<p>Your license key is invalid which may be caused by several reasons including:<br />
 									<br />
 									- An incorrect license key has been entered.<br />
@@ -197,14 +190,6 @@
 				</div>
 			{elseif $core.license.status eq 'expired'}
 				<div class="row">
-					<div class="col-md-3 text-right title">
-						<p>{$LANG.admin_system_license_product}:</p>
-					</div>
-					<div class="col-md-9">
-						<p><strong>SoluteDNS Core</strong></p>
-					</div>
-				</div>
-				<div class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-9">
 						<div class="bootstrap">
@@ -215,35 +200,7 @@
 						</div>
 					</div>
 				</div>
-			{elseif $core.license.status eq 'error'}
-				<div class="row">
-					<div class="col-md-3 text-right title">
-						<p>{$LANG.admin_system_license_product}:</p>
-					</div>
-					<div class="col-md-9">
-						<p><strong>SoluteDNS Core</strong></p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-3"></div>
-					<div class="col-md-9">
-						<div class="bootstrap">
-							<div class="alert2 alert2-danger">
-								<h4>License Error</h4>
-								<p>An error occurred when processing the license data. Please make sure all required PowerDNS tables exist.</p>
-							</div>
-						</div>
-					</div>
-				</div>
 			{elseif $core.license.status eq 'database'}
-				<div class="row">
-					<div class="col-md-3 text-right title">
-						<p>{$LANG.admin_system_license_product}:</p>
-					</div>
-					<div class="col-md-9">
-						<p><strong>SoluteDNS Core</strong></p>
-					</div>
-				</div>
 				<div class="row">
 					<div class="col-md-3"></div>
 					<div class="col-md-9">
@@ -261,7 +218,7 @@
 						<p>{$LANG.admin_system_license_product}:</p>
 					</div>
 					<div class="col-md-9">
-						<p><strong>{$core.license.productname}</strong></p>
+						<p>{if $core.license.productname|default:FALSE}<strong>{$core.license.productname}</strong>{else}{$LANG.global_status_na}{/if}</p>
 					</div>
 				</div>
 				<div class="row">
@@ -272,6 +229,7 @@
 						<p> {if $core.license.status eq 'Active'} <span class="label active">{$core.license.status}</span> {elseif $core.license.status eq 'Pending'} <span class="label pending">{$core.license.status}</span> {else} <span class="label closed">{$core.license.status}</span> {/if} </p>
 					</div>
 				</div>
+				{if $core.license.nextduedate|default:FALSE}
 				<div class="row">
 					<div class="col-md-3 text-right title">
 						<p>{$LANG.admin_system_license_expires}:</p>
@@ -280,15 +238,17 @@
 						<p> {if $core.license.nextduedate eq '0000-00-00'} {$LANG.admin_never} {else} {$core.license.nextduedate} {/if}</p>
 					</div>
 				</div>
+				{/if}
 				<div class="row spacer_15">
 					<div class="col-md-3 text-right title">
 						<p>{$LANG.admin_system_license_licensed_to}:</p>
 					</div>
 					<div class="col-md-9">
-						<p>{$core.license.companyname} <br />
+						<p>{if $core.license.companyname|default:FALSE}{$core.license.companyname} <br />{/if}
 							<i>{$core.license.registeredname}</i></p>
 					</div>
 				</div>
+				{if isset($core.license.zonelimit)|default:FALSE}
 				<div class="row spacer_15">
 					<div class="col-md-3 text-right title">
 						<p>{$LANG.admin_system_license_limit}:</p>
@@ -307,12 +267,13 @@
 						</p>
 					</div>
 				</div>
+				{/if}
 				<div class="row">
 					<div class="col-md-3 text-right title">
 						<p>{$LANG.admin_system_license_addons}:</p>
 					</div>
 					<div class="col-md-9">
-						{if $core.license.addon}
+						{if $core.license.addon|default:FALSE}
 							{foreach from=$core.license.addon item=addon}
 								<p>- {$addon.name} {if $addon.status eq 'Active'} <span class="label active">{$addon.status}</span> {elseif $addon.status eq 'Pending'} <span class="label pending">{$addon.status}</span> {else} <span class="label inactive">{$addon.status}</span> {/if} {if $addon.duedate eq '0000-00-00'} {$LANG.admin_never} {else} {$addon.duedate} {/if}</p>
 							{/foreach}
@@ -326,7 +287,7 @@
 						<p>{$LANG.admin_system_license_valid_domains}:</p>
 					</div>
 					<div class="col-md-9">
-						<p>{if $core.license.validdomain}{$core.license.validdomain}{else}{$LANG.global_status_na}{/if}</p>
+						<p>{if $core.license.validdomain|default:FALSE}{$core.license.validdomain}{else}{$LANG.global_status_na}{/if}</p>
 					</div>
 				</div>
 				<div class="row">
@@ -334,7 +295,7 @@
 						<p>{$LANG.admin_system_license_valid_ips}:</p>
 					</div>
 					<div class="col-md-9">
-						<p>{if $core.license.validip}{$core.license.validip}{else}{$LANG.global_status_na}{/if}</p>
+						<p>{if $core.license.validip|default:FALSE}{$core.license.validip}{else}{$LANG.global_status_na}{/if}</p>
 					</div>
 				</div>
 				<div class="row">
@@ -342,7 +303,18 @@
 						<p>{$LANG.admin_system_license_valid_directory}:</p>
 					</div>
 					<div class="col-md-9">
-						<p>{$core.license.validdirectory}</p>
+						<p>{if $core.license.validdirectory|default:FALSE}{$core.license.validdirectory}{else}{$LANG.global_status_na}{/if}</p>
+					</div>
+				</div>
+			{/if}
+			{if $core.license.description|default:FALSE}
+				<div class="row">
+					<div class="col-md-3"></div>
+					<div class="col-md-9">
+							<div class="alert2 alert2-danger">
+								<h4>License {$core.license.status|ucfirst}</h4>
+								<p>{$core.license.description}</p>
+							</div>
 					</div>
 				</div>
 			{/if}

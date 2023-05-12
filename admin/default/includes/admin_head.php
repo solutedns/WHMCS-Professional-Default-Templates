@@ -106,7 +106,7 @@ $return =
 					];
 				}
 				
-				SDNS_zoneTable = $('#'+nTable).dataTable( {	
+				SDNS_recordTable = $('#'+nTable).dataTable( {	
 					"columns": columns,
 					"processing": true,
 					"serverSide": true,

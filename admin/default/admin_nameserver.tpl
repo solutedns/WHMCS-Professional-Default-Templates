@@ -49,7 +49,7 @@
 			</div>
 			<div class="col-md-3">
 				<div id="sdns_db_password_field">
-					<input type="password" class="form-padding form-control" name="sdns_db_password" id="sdns_db_password" placeholder="Password" value="{$Controller->decrypt($Controller->ns_details(db_pass))}">
+					<input type="password" class="form-padding form-control" name="sdns_db_password" id="sdns_db_password" placeholder="Password" value="{$Controller->decrypt($Controller->ns_details(db_pass),2)}">
 				</div>
 			</div>
 			<div class="col-md-6 title">
@@ -204,7 +204,7 @@
 			</div>
 			<div class="col-md-3">
 				<div id="sdns_ssh_password_field">
-					<input type="password" class="form-padding form-control" name="sdns_ssh_password" id="sdns_ssh_password" value="{$Controller->decrypt($Controller->ns_details(ssh_pass))}">
+					<input type="password" class="form-padding form-control" name="sdns_ssh_password" id="sdns_ssh_password" value="{$Controller->decrypt($Controller->ns_details(ssh_pass),2)}">
 				</div>
 			</div>
 			<div class="col-md-6">
